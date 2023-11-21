@@ -1,0 +1,10 @@
+#compte-rendu de la réunion du 21/11/2023 16:00
+
+##points abordés 
+* On a repensé a comment gérer le plateau de jeu pour les biomes 
+* On a repense la classe biome 
+* On a refléchi a l'implementation d'un inventaire pour l'Homme 
+
+##Décisions prises 
+* On a choisi un tableaux a double dimensions pour représenter le biome 
+* on va gérer l'inventaire en stockant uniquement les quantité de chaque items dans la classe Homme 
