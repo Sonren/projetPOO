@@ -1,0 +1,11 @@
+#compte-rendu de la réunion du 22/10/2023 11:00
+
+##points abordés
+
+* diagramme de classe et restructuration de la classe Animaux 
+* Rapport de conception sur latax 
+
+##Décisions prises
+
+* On a supprimer des classes de Vegetaux 
+* on a choisi de ne pas implementer le biome mer car on l'a considérer comme trop complexe et couteuse en temps
