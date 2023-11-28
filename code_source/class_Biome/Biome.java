@@ -1,8 +1,9 @@
-package class_biome;
+package class_Biome;
 
 import java.util.ArrayList;
-import class_vegetal.Vegetal;
+
 import class_Animal.Animal;
+import class_Vegetal.Vegetal;
 
 public class Biome {
 	private String nom;

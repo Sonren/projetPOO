@@ -1,11 +1,15 @@
-package class_Animal; 
+package class_Animal;
+import class_Biome.Biome;
+import class_Carte.Position;
+import class_Vegetal.Vegetal;
 
-public abstract class  Animal {
-    protected String name;
-    protected int levellife;
-    protected int strength;
-    protected Position position;
-    protected Biome biome;
+
+public class  Animal {
+    private String name;
+    private int levellife;
+    private int strength;
+    private Position position;
+    private Biome biome;
 
     public Animal (String n, int l, int s , Position p, Biome b){
         this.name = n;
@@ -15,7 +19,6 @@ public abstract class  Animal {
         this.biome = b;
     }
     //fonction get
-    
     public String getname (){
         return this.name;
     }
@@ -47,25 +50,5 @@ public abstract class  Animal {
       public void setbiome (Biome bio){
         this.biome = bio;
     }
-    // fonction qui gère si l'animal est mort ou pas
-    public boolean isDeadAnimal(){
-        return levellife > 0;
-        }
-    
-    public void looselevellife(int quantite){
-        levellife -= quantite;
-        if(levellife <0){
-            levellife = 0;
-            system.out.println("l'animal est mort :(");
-        }
-    }
-    // classe abstraite eat qui depend de si l'animal est carnivore omnivore ou herbivore
-    public abstract void eatMeat(Animal);
-    public abstract void eatPlant(Plant);
 }
 
-public class Carnivore extends Animal{
-    //constructeur de la classe carnivore
-    public Carnivore(String n, int levellife, int strength, Position pos, Biome b){
-        super(name,levellife,strength,position,biome);
-    }

@@ -1,4 +1,7 @@
+package class_Vegetal;
 import class_Animal.*;
+import class_Biome.Biome;
+import class_Carte.Position;
 
 public class Vegetal {
 
@@ -10,7 +13,7 @@ public class Vegetal {
     //constructeur
     public  Vegetal (String n, Biome b, Position p){
             this.name = n;
-            this.biome = b,
+            this.biome = b;
             this.position = p;
             this.levellife = 30;
     }
@@ -24,7 +27,7 @@ public class Vegetal {
         return this.biome;
     }
 
-    public Position get position(){
+    public Position getposition(){
         return this.position;
     }
 
@@ -33,26 +36,25 @@ public class Vegetal {
     }
 
     // les setters
-    public String setname (String nom){
+    public void setname (String nom){
         this.name = nom;
     }
 
-    public Biome setbiome (biome bio){
+    public void setbiome (Biome bio){
         this.biome = bio;
     }
 
-    public Position setposition (Position emplacement){
+    public void setposition (Position emplacement){
         this.position = emplacement;
     }
 
-    public int setlife (int vie){
+    public void setlife (int vie){
         this.levellife = vie;
     }
 
 
     //fonction de la classe animal 
     public boolean isDeadveg (){
-        boolean dead = true;
         return (this.levellife == 0);
     }
 
