@@ -1,6 +1,7 @@
 package class_Vegetal;
 import class_Biome.Biome;
 import class_Carte.Position;
+
 public class Arbre extends Vegetal{
     private int nbarbre = 0;
 
@@ -14,4 +15,9 @@ public class Arbre extends Vegetal{
         return this.nbarbre;
     }
     //creation setters 
+    public void setnbarbre (int arbre){
+        this.nbarbre = arbre;
+    }
+
+
 }
