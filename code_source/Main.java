@@ -6,7 +6,7 @@ import Tool.Axe;
 import Tool.Spear;
 import Tool.Tool;
 
-public public class Main {
+public class Main {
 
 static void checkAge(int age) {
     if (age < 18) {
@@ -73,14 +73,7 @@ public static void main(String[] args) {
             }
           }
 
-          
-
-
-      } catch(ArithmeticException e) {
-          System.out.println("Encore un mineur :)");
-          // incrémente cpt
-      }
-    }
+          o
   }
 } 
 

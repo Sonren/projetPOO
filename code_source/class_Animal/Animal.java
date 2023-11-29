@@ -4,12 +4,12 @@ import class_Carte.Position;
 import class_Vegetal.Vegetal;
 
 
-public class  Animal {
-    private String name;
-    private int levellife;
-    private int strength;
-    private Position position;
-    private Biome biome;
+public abstract class  Animal {
+    protected String name;
+    protected int levellife;
+    protected int strength;
+    protected Position position;
+    protected Biome biome;
 
     public Animal (String n, int l, int s , Position p, Biome b){
         this.name = n;
@@ -19,13 +19,14 @@ public class  Animal {
         this.biome = b;
     }
     //fonction get
+    
     public String getname (){
         return this.name;
     }
      public int getlevellife (){
         return this.levellife;
     }
-     public int getstrenght (){
+     public int getstrength(){
         return this.strength;
     }
       public Position getposition (){
@@ -50,5 +51,25 @@ public class  Animal {
       public void setbiome (Biome bio){
         this.biome = bio;
     }
+    // fonction qui gère si l'animal est mort ou pas
+    public boolean isDeadAnimal(){
+        return levellife <=0;
+        }
+    
+    public void looselevellife(int quantite){
+        levellife -= quantite;
+        if(levellife <0){
+            levellife = 0;
+            System.out.println("l'animal est mort");
+        }
+    }
+
+    public boolean isHungry(){
+        return levellife < levellife/2 
+    } 
+    // classe abstraite eat qui depend de si l'animal est carnivore omnivore ou herbivore
+    public abstract void eatMeat(Animal prey);
+    public abstract void eatPlant(Vegetal plant);
+    
 }
 
