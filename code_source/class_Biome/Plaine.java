@@ -1,7 +1,7 @@
 package class_Biome;
 
 import java.util.ArrayList;
-import class_vegetal.Vegetal;
+import class_Vegetal.Vegetal;
 import class_Animal.Animal;
 
 public class Plaine extends Biome {

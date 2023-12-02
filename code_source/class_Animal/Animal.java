@@ -65,7 +65,7 @@ public abstract class  Animal {
     }
 
     public boolean isHungry(){
-        return levellife < levellife/2 
+        return levellife < levellife/2;
     } 
     // classe abstraite eat qui depend de si l'animal est carnivore omnivore ou herbivore
     public abstract void eatMeat(Animal prey);
