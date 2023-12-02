@@ -1,7 +1,6 @@
 package class_Animal.Homme;
 
-public class Pickaxe implements Tool {
-
+public class Axe implements Tool{
     public String name;
     public int strength;
     public double durability;
@@ -9,10 +8,10 @@ public class Pickaxe implements Tool {
 
 
   
-    public Pickaxe(String name) {
+    public Axe(String name) {
         this.name = name;
-        this.strength = 7;
-        this.durability = 100;
+        this.strength = 5;
+        this.durability = 70;
     }
   
     public String getName() {
@@ -41,7 +40,7 @@ public class Pickaxe implements Tool {
 
     @Override
     public void useoutil(){
-        this.durability = this.durability-0.5;
+        this.durability = this.durability-0.4;
     }
     
     @Override
@@ -54,3 +53,4 @@ public class Pickaxe implements Tool {
     
 
 }
+
