@@ -18,9 +18,9 @@ public abstract class  Animal {
         this.position = p;
         this.biome = b;
     }
-    //fonction get
     
-    public static String getname (){
+    //fonction getters et setters
+    public String getname (){
         return this.name;
     }
      public int getlevellife (){
