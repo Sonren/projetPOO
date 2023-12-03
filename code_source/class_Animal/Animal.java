@@ -20,7 +20,7 @@ public abstract class  Animal {
     }
     //fonction get
     
-    public String getname (){
+    public static String getname (){
         return this.name;
     }
      public int getlevellife (){
