@@ -1,5 +1,6 @@
 package class_Carte;
 
+
 import class_Biome.Biome;
 
 public class Case {
@@ -31,5 +32,5 @@ public class Case {
         this.position = position;
     }
 
-
+    
 }

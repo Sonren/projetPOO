@@ -3,6 +3,7 @@ package class_Animal;
 import class_Biome.Biome;
 import class_Carte.Position;
 import class_Vegetal.Vegetal;
+
 public class Carnivore extends Animal{
 
     //constructeur de la classe carnivore
