@@ -9,16 +9,17 @@ import class_Carte.*;
 
 public class Carte {
 
-    private ArrayList<Case> map = new ArrayList<>(); 
+    private Case[][] map = new Case[100][100];
+    //private ArrayList<Case> map = new ArrayList<>(); 
     private int nbtour;
     
 
     //getters et setters
-    public ArrayList<Case> getMap() {
+    public Case[][] getMap() {
         return this.map;
     }
 
-    public void setMap(ArrayList<Case> map) {
+    public void setMap(Case[][] map) {
         this.map = map;
     }
 
@@ -39,6 +40,11 @@ public class Carte {
         return empty;
         //TODO
    }
+
+   public void verifmvtanimal(Animal pet, Position pos){
+    //TODO
+   } 
+
 
  
     public void haut (Animal an, Position pos){
