@@ -13,3 +13,4 @@ public class Foret extends Biome {
         super(nom);
         this.nbrochers = 0;
     }
+}

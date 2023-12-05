@@ -72,8 +72,11 @@ public static void main(String[] args) {
               System.out.println(((Axe) spear).getMaterial());
             }
           }
+          
+          //pour les cin
+          Scanner s=new Scanner(System.in);
+          String mot = s.nextLine();  
 
-          o
   }
 } 
 

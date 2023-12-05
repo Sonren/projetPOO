@@ -18,9 +18,9 @@ public abstract class  Animal {
         this.position = p;
         this.biome = b;
     }
+    //fonction get
     
-    //fonction getters et setters
-    public String getname (){
+    public  String getname (){
         return this.name;
     }
      public int getlevellife (){
@@ -65,7 +65,7 @@ public abstract class  Animal {
     }
 
     public boolean isHungry(){
-        return levellife < levellife/2;
+        return levellife < levellife/2 || strength < strength/2 ;
     } 
     // classe abstraite eat qui depend de si l'animal est carnivore omnivore ou herbivore
     public abstract void eatMeat(Animal prey);

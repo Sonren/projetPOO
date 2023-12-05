@@ -30,6 +30,7 @@ public class Axe implements Tool{
         this.strength = strength;
     }
 
+    @Override
     public double getDurability() {
         return this.durability;
     }
@@ -40,7 +41,12 @@ public class Axe implements Tool{
 
     @Override
     public void useoutil(){
+
+        if(this.durability>0){
         this.durability = this.durability-0.4;
+        } else{
+        System.out.println("l'outil"+ this.getName()+ "a expiré");
+        }  
     }
     
     @Override

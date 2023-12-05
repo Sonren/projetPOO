@@ -2,7 +2,6 @@ package class_Animal.Homme;
 
 import java.util.ArrayList;
 
-import javax.tools.Tool;
 
 public class Inventaire {
     private int qtebois;
@@ -61,7 +60,22 @@ public class Inventaire {
         this.arsenal = arsenal;
     }
 
+    public void ajouterBois(int quantity){
+        this.qtebois = quantity;
+    } 
 
-
+    public void ajouterViande(int quantityV){
+        this.qteviande = quantityV;
+    } 
+    
+    public void ajouterCailloux(int qtyCailloux){
+        this.qtecailloux = qtyCailloux;
+    } 
+    public void ajouterFruit(int qtyfruit){
+        this.qtefruit = qtyfruit ;
+    }
+    public void ajouterOutil(Tool outil){
+        arsenal.add(outil);
+    } 
 
 }

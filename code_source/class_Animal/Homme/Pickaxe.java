@@ -41,7 +41,11 @@ public class Pickaxe implements Tool {
 
     @Override
     public void useoutil(){
+        if(this.durability>0){
         this.durability = this.durability-0.5;
+        } else{
+            System.out.println("l'outil"+ this.getName()+ "a expiré");
+        }  
     }
     
     @Override

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import class_Animal.Animal;
 import class_Biome.Biome;
 import java.util.Random;
+import class_Carte.*;
 
 public class Carte {
 
@@ -33,7 +34,13 @@ public class Carte {
         this.nbtour += 1;
     }
 
-   
+   public boolean isEmpty(Case c){
+        boolean empty = false;
+        return empty;
+        //TODO
+   }
+
+ 
     public void haut (Animal an, Position pos){
         pos.y -= 1;
         an.setposition (pos); 
@@ -55,21 +62,22 @@ public class Carte {
     }
 
 
-    public void randommvt(Animal pet){
+    public void randommvt(Animal pet, Position posi){
         Random random = new Random();
         int rand = random.nextInt(4) +1;
+        
 
         switch (rand){
             case 1:
-                haut(pet);
+                haut(pet, posi);
                 break;
             case 2:
-                bas(pet);
+                bas(pet, posi);
                 break;
             case 3:
-                gauche(pet);
+                gauche(pet, posi);
             case 4:
-                droite(pet);
+                droite(pet, posi);
                 break;
             default:
 
