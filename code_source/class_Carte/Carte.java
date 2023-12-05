@@ -35,8 +35,9 @@ public class Carte {
         this.nbtour += 1;
     }
 
-   public boolean isEmpty(Case c){
+   public boolean isEmpty(Position p){
         boolean empty = false;
+        
         return empty;
         //TODO
    }
