@@ -14,27 +14,27 @@ public class Pickaxe implements Tool {
         this.strength = 7;
         this.durability = 100;
     }
-  
+    @Override
     public String getName() {
         return this.name;
     }
-
+    @Override
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
     public int getStrength() {
         return this.strength;
     }
-
+    @Override
     public void setStrength(int strength) {
         this.strength = strength;
     }
-
+    @Override
     public double getDurability() {
         return this.durability;
     }
-
+    @Override
     public void setDurability(double durability) {
         this.durability = durability;
     }

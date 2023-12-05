@@ -14,27 +14,27 @@ public class Spear implements Tool{
         this.strength = 10;
         this.durability = 50;
     }
-  
+    @Override
     public String getName() {
         return this.name;
     }
-
+    @Override
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
     public int getStrength() {
         return this.strength;
     }
-
+    @Override
     public void setStrength(int strength) {
         this.strength = strength;
     }
-
+    @Override
     public double getDurability() {
         return this.durability;
     }
-
+    @Override
     public void setDurability(double durability) {
         this.durability = durability;
     }

@@ -13,28 +13,29 @@ public class Axe implements Tool{
         this.strength = 5;
         this.durability = 70;
     }
-  
+    
+    //getters et setters
+    @Override
     public String getName() {
         return this.name;
     }
-
+    @Override
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
     public int getStrength() {
         return this.strength;
     }
-
+    @Override
     public void setStrength(int strength) {
         this.strength = strength;
     }
-
     @Override
     public double getDurability() {
         return this.durability;
     }
-
+    @Override
     public void setDurability(double durability) {
         this.durability = durability;
     }
