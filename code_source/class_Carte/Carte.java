@@ -18,7 +18,7 @@ public class Carte {
         return this.map;
     }
 
-    public void setMap(ArrayList<Carte> map) {
+    public void setMap(ArrayList<Case> map) {
         this.map = map;
     }
 
