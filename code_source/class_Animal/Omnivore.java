@@ -1,16 +1,37 @@
 package class_Animal;
 
+import java.util.ArrayList;
+
 import class_Biome.Biome;
 import class_Carte.Position;
 import class_Vegetal.Vegetal;
 
 
 public class Omnivore extends Animal{
+
+    private ArrayList<Animal> ofaune;
+
     public Omnivore(String n, int l, int s, Position p, Biome b){
         super(n,l,s,p,b);
-    } 
+        this.ofaune = new ArrayList<Animal>();
+    }  
+   
+       public ArrayList<Animal> gethfaune(){
+        return this.ofaune;
+    }
 
-
+    public boolean isCarnivore(Animal pet){
+        boolean omni = false;
+        for (Animal an : ofaune){
+            if (pet.getname() == an.getname()){
+                omni = true;
+                return omni;
+            }
+        }
+        return omni;
+    }
+    
+    
     @Override
     public void eatMeat(Animal prey){
         int preystrength = prey.getstrength();

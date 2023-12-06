@@ -7,7 +7,7 @@ import class_Vegetal.Vegetal;
 
 public class Biome {
 	private String nom;
-	private ArrayList<Animal> faune;
+	protected ArrayList<Animal> faune;
 	private ArrayList<Vegetal> flore;
 
 	public Biome(String nom){
@@ -19,6 +19,15 @@ public class Biome {
 	public String getName(){
 		return nom;
 	}
+
+	public ArrayList<Animal> getfaune(){
+		return this.faune;
+	}
+	
+	public ArrayList<Vegetal> getflore(){
+		return this.flore;
+	}
+
 
 	public void afficheFaune (){
 		System.out.println("Faune dans" + nom + ":");

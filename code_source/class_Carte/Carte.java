@@ -35,7 +35,19 @@ public class Carte {
         this.nbtour += 1;
     }
 
-   public boolean isEmpty(Position p){
+    public boolean samePosition (Animal pet){
+       boolean sposition = false;
+       for(Animal ani : getfaune){
+            if (ani.getposition() == pet.getposition()){
+                sposition = false;
+                return sposition;
+            }else{
+                return sposition;
+            }
+       }
+    }
+   
+    public boolean isEmpty(Position p){
         boolean empty = false;
         
         return empty;
@@ -47,25 +59,40 @@ public class Carte {
    } 
 
 
- 
     public void haut (Animal an, Position pos){
         pos.y -= 1;
-        an.setposition (pos); 
+        if (!(isEmpty(pos))) {
+            verifmvtanimal(an,pos);
+        }else{
+            an.setposition (pos);
+        }
     }
-   
+         
     public void bas (Animal an, Position pos){
         pos.y += 1;
-        an.setposition (pos); 
+        if (!(isEmpty(pos))) {
+            verifmvtanimal(an,pos);
+        }else{
+            an.setposition (pos);
+        }
     }
 
     public void droite (Animal an, Position pos){
         pos.x += 1;
-        an.setposition (pos); 
+        if (!(isEmpty(pos))) {
+            verifmvtanimal(an,pos);
+        }else{
+            an.setposition (pos);
+        }
     }
 
     public void gauche (Animal an, Position pos){
         pos.x -= 1;
-        an.setposition (pos); 
+        if (!(isEmpty(pos))) {
+            verifmvtanimal(an,pos);
+        }else{
+            an.setposition (pos);
+        } 
     }
 
 
