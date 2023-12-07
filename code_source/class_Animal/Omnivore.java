@@ -20,7 +20,7 @@ public class Omnivore extends Animal{
         return this.ofaune;
     }
 
-    public boolean isCarnivore(Animal pet){
+    public boolean isOmnivore(Animal pet){
         boolean omni = false;
         for (Animal an : ofaune){
             if (pet.getname() == an.getname()){

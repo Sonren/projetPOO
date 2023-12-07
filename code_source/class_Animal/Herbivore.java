@@ -19,7 +19,7 @@ public class Herbivore extends Animal {
         return this.hfaune;
     }
 
-    public boolean isCarnivore(Animal pet){
+    public boolean isHerbivore(Animal pet){
         boolean herbi = false;
         for (Animal an : hfaune){
             if (pet.getname() == an.getname()){

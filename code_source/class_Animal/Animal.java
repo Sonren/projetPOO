@@ -52,8 +52,9 @@ public abstract class  Animal {
         this.biome = bio;
     }
     // fonction qui gère si l'animal est mort ou pas
-    public boolean isDeadAnimal(){
-        return levellife <=0;
+    public boolean isDeadAnimal(Animal pet){
+        //this.Animal =null;   voir pour la mort de l'animal
+        return this.levellife <=0;
         }
     
     public void looselevellife(int quantite){
