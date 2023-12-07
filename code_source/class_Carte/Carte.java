@@ -53,16 +53,29 @@ public class Carte {
         
     }
 
-    public void fuite(Animal petfuite){
-        //TODO
-    }
-
     public boolean isEmpty(Position p){
         boolean empty = false;
-        
         return empty;
         //TODO
    }
+    
+    public void fuite(Animal petfuite){ 
+        if ( isEmpty(haut(petfuite))){
+            petfuite.setposition(haut(petfuite));
+        }else if (isEmpty(bas(petfuite))) {
+            petfuite.setposition(bas(petfuite));
+        }else if (isEmpty(droite(petfuite))){
+            petfuite.setposition(droite(petfuite));
+        }else if (isEmpty(gauche(petfuite))){
+            petfuite.setposition(gauche(petfuite));
+        }
+    }
+
+        
+    
+
+
+
  
    public boolean verifflore(Animal pet){
         boolean isoccuped = false;
@@ -137,7 +150,8 @@ public class Carte {
     } 
 
 
-    public void haut (Animal an, Position pos){
+    public Position haut (Animal an){
+        Position pos = an.getposition();
         pos.y -= 1;
         if (!(isEmpty(pos))) {
             if ((verifmvtanimal(an)) && (verifflore(an))){
@@ -145,10 +159,12 @@ public class Carte {
             }       
         }else{
             an.setposition (pos);
+            return an.getposition();
         }
     }
          
-    public void bas (Animal an, Position pos){
+    public Position bas (Animal an){
+        Position pos = an.getposition();
         pos.y += 1;
         if ((!isEmpty(pos))) {
            if ((verifmvtanimal(an)) && (verifflore(an))){
@@ -156,10 +172,12 @@ public class Carte {
             }
         }else{
             an.setposition (pos);
+            return an.getposition();
         }
     }
 
-    public void droite (Animal an, Position pos){
+    public Position droite (Animal an){
+        Position pos = an.getposition();
         pos.x += 1;
         if (!(isEmpty(pos))) {
             if ((verifmvtanimal(an)) && (verifflore(an))){
@@ -167,10 +185,12 @@ public class Carte {
             }
         }else{
             an.setposition (pos);
+            return an.getposition();
         }
     }
 
-    public void gauche (Animal an, Position pos){
+    public Position gauche (Animal an){
+        Position pos = an.getposition();
         pos.x -= 1;
         if (!(isEmpty(pos))) {
             if ((verifmvtanimal(an)) && (verifflore(an))){
@@ -178,26 +198,27 @@ public class Carte {
             }
         }else{
             an.setposition (pos);
+            return an.getposition();
         } 
     }
 
 
-    public void randommvt(Animal pet, Position posi){
+    public void randommvt(Animal pet){
         Random random = new Random();
         int rand = random.nextInt(4) +1;
         
 
         switch (rand){
             case 1:
-                haut(pet, posi);
+                haut(pet);
                 break;
             case 2:
-                bas(pet, posi);
+                bas(pet);
                 break;
             case 3:
-                gauche(pet, posi);
+                gauche(pet);
             case 4:
-                droite(pet, posi);
+                droite(pet);
                 break;
             default:
 

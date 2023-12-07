@@ -1,35 +1,16 @@
 package class_Animal;
 
-import java.util.ArrayList;
-
 import class_Biome.Biome;
 import class_Carte.Position;
 import class_Vegetal.Vegetal;
 
 public class Carnivore extends Animal{
 
-    private ArrayList<Animal> cfaune;
-
+    
     //constructeur de la classe carnivore
     public Carnivore(String n, int levellife, int strength, Position pos, Biome b){
         super(n,levellife,strength,pos,b);
-        this.cfaune = new ArrayList<Animal>();
-    }
-
-
-    public ArrayList<Animal> getcfaune(){
-        return this.cfaune;
-    }
-
-    public boolean isCarnivore(Animal pet){
-        boolean carni = false;
-        for (Animal an : cfaune){
-            if (pet.getname() == an.getname()){
-                carni = true;
-                return carni;
-            }
-        }
-        return carni;
+        
     }
 
 
