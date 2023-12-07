@@ -53,6 +53,9 @@ public class Carte {
         
     }
 
+    public void fuite(Animal petfuite){
+        //TODO
+    }
 
     public boolean isEmpty(Position p){
         boolean empty = false;
@@ -91,40 +94,47 @@ public class Carte {
     }
 
 
-
-   public boolean verifmvtanimal(Animal pet){
-        boolean isverif = false;
-        String diet; 
-        String gibierdiet;
-        Animal gibier;
-            if (samePosition(pet)){
-                diet = whatdiet(pet);
-                gibier = findpet(pet.getposition());
-                gibierdiet = whatdiet(gibier);
-                if ((diet == "Carnivore") && ((gibierdiet == "Carnivore") || (gibierdiet == "Omnivore"))){ //carnivore qui veut manger carnivore ou omnivore
-                        if (gibier.getstrength() >= pet.getstrength()){
-                            pet.looselevellife(2*gibier.getstrength());
-                            if (!isDeadAnimal(pet)){
-                                fuite(pet);
-                                ffuite(gibier);
-                            }
-                        }
-                }else if ((diet == "Carnivore") && (gibierdiet == "Herbivore")){ // carnivore qui mange herbivore
-                    gibier.looselevellife(2*pet.getstrength());
-                    if (!isDeadAnimal(gibier)){
-                        fuite(gibier);
-                    }
-
-                }else if (diet == "omnivore"){
-
+    public void carnivoreeatcarnivore (Animal predator, Animal hunter){
+        if (predator.getstrength() >= hunter.getstrength()){
+            hunter.looselevellife(2*predator.getstrength());
+                if (!isDeadAnimal(hunter)){
+                     fuite(hunter);
+                     fuite(predator);
                 }
+        }
+    }
+
+    public void carnivoreeatherbivore (Animal predator, Animal brebis){
+        brebis.looselevellife(2*predator.getstrength());
+                    if (!isDeadAnimal(brebis)){
+                        fuite(brebis);
+                    }
+    }
+
+    //a voir pour rajouter des trucs sinon enlever procedure
+    public void herbivoremeetherbivore (Animal brebis, Animal chevre){
+        fuite(brebis);
+        fuite(chevre);
+    }
+
+// voir pour gerer rencontre herbivore carnivore et omnivore
+    public void animalmeetanimal(Animal pet){
+    String diet; 
+    String gibierdiet;
+    Animal gibier;
+        if (samePosition(pet)){
+            diet = whatdiet(pet);
+            gibier = findpet(pet.getposition());
+            gibierdiet = whatdiet(gibier);
+            if (((diet == "Carnivore") || (diet == "Omnivore")) && ((gibierdiet == "Carnivore") || (gibierdiet == "Omnivore"))){ //carnivore ou omnivorequi veut manger carnivore ou omnivore
+                carnivoreeatcarnivore(pet, gibier);
+            }else if (((diet == "Carnivore") || (diet == "Omnivore")) && (gibierdiet == "Herbivore")){ // carnivore ou omnivore qui mange herbivore
+                carnivoreeatherbivore(pet, gibier);
+            }else if ((diet == "Herbivore") && (gibierdiet == "Herbivore")){
+                herbivoremeetherbivore(pet,gibier);
             }
-        
-        
-        return isverif;
-        
-        
-   } 
+        }
+    } 
 
 
     public void haut (Animal an, Position pos){
