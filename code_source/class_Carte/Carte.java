@@ -374,4 +374,8 @@ public void contactCarnivore(Homme homme){
         }
 
     }
+
+    public void coucou(){
+        System.out.println("coucou");
+    }
 }
