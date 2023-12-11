@@ -1,16 +1,22 @@
 package class_Animal;
 
+
 import class_Biome.Biome;
 import class_Carte.Position;
 import class_Vegetal.Vegetal;
 
 
 public class Omnivore extends Animal{
+
+   
+
     public Omnivore(String n, int l, int s, Position p, Biome b){
         super(n,l,s,p,b);
-    } 
-
-
+        
+    }  
+   
+    
+    
     @Override
     public void eatMeat(Animal prey){
         int preystrength = prey.getstrength();

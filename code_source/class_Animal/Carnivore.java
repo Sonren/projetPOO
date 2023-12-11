@@ -6,10 +6,13 @@ import class_Vegetal.Vegetal;
 
 public class Carnivore extends Animal{
 
+    
     //constructeur de la classe carnivore
     public Carnivore(String n, int levellife, int strength, Position pos, Biome b){
         super(n,levellife,strength,pos,b);
+        
     }
+
 
     //implémentation de la méthode eatMeat
 
@@ -34,6 +37,8 @@ public class Carnivore extends Animal{
    public void eatPlant(Vegetal plant){
         System.out.println("Les Carnivores ne mangent pas de plantes");;
    } 
+
+
   
 
 }

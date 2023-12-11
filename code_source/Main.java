@@ -83,6 +83,35 @@ public static void main(String[] args) {
         } 
 
   }
- 
 } 
 
+    public static void testBiome() {
+        // Création d'un biome
+        Biome biome = new Biome("Forêt Amazonienne");
+
+        // Création d'animaux et de plantes pour les tests
+        Animal lion = new Animal("Lion");
+        Animal tigre = new Animal("Tigre");
+        Vegetal arbre = new Vegetal("Chêne");
+        Vegetal fleur = new Vegetal("Rose");
+
+        // Test des méthodes de la classe Biome
+        biome.addAnimaux(lion);
+        biome.addAnimaux(tigre);
+        biome.addPlante(arbre);
+        biome.addPlante(fleur);
+
+        // Affichage de la faune et de la flore
+        biome.afficheFaune();
+        biome.afficheFlore();
+
+        // Retrait d'un animal et d'une plante
+        biome.removeAnimal(tigre);
+        biome.removePlante(fleur);
+
+        // Affichage mis à jour de la faune et de la flore
+        biome.afficheFaune();
+        biome.afficheFlore();
+    }
+}
+*/

@@ -8,8 +8,12 @@ import class_Animal.Homme.Tool;
 
 public class Plaine extends Biome{
     private int nbrochers;
-    private int champignons;
-    
+
+    /**
+     * Constructeur de la classe Plaine.
+     * 
+     * @param nom Le nom de la plaine 
+     */
     public Plaine(String nom) {
         super(nom);
         this.nbrochers = 0;
