@@ -1,17 +1,40 @@
 package class_Biome;
 
+/**
+ * La classe Mer représente un type de biome aquatique.
+ * Elle étend la classe Biome
+ */
 public class Mer extends Biome {
+
+    /*
+     * La profondeur de la mer
+     */
     private int profondeur;
 
+    /**
+     * Constructeur de la classe Mer.
+     * 
+     * @param nom nom de la mer.
+     */
     public Mer(String nom){
         super(nom);
         this.profondeur = 0;
     }
 
+    /**
+     * Obtient la profondeur actuelle de la mer.
+     * 
+     * @return La pronfondeur de la mer.
+     */
     public int getProfondeur() {
         return this.profondeur;
     }
 
+    /**
+     * Modifie la pronfondeur de la mer avec la nouvelle valeur spécifiée.
+     * 
+     * @param newProfondeur La nouvelle profondeur de la mer.
+     */
     public void setProfondeur(int newProfondeur) {
         if (newProfondeur >= 0) {
             this.profondeur = newProfondeur;
