@@ -6,7 +6,7 @@ import class_Animal.Animal;
 import class_Animal.Homme.Homme;
 import class_Animal.Homme.Tool;
 
-public class Plaine extends Biome {
+public class Plaine extends Biome{
     private int nbrochers;
     private int champignons;
     
@@ -14,6 +14,9 @@ public class Plaine extends Biome {
         super(nom);
         this.nbrochers = 0;
         this.champignons =0;
+    }
+}
+
 
    /* // Méthode permettant à l'Homme de couper du bois avec son outil sans perdre de vie
     public int getCouperBoisOutil(Homme homme, Axe hache) {
@@ -25,4 +28,4 @@ public class Plaine extends Biome {
     }  
 
 
-*/}
+*/

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import Tool.Axe;
@@ -73,10 +74,15 @@ public static void main(String[] args) {
             }
           }
           
-          //pour les cin
-          Scanner s=new Scanner(System.in);
-          String mot = s.nextLine();  
+          //fonction pour prendre les réponses de l'utilisateur pour pas faire de scanner tout le temps
+          public boolean demandeUtilisateur(String message){
+          Scanner  sc =new Scanner(System.in);
+          System.out.println(message + " Oui/Non");
+          return sc.nextBoolean();
+          //String mot = s.nextLine(); 
+        } 
 
   }
+ 
 } 
 
