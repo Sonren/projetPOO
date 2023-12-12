@@ -80,6 +80,8 @@ public abstract class  Animal {
         if(levellife <0){
             levellife = 0;
             System.out.println("l'animal est mort");
+        } else{
+            System.out.println("l'animal n'est pas mort");
         }
     }
 

@@ -78,4 +78,12 @@ public class Inventaire {
         arsenal.add(outil);
     } 
 
-}
+    public Tool getTool(String nameTool){
+        for(Tool atool : arsenal ){
+            if(atool.getName() == nameTool){
+                return atool;
+            } 
+        } 
+        return null; // l'outil n'a pas été trouvé
+    } 
+} 

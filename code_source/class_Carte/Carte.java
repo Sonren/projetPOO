@@ -130,66 +130,6 @@ public class Carte {
     } 
 
 
-    public Position haut (Animal an){
-        Position pos = an.getposition();
-        pos.y -= 1;
-        if (!(isEmpty(pos))) {
-            if ((verifmvtanimal(an)) && (verifflore(an))){
-                //rajouter de update la position
-            }       
-        }else{
-            an.setposition (pos);
-            return an.getposition();
-        }
-    }
-         
-    public Position bas (Animal an){
-        Position pos = an.getposition();
-        pos.y += 1;
-        if ((!isEmpty(pos))) {
-           if ((verifmvtanimal(an)) && (verifflore(an))){
-                //rajouter de update la position
-            }
-        }else{
-            an.setposition (pos);
-            return an.getposition();
-        }
-    }
-
-    public Position droite (Animal an){
-        Position pos = an.getposition();
-        pos.x += 1;
-        if (!(isEmpty(pos))) {
-            if ((verifmvtanimal(an)) && (verifflore(an))){
-                //rajouter de update la position
-            }
-        }else{
-            an.setposition (pos);
-            return an.getposition();
-        }
-    }
-
-    public Position gauche (Animal an){
-        Position pos = an.getposition();
-        pos.x -= 1;
-        an.setposition (pos); 
-    }
-     public boolean isEmpty(Position p){
-        if(p.x < 0|| p.x >= map.length|| p.y <0|| p.y>= map[0].length){
-            return false;
-        } 
-        for(Animal anAnimal : desAnimaux){
-            if(anAnimal.getposition().equals(p)){ // Un animal est dans la case
-                return false;
-            } 
-        } 
-        // la case est occupé par l'homme
-        if(homme.getposition().equals(p)){
-            return false;
-        } 
-        // La case n'est occupé ni par l'homme ni par un animal
-        return true; 
-   }
    //fonction pour prendre les réponses de l'utilisateur pour pas faire de scanner tout le temps
    public boolean demandeUtilisateur(String message){
     Scanner  sc =new Scanner(System.in);
@@ -272,8 +212,6 @@ public void contactCarnivore(Homme homme){
     boolean veutfuir = demandeUtilisateur("veux-tu fuir?");
     // implémenter la logique derrière
 }  
-
-
 
 public void moveHomme(Homme homme, Position moveto){
     Position movefrom = homme.getposition();
