@@ -31,7 +31,7 @@ public class testBiomes {
         Biome biome = new Biome("Biome Générique"));
 
         // Création d'animaux et de plantes pour les tests
-        Animal mouton = new Animal("Mouton");
+        Animal mouton = new Herbivore(Animaux_herbivore.MOUTON.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
         Animal loup = new Animal("Loup");
         Vegetal arbre = new Vegetal("Chêne", "Foret", 5 5 );
         Vegetal fraisier = new Vegetal("Fraisier");
