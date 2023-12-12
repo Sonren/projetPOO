@@ -1,8 +1,8 @@
-package class_Animal;
+package fr.lynchmaniac.class_Animal;
 
-import class_Biome.Biome;
-import class_Carte.Position;
-import class_Vegetal.Vegetal;
+import fr.lynchmaniac.class_Biome.Biome;
+import fr.lynchmaniac.class_Carte.Position;
+import fr.lynchmaniac.class_Vegetal.Vegetal;
 
 public class Carnivore extends Animal{
 
