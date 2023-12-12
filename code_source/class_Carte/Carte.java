@@ -1,23 +1,32 @@
-package class_Carte;
+package fr.lynchmaniac.class_Carte;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import class_Animal.*;
-import class_Biome.*;
-import java.util.Random;
-import class_Carte.*;
-import class_Vegetal.Vegetal;
-import class_Animal.Carnivore;
+import fr.lynchmaniac.class_Animal.Animal;
+import fr.lynchmaniac.class_Animal.Animaux_carnivore;
+import fr.lynchmaniac.class_Animal.Animaux_herbivore;
+import fr.lynchmaniac.class_Animal.Animaux_omnivore;
+import fr.lynchmaniac.class_Animal.Carnivore;
+import fr.lynchmaniac.class_Animal.Diet;
+import fr.lynchmaniac.class_Animal.Herbivore;
+import fr.lynchmaniac.class_Animal.Omnivore;
+import fr.lynchmaniac.class_Biome.Biome;
+import fr.lynchmaniac.class_Biome.Plaine;
+import fr.lynchmaniac.class_Vegetal.Abres;
+import fr.lynchmaniac.class_Vegetal.Arbre;
+import fr.lynchmaniac.class_Vegetal.Arbrefruit;
+import fr.lynchmaniac.class_Vegetal.Rocher;
+import fr.lynchmaniac.class_Vegetal.Rochers;
+import fr.lynchmaniac.class_Vegetal.Vegetal;
 
 public class Carte {
 
-    private Case[][] map = new Case[100][100];
-    //private ArrayList<Case> map = new ArrayList<>(); 
-    private ArrayList<Animal> desAnimaux = new ArrayList<>() ;
+    private Case[][] map = new Case[10][10];
     private int nbtour;
-    private Homme homme;
     
+    public Carte (Case[][] m, int nb){
+        this.map = m;
+        this.nbtour = nb;
+    }
 
     //getters et setters
     public Case[][] getMap() {
@@ -39,281 +48,167 @@ public class Carte {
     public void addtour (){
         this.nbtour += 1;
     }
-
-   public boolean isEmpty(Position p){
-        boolean empty = false;
-        
-        return empty;
-        //TODO
-   }
-
-   public void verifmvtanimal(Animal pet, Position pos){
-    //TODO
-   } 
-
-        
-    
-
-
-
- 
-   public boolean verifflore(Animal pet){
-        boolean isoccuped = false;
-        for(Vegetal veg : getflore){
-            if (veg.getposition() == pet.getposition()){
-                isoccuped = true;
-                return isoccuped;
-            }
-        }
-        return isoccuped;
-    }
    
-    public String whatdiet (Animal an){
-        if (isCarnivore(an)){
-            return "Carnivore";
-        }else if (isHerbivore(an)){
-                return "Herbivore";
-        }else if (isOmnivore(an)){
-            return "Omnivore";
-        }
+    public void preservefaune (){
+        //TODO
     }
 
-    public Animal findpet (Position pos){
-        for(Animal ani : getfaune){
-            if (ani.getposition() == pos){
-                return ani;
-            }//else leve exception
-        }
+    public Case[][] addcase(Case cas) {
+       map[cas.getPosition().getX()][cas.getPosition().getY()] = cas;
+       return map;
     }
 
-
-    public void carnivoreeatcarnivore (Animal predator, Animal hunter){
-        if (predator.getstrength() >= hunter.getstrength()){
-            hunter.looselevellife(2*predator.getstrength());
-                if (!isDeadAnimal(hunter)){
-                     fuite(hunter);
-                     fuite(predator);
-                }
-        }
-    }
-
-    public void carnivoreeatherbivore (Animal predator, Animal brebis){
-        brebis.looselevellife(2*predator.getstrength());
-                    if (!isDeadAnimal(brebis)){
-                        fuite(brebis);
-                    }
-    }
-
-    //a voir pour rajouter des trucs sinon enlever procedure
-    public void herbivoremeetherbivore (Animal brebis, Animal chevre){
-        fuite(brebis);
-        fuite(chevre);
-    }
-
-// voir pour gerer rencontre herbivore carnivore et omnivore
-    public void animalmeetanimal(Animal pet){
-    String diet; 
-    String gibierdiet;
-    Animal gibier;
-        if (samePosition(pet)){
-            diet = whatdiet(pet);
-            gibier = findpet(pet.getposition());
-            gibierdiet = whatdiet(gibier);
-            if (((diet == "Carnivore") || (diet == "Omnivore")) && ((gibierdiet == "Carnivore") || (gibierdiet == "Omnivore"))){ //carnivore ou omnivorequi veut manger carnivore ou omnivore
-                carnivoreeatcarnivore(pet, gibier);
-            }else if (((diet == "Carnivore") || (diet == "Omnivore")) && (gibierdiet == "Herbivore")){ // carnivore ou omnivore qui mange herbivore
-                carnivoreeatherbivore(pet, gibier);
-            }else if ((diet == "Herbivore") && (gibierdiet == "Herbivore")){
-                herbivoremeetherbivore(pet,gibier);
+    /**
+     * fonction qui va crée l'animal avec des caractéristique spéciale en fonction de son alimentation de son biome. Chaque animaux ont une position de base généré aléatoirement
+     * @param diet définie le régime alimentaire de l'animal (Herbivore, Carnivore, Omnivore)
+     * @param animale nom de l'animal (stocké dans les énumération dans le classe animal)
+     * @param world plateau de jeu sur lequel les animaux vont être placé aléatoirement
+     * @param bio le biome auquel appartienent les animaux (stoké dans l'énumération Biomes)
+     * @param strg force de l'animal car deux animaux identique peuvent avoir une force différente
+     * @return l'animal crée avec tout ces paramètre, on a bien vérifier que l'animal est dans le bon biome et a une position aléatoire
+     */
+    public Animal addanimal(String diet, String animale , Case[][] world, Biome bio, int strg){
+        Animal pet; 
+        Position posi = new Position(0, 0);
+        if (diet == Diet.HERBIVORE.getNom()){
+            if (animale == Animaux_herbivore.VACHE.getNom()){
+                pet = new Herbivore(Animaux_herbivore.VACHE.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addherbivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.HERBIVORE.getNom() + " et c'est un(e) " + Animaux_herbivore.VACHE.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            }else if (animale == Animaux_herbivore.ZEBRE.getNom()){
+                pet = new Herbivore(Animaux_herbivore.ZEBRE.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addherbivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.HERBIVORE.getNom() + " et c'est un(e) " + Animaux_herbivore.ZEBRE.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            } else if (animale == Animaux_herbivore.MOUTON.getNom()){
+                pet = new Herbivore(Animaux_herbivore.MOUTON.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addherbivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.HERBIVORE.getNom() + " et c'est un(e) " + Animaux_herbivore.MOUTON.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            } else if (animale == Animaux_herbivore.ELEPHANT.getNom()){
+                pet = new Herbivore(Animaux_herbivore.ELEPHANT.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                bio.addAnimaux(pet);
+                pet.addherbivore(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.HERBIVORE.getNom() + " et c'est un(e) " + Animaux_herbivore.ELEPHANT.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            } else if (animale == Animaux_herbivore.SINGE.getNom()){
+                pet = new Herbivore(Animaux_herbivore.SINGE.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addherbivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.HERBIVORE.getNom() + " et c'est un(e) " + Animaux_herbivore.SINGE.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            }
+        }else if (diet == Diet.CARNIVORE.getNom()){ 
+            if (animale == Animaux_carnivore.LION.getNom()){
+                pet = new Carnivore(Animaux_carnivore.LION.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addcarnivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.CARNIVORE.getNom() + " et c'est un(e) " + Animaux_carnivore.LION.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            } else if (animale == Animaux_carnivore.LOUP.getNom()){
+                pet = new Carnivore(Animaux_carnivore.LOUP.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addcarnivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.CARNIVORE.getNom() + " et c'est un(e) " + Animaux_carnivore.LOUP.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
+            }
+        }else if (animale == Animaux_omnivore.OURS.getNom()){
+            if (animale == Animaux_omnivore.OURS.getNom()){
+                pet = new Omnivore (Animaux_omnivore.OURS.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
+                pet.addomnivore(pet);
+                bio.addAnimaux(pet);
+                world[posi.getX()][posi.getY()].setisanimal(true);
+                System.out.println("l'animal est " + Diet.OMNIVORE.getNom() + " et c'est un(e) " + Animaux_omnivore.OURS.getNom() + " position = x: " + pet.getposition().getX() + " y: " + pet.getposition().getY() + "\n");
+                return pet;
             }
         }
-    } 
-
-
-   //fonction pour prendre les réponses de l'utilisateur pour pas faire de scanner tout le temps
-   public boolean demandeUtilisateur(String message){
-    Scanner  sc =new Scanner(System.in);
-    System.out.println(message + " Oui/Non");
-    return sc.nextBoolean();
-
-}
-
-
-public void moveHomme(Homme homme, Position moveto){
-    Position movefrom = homme.getposition();
-    if(isEmpty(moveto)){
-        homme.setposition(moveto);
-    } 
-    else { 
-         if(moveto.x > movefrom.x){
-            homme.droite(moveto);
-         } 
-        if(moveto.x < movefrom.x){
-            homme.gauche(moveto);
-         } 
-        else if(moveto.y > movefrom.y){
-            homme.bas(moveto);
-         } 
-        if(moveto.y < movefrom.y){
-            homme.haut(moveto);
-        } 
-        if(moveto.x < movefrom.x && moveto.y < movefrom.y){
-            homme.diagonalehautgauche(moveto);
-        } 
-        if(moveto.x > movefrom.x && moveto.y < movefrom.y){
-            homme.diagonalehautdroit(moveto);
-        } 
-        if(moveto.x < movefrom.x && moveto.y > movefrom.y){
-            homme.diagonalebasgauche(movefrom);
-        } 
-        if(moveto.x > movefrom.x && moveto.y > movefrom.y){
-            homme.diagonalbasdroit(moveto);
-        } 
-    } 
-
-    //gestion de l'element qui se trouve dans la case où l'homme souhaite y aller
-    
-} 
-
-public void demanderCouperBois(Homme homme , Arbre arbre){
-
-     boolean veutcouper = demandeUtilisateur("souhaites tu couper du bois?");
-        if(veutcouper){
-             couperBois(homme,outil,arbre);// à impléménter
-        } else{
-                System.out.println("L'homme ne veut pas couper du bois");
-             } 
-}  
-
-public void demanderChasserherbivore(Homme hoeme, Herbivore herbivore){
-    boolean veutchasser = demandeUtilisateur("Souhaites tu chasser l'animal?");
-    if(veutchasser){
-        chasser(homme,outil,herbivore); // à implémenter
-    } else{
-        System.out.println("L'homme ne veut pas chasser l'animal");
-    } 
-} 
-
-public void demanderecolterFruit(Homme homme, Arbrefruit arbref){
-    boolean recolterf = demandeUtilisateur("souhaites turecolter des fruits?");
-    if(recolterf){
-        recolterfruit(homme, arbref); // a impléménter
-    } else{
-        System.out.println("l'homme ne souhaite pas recolter de fruits");
-    } 
-}
-
-public void contactCarnivore(Homme homme){
-    for(Animal animal : desAnimaux){
-        if(animal instanceof Carnivore && animal.getposition().equals(homme.getposition())){
-            System.out.println("l'homme vient de rentrer en contact avec un carnivore");
-        }
-    } 
-    boolean veutfuir = demandeUtilisateur("veux-tu fuir?");
-    // implémenter la logique derrière
-}  
-
-public void moveHomme(Homme homme, Position moveto){
-    Position movefrom = homme.getposition();
-    if(isEmpty(moveto)){
-        homme.setposition(moveto);
-    } 
-    else { 
-         if(moveto.x > movefrom.x){
-            homme.droite(moveto);
-         } 
-        if(moveto.x < movefrom.x){
-            homme.gauche(moveto);
-         } 
-        else if(moveto.y > movefrom.y){
-            homme.bas(moveto);
-         } 
-        if(moveto.y < movefrom.y){
-            homme.haut(moveto);
-        } 
-        if(moveto.x < movefrom.x && moveto.y < movefrom.y){
-            homme.diagonalehautgauche(moveto);
-        } 
-        if(moveto.x > movefrom.x && moveto.y < movefrom.y){
-            homme.diagonalehautdroit(moveto);
-        } 
-        if(moveto.x < movefrom.x && moveto.y > movefrom.y){
-            homme.diagonalebasgauche(movefrom);
-        } 
-        if(moveto.x > movefrom.x && moveto.y > movefrom.y){
-            homme.diagonalbasdroit(moveto);
-        } 
-    } 
-
-    //gestion de l'element qui se trouve dans la case où l'homme souhaite y aller
-    
-} 
-
-public void demanderCouperBois(Homme homme , Arbre arbre){
-
-     boolean veutcouper = demandeUtilisateur("souhaites tu couper du bois?");
-        if(veutcouper){
-             couperBois(homme,outil,arbre);// à impléménter
-        } else{
-                System.out.println("L'homme ne veut pas couper du bois");
-             } 
-}  
-
-public void demanderChasserherbivore(Homme hoeme, Herbivore herbivore){
-    boolean veutchasser = demandeUtilisateur("Souhaites tu chasser l'animal?");
-    if(veutchasser){
-        chasser(homme,outil,herbivore); // à implémenter
-    } else{
-        System.out.println("L'homme ne veut pas chasser l'animal");
-    } 
-} 
-
-public void demanderecolterFruit(Homme homme, Arbrefruit arbref){
-    boolean recolterf = demandeUtilisateur("souhaites turecolter des fruits?");
-    if(recolterf){
-        recolterfruit(homme, arbref); // a impléménter
-    } else{
-        System.out.println("l'homme ne souhaite pas recolter de fruits");
-    } 
-}
-
-public void contactCarnivore(Homme homme){
-    for(Animal animal : desAnimaux){
-        if(animal instanceof Carnivore && animal.getposition().equals(homme.getposition())){
-            System.out.println("l'homme vient de rentrer en contact avec un carnivore");
-        }
-    } 
-    boolean veutfuir = demandeUtilisateur("veux-tu fuir?");
-    // implémenter la logique derrière
-}  
-
-
-
-    public void randommvt(Animal pet){
-        Random random = new Random();
-        int rand = random.nextInt(4) +1;
-        
-
-        switch (rand){
-            case 1:
-                haut(pet);
-                break;
-            case 2:
-                bas(pet);
-                break;
-            case 3:
-                gauche(pet);
-            case 4:
-                droite(pet);
-                break;
-            default:
-
-                break;
-        }
-
+        return pet = null;
     }
 
-    public void coucou(){
-        System.out.println("coucou");
+    /**
+     * fonction 
+     * @param bio
+     * @param map
+     * @param name
+     * @return
+     */
+    public Vegetal addarbre(Biome bio, Case[][] map, String name){
+        Vegetal veg;
+        Position posi = new Position(0, 0);
+        if (name == Abres.CHENE.getNom()){
+            veg = new Arbre(Abres.CHENE.getNom(), bio, posi = posi.ramdomPosition(bio, map));
+            bio.addPlante(veg);
+            map[posi.getX()][posi.getY()].setisvegetal(true);
+            System.out.println("l'arbre est un " + Abres.CHENE.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + veg.getposition().getX() + " y: " + veg.getposition().getY() + "\n");
+            return veg;
+        }else if (name == Abres.BANANIER.getNom()){
+            veg = new Arbrefruit(Abres.BANANIER.getNom(), bio, posi = posi.ramdomPosition(bio, map));
+            bio.addPlante(veg);
+            map[posi.getX()][posi.getY()].setisvegetal(true);
+            System.out.println("l'arbre est un " + Abres.BANANIER.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + veg.getposition().getX() + " y: " + veg.getposition().getY() + "\n");
+            return veg;
+        }else if (name == Abres.CERISIER.getNom()){
+            veg = new Arbrefruit(Abres.CERISIER.getNom(), bio, posi = posi.ramdomPosition(bio, map));
+            bio.addPlante(veg);
+            map[posi.getX()][posi.getY()].setisvegetal(true);
+            System.out.println("l'arbre est un " + Abres.CERISIER.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + veg.getposition().getX() + " y: " + veg.getposition().getY() + "\n");
+            return veg;
+        }else if (name == Abres.BOULEAU.getNom()){
+            veg = new Arbre(Abres.BOULEAU.getNom(), bio, posi = posi.ramdomPosition(bio, map));
+            bio.addPlante(veg);
+            map[posi.getX()][posi.getY()].setisvegetal(true);
+            System.out.println("l'arbre est un " + Abres.BOULEAU.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + veg.getposition().getX() + " y: " + veg.getposition().getY() + "\n");
+            return veg;
+        }
+        return veg = null;
     }
+
+    public Rocher addrocher(Biome bio, Case[][] world, String nom){
+        Rocher rock;
+        Position posi = new Position(0, 0);
+        if (nom == Rochers.CAILLOUX.getNom()){
+            rock = new Rocher(posi = posi.ramdomPosition(bio, map), bio, 5, Rochers.CAILLOUX.getNom());
+            bio.addRocher(rock);
+            map[posi.getX()][posi.getY()].setisrocher(true);
+            ((Plaine) bio).setnbrocher(((Plaine) bio).getnbrocher() + 1);
+            System.out.println("le rocher est un " + Rochers.CAILLOUX.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + rock.getPos().getX() + " y: " + rock.getPos().getY() + "\n");
+            return rock;
+        }else if (nom == Rochers.GROS_CAILLOUX.getNom()){
+            rock = new Rocher(posi = posi.ramdomPosition(bio, map), bio, 10, Rochers.GROS_CAILLOUX.getNom());
+            bio.addRocher(rock);
+            map[posi.getX()][posi.getY()].setisrocher(true);
+            ((Plaine) bio).setnbrocher(((Plaine) bio).getnbrocher() + 1);
+            System.out.println("le rocher est un " + Rochers.GROS_CAILLOUX.getNom() + " il se situe dans le biome : " + bio.getName() + " position = x: " + rock.getPos().getX() + " y: " + rock.getPos().getY() + "\n");
+            return rock;
+        }
+        return rock = null;
+    }
+
+    public void randommvtAllAnimaux (Biome bio){
+        bio.afficheFaune(bio);
+        int i = 0;
+        for (Animal ani : bio.getfaune()){ 
+            System.out.println(ani.getname() + " est a la position x = " + ani.getposition().getX() + " y = " + ani.getposition().getY());
+            //fonction qui teste si les 4 case ne sont pas libre
+            ani.randommvt(this.map);
+            if (ani != null){
+                System.out.println(ani.getname() + " est a la position x = " + ani.getposition().getX() + " y = " + ani.getposition().getY());
+            }
+            i = i + 1;
+            bio.afficheFaune(bio);
+            System.out.println("i = " + i);
+        }
+    }
+
 }
