@@ -30,4 +30,16 @@ public class Plaine extends Biome {
             System.out.println("Ajout de rochers à la plaine.");
         }
     }
+
+    public void setnbrocher (int r){
+        this.nbrochers = r;
+    }
+
+    public int getnbrocher(){
+        return this.nbrochers;
+    }
+
+    public void removerocher(int r){
+        this.nbrochers -= r;
+    }
 }

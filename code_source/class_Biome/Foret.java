@@ -46,4 +46,20 @@ public class Foret extends Biome {
             System.out.println("Ajout de champignons dans la forêt.");
         }
     }
+
+     public void setchampi(int r){
+        this.nbchampignon = r;
+    }
+
+    public int getchampi(){
+        return this.nbchampignon;
+    }
+
+    public void addchampignon(int r){
+        this.nbchampignon += r;
+    }
+
+    public void removechampi(int r){
+        this.nbchampignon -= r;
+    }
 }
