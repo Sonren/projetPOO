@@ -1,14 +1,14 @@
-package class_Vegetal;
+package fr.lynchmaniac.class_Vegetal;
 
-import class_Biome.Biome;
-import class_Carte.Position;
+import fr.lynchmaniac.class_Biome.Biome;
+import fr.lynchmaniac.class_Carte.Position;
 
 public class Arbrefruit extends Arbre {
     private int nbfruit;
 
-    public Arbrefruit (String n,Biome b, Position p, int nb, int fruit){
-        super (n,b,p,nb);
-        this.nbfruit = fruit;
+    public Arbrefruit (String n,Biome b, Position p){
+        super (n,b,p);
+        this.nbfruit = 10;
     }
 
     //getters 
