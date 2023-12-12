@@ -121,4 +121,17 @@ public class Biome {
 			System.out.println(animal.getname() + "inexistant(e) dans la faune de la" + nom);
 		}
 	}
+
+	public void removeRocher (Rocher roc){
+		if (geologie.remove(roc)){
+			System.out.println(roc.getNom() + "a été éléminé(e) de la faune de la " + nom);
+		}else{
+			System.out.println(roc.getNom() + "inexistant(e) dans la faune de la" + nom);
+		}
+	}
+
+	public void addRocher (Rocher roc){
+		geologie.add(roc);
+		System.out.println(roc.getNom() + " ajouté(e) dans la " + this.nom);
+	}
 }
