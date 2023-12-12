@@ -48,18 +48,18 @@ public class Foret extends Biome {
     }
 
      public void setchampi(int r){
-        this.nbchampignon = r;
+        this.nbchampignons = r;
     }
 
     public int getchampi(){
-        return this.nbchampignon;
+        return this.nbchampignons;
     }
 
     public void addchampignon(int r){
-        this.nbchampignon += r;
+        this.nbchampignons += r;
     }
 
     public void removechampi(int r){
-        this.nbchampignon -= r;
+        this.nbchampignons -= r;
     }
 }

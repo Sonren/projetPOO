@@ -9,10 +9,10 @@ import class_Vegetal.Vegetal;
 public class testBiomes {
     public static void main(String[] args){
         //Test de toutes les classes liées aux Biomes
-        testBiomes();
+        testBiome();
     }
 
-    public static void testBiomes(){
+    public static void testingBiomes(){
         //Test de la classe Biome
         testBiome();
 
@@ -33,7 +33,7 @@ public class testBiomes {
         // Création d'animaux et de plantes pour les tests
         Animal mouton = new Animal("Mouton");
         Animal loup = new Animal("Loup");
-        Vegetal arbre = new Vegetal("Chêne");
+        Vegetal arbre = new Vegetal("Chêne", "Foret", 5 5 );
         Vegetal fraisier = new Vegetal("Fraisier");
 
         // Test des méthodes de la classe Biome
