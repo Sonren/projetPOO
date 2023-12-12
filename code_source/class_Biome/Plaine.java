@@ -1,35 +1,33 @@
 package class_Biome;
 
-import java.util.ArrayList;
-import class_Vegetal.Vegetal;
-import class_Animal.Animal;
-import class_Animal.Homme.Homme;
-import class_Animal.Homme.Tool;
+/**
+ * La classe Plaine représente un type de biome spécifique.
+ * Elle étend la classe abstraite Biome.
+ */
+public class Plaine extends Biome {
 
-public class Plaine extends Biome{
+    /**
+     * Le nombre de rochers dans la plaine.
+     */
     private int nbrochers;
 
     /**
      * Constructeur de la classe Plaine.
-     * 
-     * @param nom Le nom de la plaine 
+     *
+     * @param nom Le nom de la plaine.
      */
     public Plaine(String nom) {
         super(nom);
-        this.nbrochers = 0;
-        this.champignons =0;
+        this.nbrochers = 100;
+    }
+
+    /**
+     * Vérifie si le nombre de rochers est inférieur à 50 et en ajoute 50, si c'est le cas.
+     */
+    public void addRocher() {
+        if (nbrochers < 50) {
+            nbrochers = nbrochers + 50;
+            System.out.println("Ajout de rochers à la plaine.");
+        }
     }
 }
-
-
-   /* // Méthode permettant à l'Homme de couper du bois avec son outil sans perdre de vie
-    public int getCouperBoisOutil(Homme homme, Axe hache) {
-        int boisGagne = 10;  // Valeur à revoir 
-        System.out.println(Animal.getname() + " coupe du bois avec un(e) " + outil.getType() + " dans la plaine.");//Il faudrait voir pour recuperer le nom de l'homme a partir de la class animal
-        //et on ne peut pas recuperer le type d'un outil comme ca vu que c'est une interface
-        System.out.println("Gagne " + boisGagne + " unités de bois.");
-        return boisGagne;
-    }  
-
-
-*/

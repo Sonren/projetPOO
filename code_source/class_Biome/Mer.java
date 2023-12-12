@@ -18,7 +18,7 @@ public class Mer extends Biome {
      */
     public Mer(String nom){
         super(nom);
-        this.profondeur = 0;
+        this.profondeur = 5000;
     }
 
     /**
@@ -27,6 +27,7 @@ public class Mer extends Biome {
      * @return La pronfondeur de la mer.
      */
     public int getProfondeur() {
+        System.out.println(this.profondeur + "m");
         return this.profondeur;
     }
 
@@ -38,7 +39,7 @@ public class Mer extends Biome {
     public void setProfondeur(int newProfondeur) {
         if (newProfondeur >= 0) {
             this.profondeur = newProfondeur;
-            System.out.println("Profondeur de la mer mise à jour : " + this.profondeur);
+            System.out.println("Profondeur de la mer mise à jour : " + this.profondeur + "m");
         } else {
             System.out.println("Erreur : La profondeur de la mer ne peut pas être négative.");
         }

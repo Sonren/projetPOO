@@ -23,37 +23,27 @@ public class Foret extends Biome {
      */
     public Foret(String nom) {
         super(nom);
-        this.nbrochers = 0;
-        this.nbchampignons =0;
+        this.nbrochers = 100;
+        this.nbchampignons =100;
     }
 
-    /**
-     * Ajoute une quantité spécifiée de rochers à la forêt, sous réserve de ne pas dépasser la limite maximale.
-     * 
-     * @param quantity La quantité de rochers à ajouter.
-     * @param maxRochers Le nombre maximum autorisé de rochers dans la forêt.
+   /**
+     * Vérifie si le nombre de rochers est inférieur à 50 et en ajoute 50, si c'est le cas.
      */
-    public void addRocher(int quantity, int maxRochers) {
-        if (nbrochers + quantity <= maxRochers) {
-            nbrochers += quantity;
-            System.out.println("Ajout de " + quantity + " rochers dans la forêt. Il y a maintenant " + nbrochers + " rochers.");
-        } else {
-            System.out.println("Erreur : Impossible d'ajouter plus de rochers que le nombre maximum autorisé (" + maxRochers + ").");
+    public void addRocher() {
+        if (nbrochers < 50) {
+            nbrochers = nbrochers + 50;
+            System.out.println("Ajout de rochers dans la forêt.");
         }
     }
     
     /**
-     * Ajoute une quantité spécifiée de champignons à la forêt, sous réserve de ne pas dépasser la limite maximale.
-     * 
-     * @param quantity La quantité de rochers à ajouter.
-     * @param maxChampignons Le nombre maximum autorisé de rochers dans la forêt. 
+     * Vérifie si le nombre de rochers est inférieur à 50 et en ajoute 50, si c'est le cas.
      */
-    public void addChampignons(int quantity, int maxChampignons) {
-        if (nbchampignons + quantity <= maxChampignons) {
-            nbchampignons += quantity;
-            System.out.println("Ajout de " + quantity + " champignons dans la forêt. Il y a maintenant " + nbchampignons + " champignons.");
-        } else {
-            System.out.println("Erreur : Impossible d'ajouter plus de champignons que le nombre maximum autorisé (" + maxChampignons + ").");
-    }
+    public void addChampignons() {
+        if (nbchampignons < 50) {
+            nbchampignons = nbchampignons + 50;
+            System.out.println("Ajout de champignons dans la forêt.");
+        }
     }
 }
