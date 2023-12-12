@@ -2,105 +2,85 @@ package class_Biome;
 
 import java.util.ArrayList;
 import class_Animal.Animal;
+import class_Vegetal.Rocher;
 import class_Vegetal.Vegetal;
 
-/**
- * La classe Biome représente un environnement naturel comprenant une faune et une flore.
- */
 public class Biome {
-
-	/** Lr nom du biome. */
 	private String nom;
-
-	/** La liste des animaux présents dans le biome. */
 	protected ArrayList<Animal> faune;
-
-	/** La liste des végétaux présents dans le biome */
 	private ArrayList<Vegetal> flore;
+	private ArrayList<Rocher> geologie;
 
-	/**
-	 * Constructeur de la classe Biome.
-	 * 
-	 * @param nom Le nom du biome.
-	 */
 	public Biome(String nom){
 		this.nom = nom;
-		this.faune = new ArrayList<>();
-		this.flore = new ArrayList<>();
+		this.faune = new ArrayList<Animal>();
+		this.flore = new ArrayList<Vegetal>();
+		this.geologie = new ArrayList<Rocher>();
 	}
 
-	/**
-	 * Obtient le nom du biome.
-	 * 
-	 * @return Le nom du biome.
-	 */
+	public Biome(Biomes foret) {
+	}
+
 	public String getName(){
 		return nom;
 	}
 
-	/**
-	 * Obtient la liste des animaux présents dans le biome.
-	 * 
-	 * @return La liste des animaux.
-	 */
 	public ArrayList<Animal> getfaune(){
 		return this.faune;
 	}
 	
-	/**
-	 * Obtient la liste des végétaux présents dans le biome.
-	 * 
-	 * @return La liste des végétaux.
-	 */
 	public ArrayList<Vegetal> getflore(){
 		return this.flore;
 	}
 
-	/**
-	 * Affiche la faune du biome.
-	 */
-	public void afficheFaune (){
-		System.out.println("Faune dans" + nom + ":");
-		for (Animal animal: faune){
+	public ArrayList<Rocher> getgeologie(){
+		return this.geologie;
+	}
+
+	public void setName(String b){
+		this.nom = b;
+	}
+
+
+	public void afficheFaune (Biome bio){
+		System.out.println("Faune dans " + this.nom + ":");
+		for (Animal animal : bio.getfaune() ){
 			System.out.println(animal.getname());
-		}
+			System.out.println(animal.getname() + " a la position x = " + animal.getposition().getX() + " y = " + animal.getposition().getY());		}
+		System.out.println("\n");
 	}
 
-	/**
-	 * Affiche la flore du biome.
-	 */
 	public void afficheFlore (){
-		System.out.println("Flore dans" + nom + ":");
-		for (Vegetal vegetal: flore){
-			System.out.println(vegetal.getname());
+		System.out.println("Flore dans " + this.nom + ":");
+		for (Vegetal vegetal : flore){
+			System.out.println(vegetal.getname() + " a la position x = " + vegetal.getposition().getX() + " y = " + vegetal.getposition().getY());
 		}
+		System.out.println("\n");
 	}
 
-	/**
-	 * Ajoute un animal à la faune du biome.
-	 * 
-	 * @param animal L'animal à ajouter.
-	 */
+	public void affichegeologie (){
+		System.out.println("Rocher dans " + this.nom + ":");
+		for (Rocher roc: geologie){
+			System.out.println(roc.getNom() + " a la position x = " + roc.getPos().getX() + " y = " + roc.getPos().getY());
+		}
+		System.out.println("\n");
+	}
+
 	public void addAnimaux (Animal animal){
-		faune.add(animal);
-		System.out.println(animal.getname() + "ajouté(e) à la faune de la" + nom);
+		this.faune.add(animal);
+		System.out.println(animal.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
-	/**
-	 * Ajoute un végétal à la flore du biome.
-	 * 
-	 * @param vegetal Le végétal à ajouter.
-	 */
 	public void addPlante (Vegetal vegetal){
 		flore.add(vegetal);
-		System.out.println(vegetal.getname() + "ajouté(e) à la flore de la" + nom);
+		System.out.println(vegetal.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
-	/**
-	 * Retire un végétal de la flore du biome.
-	 * 
-	 * @param vegetal Le végétal à retirer.
-	 */
+	public void addRocher (Rocher roc){
+		geologie.add(roc);
+		System.out.println(roc.getNom() + " ajouté(e) dans la " + this.nom);
+	}
+
 	public void removePlante (Vegetal vegetal){
 		if (flore.remove(vegetal)){
 			System.out.println(vegetal.getname() + "a été extirpé(e) de la flore de la " + nom);
@@ -109,11 +89,6 @@ public class Biome {
 		}
 	}
 
-	/**
-	 * Retire un animal de la faune du biome.
-	 * 
-	 * @param animal L'animal à retirer.
-	 */
 	public void removeAnimal (Animal animal){
 		if (faune.remove(animal)){
 			System.out.println(animal.getname() + "a été éléminé(e) de la faune de la " + nom);
@@ -128,10 +103,5 @@ public class Biome {
 		}else{
 			System.out.println(roc.getNom() + "inexistant(e) dans la faune de la" + nom);
 		}
-	}
-
-	public void addRocher (Rocher roc){
-		geologie.add(roc);
-		System.out.println(roc.getNom() + " ajouté(e) dans la " + this.nom);
 	}
 }
