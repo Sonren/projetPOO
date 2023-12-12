@@ -1,7 +1,7 @@
-package fr.lynchmaniac.class_Vegetal;
+package class_Vegetal;
 
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Carte.Position;
+import class_Biome.Biome;
+import class_Carte.Position;
 
 public class Rocher {
 

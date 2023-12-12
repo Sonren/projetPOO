@@ -1,4 +1,4 @@
-package fr.lynchmaniac.class_Vegetal;
+package class_Vegetal;
 
 public enum Abres {
   CHENE("chêne"),

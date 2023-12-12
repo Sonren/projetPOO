@@ -1,22 +1,22 @@
-package fr.lynchmaniac.class_Carte;
+package class_Carte;
 
 
-import fr.lynchmaniac.class_Animal.Animal;
-import fr.lynchmaniac.class_Animal.Animaux_carnivore;
-import fr.lynchmaniac.class_Animal.Animaux_herbivore;
-import fr.lynchmaniac.class_Animal.Animaux_omnivore;
-import fr.lynchmaniac.class_Animal.Carnivore;
-import fr.lynchmaniac.class_Animal.Diet;
-import fr.lynchmaniac.class_Animal.Herbivore;
-import fr.lynchmaniac.class_Animal.Omnivore;
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Biome.Plaine;
-import fr.lynchmaniac.class_Vegetal.Abres;
-import fr.lynchmaniac.class_Vegetal.Arbre;
-import fr.lynchmaniac.class_Vegetal.Arbrefruit;
-import fr.lynchmaniac.class_Vegetal.Rocher;
-import fr.lynchmaniac.class_Vegetal.Rochers;
-import fr.lynchmaniac.class_Vegetal.Vegetal;
+import class_Animal.Animal;
+import class_Animal.Animaux_carnivore;
+import class_Animal.Animaux_herbivore;
+import class_Animal.Animaux_omnivore;
+import class_Animal.Carnivore;
+import class_Animal.Diet;
+import class_Animal.Herbivore;
+import class_Animal.Omnivore;
+import class_Biome.Biome;
+import class_Biome.Plaine;
+import class_Vegetal.Abres;
+import class_Vegetal.Arbre;
+import class_Vegetal.Arbrefruit;
+import class_Vegetal.Rocher;
+import class_Vegetal.Rochers;
+import class_Vegetal.Vegetal;
 
 public class Carte {
 

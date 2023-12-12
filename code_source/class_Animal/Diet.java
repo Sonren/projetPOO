@@ -1,4 +1,4 @@
-package fr.lynchmaniac.class_Animal;
+package class_Animal;
 
 public enum Diet {
   HERBIVORE("herbivore"),

@@ -1,4 +1,4 @@
-package fr.lynchmaniac.class_Biome;
+package class_Biome;
 
 public enum Biomes {
   FORET("fôret"),

@@ -1,14 +1,14 @@
-package fr.lynchmaniac.class_Animal;
+package class_Animal;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Biome.Biomes;
-import fr.lynchmaniac.class_Carte.Carte;
-import fr.lynchmaniac.class_Carte.Case;
-import fr.lynchmaniac.class_Carte.Position;
-import fr.lynchmaniac.class_Vegetal.Vegetal;
+import class_Biome.Biome;
+import class_Biome.Biomes;
+import class_Carte.Carte;
+import class_Carte.Case;
+import class_Carte.Position;
+import class_Vegetal.Vegetal;
 
 
 public abstract class  Animal {
