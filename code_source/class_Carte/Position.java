@@ -1,9 +1,9 @@
-package class_Carte;
+package fr.lynchmaniac.class_Carte;
 
 import java.util.Random;
 
-import class_Biome.Biome;
-import class_Biome.Biomes;
+import fr.lynchmaniac.class_Biome.Biome;
+import fr.lynchmaniac.class_Biome.Biomes;
 
 public class Position {
     protected int x;
@@ -21,14 +21,12 @@ public class Position {
         return this.x;
     }
 
-    public void setX(int x, boolean isWrongPosition) {
-        isWrongPosition = false;
-        if (x < 0 || x > 9){
+    public void setX(int xx, boolean isCorrectPosition) {
+        if (xx < 0 || xx > 9){
             System.out.println("position hors le carte");
-            isWrongPosition = true;
-            System.out.println(isWrongPosition);
+            isCorrectPosition = true;
         } else {
-            this.x = x;
+            this.x = xx;
         }
     }
 
@@ -36,37 +34,54 @@ public class Position {
         return this.y;
     }
 
-    public void setY(int y, boolean isWrongPosition) {
-        isWrongPosition = false;
-        if (y < 0 || y > 9){
+    public void setY(int yy, boolean isCorrectPosition) {
+        if (yy < 0 || yy > 9){
             System.out.println("position hors le carte");
-            isWrongPosition = true;
-            System.out.println(isWrongPosition); 
+            isCorrectPosition = true;
         } else {
-            this.y = y;
+            this.y = yy;
         }
     }
 
-    public void setPosition (int x, int y, boolean isWrongPosition){
-        isWrongPosition = false;
-        if (y < 0 || y > 9 && x < 0 || x > 9){
-            System.out.println("position hors de la carte");
-            isWrongPosition = true;
-        }else{
-            System.out.println("position changé");
-            this.x = x;
-            this.y = y;
+
+    public boolean setPosition (int xx, int yy){
+        boolean isCorrectPosition = false;
+        if (yy < 0 || yy > 9) {
+          System.out.println("position hors de la carte");
+          if (yy > 9){
+            this.x = xx;
+            this.y = 9;
+          }
+          this.x = xx;
+          return isCorrectPosition;
         }
+        if ( xx < 0 || xx > 9){
+          System.out.println("position hors de la carte");
+          if(xx > 9){
+            this.y = yy;
+            this.x = 9;
+          }
+          this.y = yy;
+          return isCorrectPosition;
+        }
+        if(yy >= 0 && yy <= 9 && xx >= 0 && xx <= 9){
+            this.x = xx;
+            this.y = yy;
+            isCorrectPosition = true;
+            return isCorrectPosition;
+        }
+        System.out.println("rien ne se passe dans setPosition");
+        return isCorrectPosition;
+    }
         
-    }
 
-    public boolean isEmpty (Position pos, Case[][] map){
+    public boolean isEmpty (Case[][] map){
         boolean empty = false;
-        if(map[pos.getX()][pos.getY()].getisanimal()){
+        if(map[this.getX()][this.getY()].getisanimal()){
             return empty;
-        }else if (map[pos.getX()][pos.getY()].getisvegetal()){
+        }else if (map[this.getX()][this.getY()].getisvegetal()){
             return empty;
-        }else if (map[pos.getX()][pos.getY()].getisrocher()){
+        }else if (map[this.getX()][this.getY()].getisrocher()){
             return empty;
         }else{
             empty = true;
@@ -74,30 +89,42 @@ public class Position {
         }
     }
 
+    public boolean isEmptyVegetal(Case[][] map) {
+        boolean isEmptyVeg = false;
+        if (map[this.getX()][this.getY()].getisvegetal()){
+            return isEmptyVeg;
+        }
+        if (map[this.getX()][this.getY()].getisrocher()){
+            return isEmptyVeg;
+        }
+        isEmptyVeg = true;
+        return isEmptyVeg;
+    }
+    
+
     public Position ramdomPosition(Biome bio, Case[][] mapwrld){
         Random rand = new Random();
-        boolean WrongPosition = false;
+        boolean isgoodPosition = false;
         if (bio.getName() == Biomes.FORET.getNom()){
-            this.setPosition(rand.nextInt(10), rand.nextInt(4), WrongPosition);
-            while(WrongPosition == true || !isEmpty(this, mapwrld)){
-                this.setPosition(rand.nextInt(10), rand.nextInt(4), WrongPosition);
+            isgoodPosition = this.setPosition(rand.nextInt(10), rand.nextInt(4));
+            while(isgoodPosition == false || !this.isEmpty(mapwrld)){
+                isgoodPosition = this.setPosition(rand.nextInt(10), rand.nextInt(4));
             }
             return this;
         }else if (bio.getName() == Biomes.PLAINE.getNom()){
-            this.setPosition(rand.nextInt(10), rand.nextInt(5) + 4, WrongPosition);
-            while(WrongPosition == true || !isEmpty(this, mapwrld)){
-                this.setPosition(rand.nextInt(10), rand.nextInt(5) + 4, WrongPosition);
+            isgoodPosition = this.setPosition(rand.nextInt(10), rand.nextInt(5) + 4);
+            while(isgoodPosition == false || !this.isEmpty(mapwrld)){
+                isgoodPosition = this.setPosition(rand.nextInt(10), rand.nextInt(5) + 4);
             }
             return this;
         }else if (bio.getName() == Biomes.MER.getNom()){
-            this.setPosition(rand.nextInt(10), 9, WrongPosition);
-            while(WrongPosition == true || !isEmpty(this, mapwrld)){
-                this.setPosition(rand.nextInt(10), 9, WrongPosition);
+            isgoodPosition = this.setPosition(rand.nextInt(10), 9);
+            while(isgoodPosition == false || !this.isEmpty(mapwrld)){
+                isgoodPosition = this.setPosition(rand.nextInt(10), 9);
             }
             return this;
         }
         System.out.println("erreur");
         return this;
     }
-
 }
