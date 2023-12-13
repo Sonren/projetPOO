@@ -1,9 +1,13 @@
 package Test;
 import class_Animal.Animal;
+import class_Animal.Carnivore;
+import class_Animal.Herbivore;
+import class_Animal.Omnivore;
 import class_Biome.Biome;
 import class_Biome.Foret;
 import class_Biome.Mer;
 import class_Biome.Plaine;
+import class_Carte.Position;
 import class_Vegetal.Vegetal;
 
 public class testBiomes {
@@ -27,14 +31,21 @@ public class testBiomes {
     }
 
     public static void testBiome(){
+
         // Création d'un biome
-        Biome biome = new Biome("Biome Générique"));
+        Biome biome = new Biome("Biome Générique");
+
+        // Création des positions
+        Position position_Mouton = new Position(20, 78);
+        Position position_Loup = new Position(55, 54);
+        Position position_arbre = new Position(25, 55);
+        Position position_fraisier = new Position(30, 60);
 
         // Création d'animaux et de plantes pour les tests
-        Animal mouton = new Herbivore(Animaux_herbivore.MOUTON.getNom(), 20, strg, posi = posi.ramdomPosition(bio, world), bio);
-        Animal loup = new Animal("Loup");
-        Vegetal arbre = new Vegetal("Chêne", "Foret", 5 5 );
-        Vegetal fraisier = new Vegetal("Fraisier");
+        Animal mouton = new Herbivore("Mouton", 20, 10, position_Mouton, biome);
+        Animal loup = new Carnivore("Loup", 50, 45, position_Loup, biome );
+        Vegetal arbre = new Vegetal("arbre", biome, position_arbre);
+        Vegetal fraisier = new Vegetal("Fraisier", biome, position_fraisier);
 
         // Test des méthodes de la classe Biome
         biome.addAnimaux(mouton);
@@ -43,7 +54,7 @@ public class testBiomes {
         biome.addPlante(fraisier);
 
         // Affichage de la faune et de la flore
-        biome.afficheFaune();
+        biome.afficheFaune(biome);
         biome.afficheFlore();
 
         // Retrait d'un animal et d'une plante
@@ -51,19 +62,26 @@ public class testBiomes {
         biome.removePlante(arbre);
 
         // Affichage mis à jour de la faune et de la flore
-        biome.afficheFaune();
+        biome.afficheFaune(biome);
         biome.afficheFlore();
     }
 
     public static void testPlaine(){
+
         // Création d'une plaine
         Plaine plaine = new Plaine("Plaine Hostile");
 
+        // Création des positions
+        Position position_Zebre = new Position(40, 50);
+        Position position_Cochon = new Position(33, 21);
+        Position position_Baobab = new Position(52, 44);
+        Position position_Herbe = new Position(1, 10);
+
         // Création d'animaux et de plantes pour les tests
-        Animal zebre = new Animal("Zèbre");
-        Animal cochon = new Animal("Cochon");
-        Vegetal baobab = new Vegetal("Baobab");
-        Vegetal herbe = new Vegetal("Herbe");
+        Animal zebre = new Herbivore("Zèbre", 41, 35, position_Zebre, plaine);
+        Animal cochon = new Herbivore("Cochon", 26, 20, position_Cochon, plaine);
+        Vegetal baobab = new Vegetal("Baobab", plaine, position_Baobab);
+        Vegetal herbe = new Vegetal("Herbe", plaine, position_Herbe);
 
         // Test des méthodes de la classe Biome (superclasse de Plaine)
         plaine.addAnimaux(zebre);
@@ -72,27 +90,33 @@ public class testBiomes {
         plaine.addPlante(herbe);
 
         // Affichage de la faune et de la flore
-        plaine.afficheFaune();
+        plaine.afficheFaune(plaine);
         plaine.afficheFlore();
 
         // Test des méthodes spécifiques de la classe Plaine
         plaine.addRocher();
 
         // Affichage mis à jour de la faune, de la flore et des rochers
-        plaine.afficheFaune();
+        plaine.afficheFaune(plaine);
         plaine.afficheFlore();
-        plaine.afficheRochers();
     }
 
     public static void testForet(){
+
         // Création d'une forêt
         Foret foret = new Foret("Forêt Sauvage");
 
+        // Création des positions
+        Position position_Singe = new Position(70, 80);
+        Position position_Elephant = new Position(55, 54);
+        Position position_Chêne = new Position(65, 59);
+        Position position_Chataigner = new Position(69, 80);
+
         // Création d'animaux et de plantes pour les tests
-        Animal singe = new Animal("Singe");
-        Animal elephant = new Animal("Elephant");
-        Vegetal chêne = new Vegetal("Chêne");
-        Vegetal chataigner = new Vegetal("Châtaigner");
+        Animal singe = new Omnivore("Singe", 80, 74, position_Singe, foret);
+        Animal elephant = new Herbivore("Elephant", 200, 185, position_Elephant, foret);
+        Vegetal chêne = new Vegetal("Chêne", foret, position_Chêne);
+        Vegetal chataigner = new Vegetal("Châtaigner", foret, position_Chataigner);
 
         // Test des méthodes de la classe Biome (superclasse de Foret)
         foret.addAnimaux(singe);
@@ -101,7 +125,7 @@ public class testBiomes {
         foret.addPlante(chataigner);
 
         // Affichage de la faune et de la flore
-        foret.afficheFaune();
+        foret.afficheFaune(foret);
         foret.afficheFlore();
 
         // Test des méthodes spécifiques de la classe Foret
@@ -109,21 +133,24 @@ public class testBiomes {
         foret.addChampignons();
 
         // Affichage mis à jour de la faune, de la flore, des rochers et des champignons
-        foret.afficheFaune();
+        foret.afficheFaune(foret);
         foret.afficheFlore();
-        foret.afficheRochers();
-        foret.afficheChampignons();
-    
     }
 
     public static void testMer(){
+
         // Création d'une mer
         Mer mer = new Mer("Mer Virulente");
 
+        // Création des positions
+        Position position_poisson = new Position(15, 10);
+        Position position_algue = new Position(35, 24);
+        Position position_corail = new Position(12, 20);
+
         // Création d'animaux et de plantes pour les tests
-        Animal poisson = new Animal("Poisson");
-        Vegetal algue = new Vegetal("Algue");
-        Vegetal corail = new Vegetal("Corail");
+        Animal poisson = new Omnivore("Poisson", 10, 1, position_poisson, mer);
+        Vegetal algue = new Vegetal("Algue", mer, position_algue);
+        Vegetal corail = new Vegetal("Corail", mer, position_corail);
 
         // Test des méthodes de la classe Biome (superclasse de Mer)
         mer.addAnimaux(poisson);
@@ -131,17 +158,16 @@ public class testBiomes {
         mer.addPlante(corail);
 
         // Affichage de la faune et de la flore
-        mer.afficheFaune();
+        mer.afficheFaune(mer);
         mer.afficheFlore();
 
         // Test des méthodes spécifiques de la classe Mer
         mer.setProfondeur(6000);
 
         // Affichage mis à jour de la faune, de la flore et de la profondeur
-        mer.afficheFaune();
+        mer.afficheFaune(mer);
         mer.afficheFlore();
-        mer.afficheProfondeur();
     }
-    }
+}
 
     
