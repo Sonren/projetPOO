@@ -1,7 +1,7 @@
-package class_Carte;
+package fr.lynchmaniac.class_Carte;
 
 
-import class_Biome.Biome;
+import fr.lynchmaniac.class_Biome.Biome;
 
 public class Case {
 
@@ -11,6 +11,7 @@ public class Case {
    private boolean isanimal = false;
    private boolean isrocher = false;
    private boolean ischampi = false;
+   private boolean isHomme = false;
     
     public Case() {
     }
@@ -60,8 +61,16 @@ public class Case {
         this.ischampi = ch;
     }
 
-    public boolean setischampi(){
+    public boolean ischampi(){
         return this.ischampi;
+    }
+
+    public boolean isHomme(){
+        return this.isHomme;
+    }
+
+    public void setisHomme(boolean ho){
+        this.isHomme = ho;
     }
 
     
