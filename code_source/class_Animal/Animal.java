@@ -97,7 +97,7 @@ public abstract class  Animal {
         return levellife < levellife/2 || strength < strength/2 ;
     } 
     // classe abstraite eat qui depend de si l'animal est carnivore omnivore ou herbivore
-    public abstract void eatMeat(Animal prey);
+    public abstract void eatMeat();
     public abstract void eatPlant(Vegetal plant);
     
 
