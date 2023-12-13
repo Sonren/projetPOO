@@ -1,9 +1,9 @@
-package class_Biome;
+package fr.lynchmaniac.class_Biome;
 
 import java.util.ArrayList;
-import class_Animal.Animal;
-import class_Vegetal.Rocher;
-import class_Vegetal.Vegetal;
+import fr.lynchmaniac.class_Animal.Animal;
+import fr.lynchmaniac.class_Vegetal.Rocher;
+import fr.lynchmaniac.class_Vegetal.Vegetal;
 
 public class Biome {
 	private String nom;
@@ -42,9 +42,9 @@ public class Biome {
 	}
 
 
-	public void afficheFaune (Biome bio){
+	public void afficheFaune (){
 		System.out.println("Faune dans " + this.nom + ":");
-		for (Animal animal : bio.getfaune() ){
+		for (Animal animal : this.getfaune() ){
 			System.out.println(animal.getname());
 			System.out.println(animal.getname() + " a la position x = " + animal.getposition().getX() + " y = " + animal.getposition().getY());		}
 		System.out.println("\n");
