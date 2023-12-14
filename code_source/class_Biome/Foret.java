@@ -47,18 +47,38 @@ public class Foret extends Biome {
         }
     }
 
-     public void setchampi(int r){
+    /**
+     * Définit le nombre de champignons dans la forêt.
+     *
+     * @param r Le nouveau nombre de champignons.
+     */
+    public void setchampi(int r){
         this.nbchampignons = r;
     }
 
+    /**
+     * Obtient le nombre actuel de champignons dans la forêt.
+     *
+     * @return Le nombre de champignons dans la forêt.
+     */
     public int getchampi(){
         return this.nbchampignons;
     }
 
+    /**
+     * Ajoute un nombre spécifié de champignons à la forêt.
+     *
+     * @param r Le nombre de champignons à ajouter.
+     */
     public void addchampignon(int r){
         this.nbchampignons += r;
     }
 
+    /**
+     * Retire un nombre spécifié de champignons de la forêt.
+     *
+     * @param r Le nombre de champignons à retirer.
+     */
     public void removechampi(int r){
         this.nbchampignons -= r;
     }

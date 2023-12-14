@@ -61,7 +61,7 @@ public class Biome {
 	public void affichegeologie (){
 		System.out.println("Rocher dans " + this.nom + ":");
 		for (Rocher roc: geologie){
-			System.out.println(roc.getNom() + " a la position x = " + roc.getPos().getX() + " y = " + roc.getPos().getY());
+			System.out.println(roc.getname() + " a la position x = " + roc.getposition().getX() + " y = " + roc.getposition().getY());
 		}
 		System.out.println("\n");
 	}
@@ -78,7 +78,7 @@ public class Biome {
 
 	public void addRocher (Rocher roc){
 		geologie.add(roc);
-		System.out.println(roc.getNom() + " ajouté(e) dans la " + this.nom);
+		System.out.println(roc.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
 	public void removePlante (Vegetal vegetal){
@@ -99,9 +99,9 @@ public class Biome {
 
 	public void removeRocher (Rocher roc){
 		if (geologie.remove(roc)){
-			System.out.println(roc.getNom() + "a été éléminé(e) de la faune de la " + nom);
+			System.out.println(roc.getname() + "a été éléminé(e) de la faune de la " + nom);
 		}else{
-			System.out.println(roc.getNom() + "inexistant(e) dans la faune de la" + nom);
+			System.out.println(roc.getname() + "inexistant(e) dans la faune de la" + nom);
 		}
 	}
 }

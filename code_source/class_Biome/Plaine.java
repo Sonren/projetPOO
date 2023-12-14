@@ -31,14 +31,29 @@ public class Plaine extends Biome {
         }
     }
 
+    /**
+     * Définit le nombre de rochers dans la forêt.
+     *
+     * @param r Le nouveau nombre de rochers.
+     */
     public void setnbrocher (int r){
         this.nbrochers = r;
     }
 
+    /**
+     * Obtient le nombre actuel de rochers dans la forêt.
+     *
+     * @return Le nombre de rochers dans la forêt.
+     */
     public int getnbrocher(){
         return this.nbrochers;
     }
 
+    /**
+     * Retire un nombre spécifié de rochers de la forêt.
+     *
+     * @param r Le nombre de rochers à retirer.
+     */
     public void removerocher(int r){
         this.nbrochers -= r;
     }
