@@ -15,7 +15,6 @@ public class Homme extends Animal {
     private boolean isDead;
 
     public Homme(String n, int l, int s,Position p, Biome b) {
-    public Homme(String n, int l, int s,Position p, Biome b) {
         super(n,l,s,p,b);
         this.isDead = false;
     }
@@ -42,11 +41,8 @@ public class Homme extends Animal {
         return value >= 0 && value <=9 ;
     } 
 
-        public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
+    public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
         Scanner scanner = new Scanner(System.in);
-        boolean hasNothing = true;
-        while(hasNothing){
-            System.out.println("Entrez ls nouvelle coordonnée de x entre 0 et 9");
         boolean hasNothing = true;
         while(hasNothing){
             System.out.println("Entrez ls nouvelle coordonnée de x entre 0 et 9");
@@ -358,7 +354,7 @@ public class Homme extends Animal {
 
     public Vegetal findVegetal(Position temppos, Case[][] gamemap, Biome bio){
         for(Vegetal veg : bio.getflore()){
-            if(veg.getposition().getX() == temppos.getX() && veg.getposition().getY() == temppos.getY()){
+            if(veg.getposition().getX() == temppos.getX() && veg.getposition.getY() == temppos.getY()){
                 if(veg.isDeadveg() == false){
                     System.out.println("végétal rencontré = " + veg.getname());
                     return veg;
@@ -655,10 +651,7 @@ public class Homme extends Animal {
         } else{
             System.out.println("Dommage, nous n'avons pas assez de ressources pour fabriquer une hache :(");
         } 
-
     } 
-
-
     public void fabriquerPickaxe(){
         if(this.invent.getQtecailloux() >=3 && this.invent.getQtebois()>=2){
             this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
@@ -671,8 +664,6 @@ public class Homme extends Animal {
             System.out.println("Aie, va falloir recolter plus de bois et caillous Francis!");
         } 
     } 
-
-
     public void fabriquerOutil(){
 
         boolean creePioche = demandeUtilisateur("veuw-tu fabriquer une pioche?");
@@ -691,8 +682,8 @@ public class Homme extends Animal {
             System.out.println("Francis souhaite fabriquer une lance");
             this.fabriquerspear();
         } 
-    } 
-
+    }
 }
+
 
        

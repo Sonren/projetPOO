@@ -1,7 +1,7 @@
-package class_Vegetal;
+package fr.lynchmaniac.class_Vegetal;
 
-import class_Biome.Biome;
-import class_Carte.Position;
+import fr.lynchmaniac.class_Biome.Biome;
+import fr.lynchmaniac.class_Carte.Position;
 
 public class Arbre extends Vegetal{
     private int hauteur = 0;
