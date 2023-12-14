@@ -1,29 +1,22 @@
 package class_Animal.Homme;
 
-import java.util.Random;
 import java.util.Scanner;
 
 import class_Animal.Animal;
-import class_Animal.Carnivore;
-import class_Animal.Herbivore;
-/*import class_Animal.Homme.Axe;
-import class_Animal.Homme.Pickaxe;*/
-import class_Animal.Omnivore;
 import class_Biome.Biome;
-import class_Carte.*;
-import class_Carte.Case;
-import class_Vegetal.Arbre;
-import class_Vegetal.Arbrefruit;
-//import class_Vegetal.Rocher;
+import class_Carte.Position;
 import class_Vegetal.Vegetal;
-//import class_Animal.Homme.*;
+import class_Carte.Case;
+import class_Vegetal.Rocher;
+import class_Vegetal.Rochers;
 
-public class Homme extends Omnivore {
-    public Inventaire invent;
+public class Homme extends Animal {
+    public Inventaire invent = new Inventaire(0, 0, 0, 0, null);
+    private boolean isDead;
 
-    public Homme(String n, int l, int s,Position p, Biome b,Inventaire invent) {
+    public Homme(String n, int l, int s,Position p, Biome b) {
         super(n,l,s,p,b);
-        this.invent = invent;
+        this.isDead = false;
     }
     
     //getters et setters
@@ -35,114 +28,20 @@ public class Homme extends Omnivore {
         this.invent = invent;
     }
 
-    public boolean isDead(){
-        return this.levellife <= 0;
-
+    public boolean demandeUtilisateur(String message){
+        boolean answer;
+        Scanner scanner =new Scanner(System.in);
+        System.out.println(message + " Oui(true)/Non(false)"); 
+        answer = scanner.nextBoolean();
+        scanner.close();
+        return answer;
     }
-    public boolean isTired(){
-        return this.levellife < this.levellife/2 ;
-    } 
-     public boolean isEmpty(Case[][] map) {
-    if (!isValidCoordinate(this.getposition().getX()) || !isValidCoordinate(this.getposition().getY())) {
-        System.out.println("Coordonnées invalides. x et y doivent être compris entre 0 et 9");
-        return false;
-    }
-
-    Case targetCase = map[this.getposition().getX()][this.getposition().getY()];
-
-    if (targetCase.getisvegetal()) {
-        // Si c'est un arbre, demander à l'homme s'il veut couper l'arbre
-        if (demanderAction("Couper l'arbre")) {
-            
-            System.out.println("Vous avez coupé l'arbre.");
-        }
-        return false; // La case n'est pas vide, mais l'homme a fait une action.
-
-    } else if (targetCase.getisanimal()) {
-        // Si c'est un herbivore, demander à l'homme s'il veut chasser
-        // Si c'est un carnivore, demander à l'homme s'il veut fuir
-        if (targetCase.getisanimal()) {
-            if (demanderAction("Chasser l'herbivore")) {
-                chasserHerbivore(targetCase.getAnimal());
-                System.out.println("Vous avez chassé l'herbivore.");
-            }
-        } else if (targetCase.getisanimal() instanceof Carnivore) {
-            if (demandeUtilisateur("Fuir le carnivore")) {
-               
-            }
-        }
-        return false; // La case n'est pas vide, mais l'homme a fait une action.
-
-    } else if (targetCase.getisrocher())) {
-        // Si c'est un rocher, collecter des cailloux avec la pioche
-
-    } else if (!targetCase.isEmpty()) {
-        // Si la case est occupée par autre chose
-        System.out.println("La case est occupée par autre chose.");
-        return false;
-
-    } else {
-        // Si la case est vide
-        System.out.println("La case est libre.");
-        return true;
-    }
-}
-
-
-
-       public boolean demandeUtilisateur(String message){
-    Scanner  scanner =new Scanner(System.in);
-    System.out.println(message + " Oui/Non");
-    return scanner.nextBoolean();
-
-}
-public Position RandomMoveHommmme(Case[][] map ){
-    Random random= new Random();
-    int rand = random.nextInt(8) +1 ;
-
-    switch(rand){
-        case 1 :
-            System.out.println("haut");
-            return this.haut(map);
-        case 2 :
-            System.out.println("bas");
-            return this.bas(map);
     
-        case 3 :
-            System.out.println("gauche");
-            return this.gauche(map);
-            
-        case 4 :
-            System.out.println("droit");
-            return this.droite(map);
-            
-        case 5:
-            System.out.println("diagonale haut gauche");
-            return this.diagonalehautgauche(map);
-            
-        case 6 :
-            System.out.println(" diagonale haut droit");
-            return this.diagonalehautdroit(map);
-            
-        case 7 :
-            System.out.println("diagonale bas gauche");
-            return this.diagonalebasgauche(map);
-            
-        case 8 :
-            System.out.println("diagonale bas droit");
-            return this.diagonalebasgauche(map);
-            
-        default :
-            System.out.println("le choix n'est pas valide!!");
-    }  
-    
-    return this.getposition();
-} 
     public boolean isValidCoordinate(int value){
         return value >= 0 && value <=9 ;
     } 
 
-public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
+   public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
         Scanner scanner = new Scanner(System.in);
             System.out.println("Entrez la nouvelle coordonnée de x entre 0 et 9");
             int newX = scanner.nextInt();
@@ -153,7 +52,7 @@ public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
             } 
             Position nextMove = new Position(newX, newY);
             
-            if(this.getposition().isEmpty(nextMove , cartCase)){
+            if(this.isEmpty(cartCase, nextMove)){
             //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
             this.setposition( nextMove);
             //cartCase[nextMove.getX()][nexMove.getY()].sethomme(true);  
@@ -162,337 +61,624 @@ public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
              } else{
             System.out.println("ouuups! la case est déjà occupée");
         }   
-    return nextMove;
+        return nextMove;
+    }
 
-}
-//-----------------------------------------------------------------------------------------------
-    public Position haut (Case[][] cartCase){
-        Position moveto = new Position(0,0);
-        boolean wposition = false;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition);
-        moveto.setY(moveto.getY()-1, wposition);
-        if(this.getposition().isEmpty(moveto , cartCase)){
-            System.out.println("La position a été changé");
-            //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
+//--------------------------------------------------------------------------------------------------
+    //fonction de vérification 
+
+    /**
+     * 
+     * @param map
+     * @param posarriv
+     * @return
+     */
+    public boolean isEmpty (Case[][] map, Position posarriv){
+        boolean empty = false;
+        if(map[posarriv.getX()][posarriv.getY()].getisanimal()){
+            return empty;
+        }else if (map[posarriv.getX()][posarriv.getY()].getisvegetal()){
+            return empty;
+        }else if (map[posarriv.getX()][posarriv.getY()].getisrocher()){
+            return empty;
+        }else{
+            empty = true;
+            return empty;
+        }
+    }
+
+    /**
+     * 
+     * @param pos
+     * @param plain
+     * @param forest
+     */
+    public void GoodBiomehuman(Position pos, Biome plain, Biome forest) {
+        if (this.getbiome().getName() == Biomes.FORET.getNom()){
+            if (pos.getY() < 4){
+                System.out.println("vous etes dans la forêt");
+            }else{
+                if(pos.getY() < 9 && pos.getY() >=4){
+                    this.setbiome(plain);
+                    System.out.println("Vous changez de biome , vous arrivez dans la : " + this.getbiome().getName());
+                }else if(pos.getY() >= 9){
+                    System.out.println("Vous ne pouvez aller dans la mer");
+                    pos.setPosition(pos.getX(), pos.getY() - 1);
+                }
+            }
+        }else if(this.getbiome().getName() == Biomes.PLAINE.getNom()){
+            if(pos.getY() < 9 && pos.getY() >=4){
+                System.out.println("vous êtes dans la plaine");
+            }else if(pos.getY() < 4){
+                this.setbiome(forest);
+                System.out.println("Vous changez de biome , vous arrivez dans la : " + this.getbiome().getName());
+            }else if(pos.getY() >= 9){
+                    System.out.println("Vous ne pouvez aller dans la mer");
+                    pos.setPosition(pos.getX(), pos.getY() - 1);
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param toolname
+     * @return
+     */
+    public boolean hasTool(String toolname){
+        boolean hastool = false;
+        if(toolname == Tools.HACHE.getNom()){
+            Tool tolfind = findTool(this.getInvent(), Tools.HACHE.getNom());
+            if(tolfind != null){
+                if (tolfind instanceof Axe){
+                    hastool = true;
+                    return hastool;
+                }
+            }else{
+                return hastool;
+            }
+        }else if(toolname == Tools.PIOCHE.getNom()){
+            Tool tolfind = findTool(this.getInvent(), Tools.PIOCHE.getNom());
+            if(tolfind != null){
+                if (tolfind instanceof Pickaxe){
+                    hastool = true;
+                    return hastool;
+                }
+            }else{
+                return hastool;
+            }
+        }else if(toolname == Tools.LANCE.getNom()){
+            Tool tolfind = findTool(this.getInvent(), Tools.LANCE.getNom());
+            if(tolfind != null){
+                if (tolfind instanceof Spear){
+                    hastool = true;
+                    return hastool;
+                }
+            }else{
+                return hastool;
+            }
+        }
+        System.out.println("l'outil que vous voulez utiliser n'existe pas");
+        return hastool;
+    }
+
+//--------------------------------------------------------------------------------------------------------
+    //fonction de recherche
+
+    /**
+     * 
+     * @param invent
+     * @param name
+     * @return
+     */
+    public Tool findTool(Inventaire invent, String name){
+        if(invent.getArsenal() == null){
+            System.out.println("Vous n'avez pas l'outil : " + name);
+        return null;
+        }else{
+            for(Tool tol : invent.getArsenal()){
+                if(tol.getName() == name){
+                    return tol;
+                }
+            }
+        }
+        System.out.println("Vous n'avez pas l'outil : " + name);
+        return null;
+    }
+
+    /**
+     * 
+     * @param temppos
+     * @param gamemap
+     * @param bio
+     * @return
+     */
+    public Vegetal findVegetal(Position temppos, Case[][] gamemap, Biome bio){
+        for(Vegetal veg : bio.getflore()){
+            if(veg.getposition().getX() == temppos.getX() && veg.getposition().getY() == temppos.getY()){
+                if(veg.isDeadveg() == false){
+                    System.out.println("végétal rencontré = " + veg.getname());
+                    return veg;
+                }else{
+                    System.out.println("l'abre a déja été coupé");
+                    return veg;//on retourne ici l'arbre mort et on gère le cas au dessus
+                }
+            }
+        }
+        bio.afficheFlore();
+        System.out.println("aucun arbre trouvé");
+        return null;
+    }
+
+    /**
+     * 
+     * @param temppos
+     * @param gamemap
+     * @param bio
+     * @return
+     */
+    public Rocher findRock(Position temppos, Case[][] gamemap, Biome bio){
+        for(Rocher rok : bio.getgeologie()){
+            if(rok.getposition().getX() == temppos.getX() && rok.getposition().getY() == temppos.getY()){
+                if(rok.isDeadroc() == false){
+                    System.out.println("Rocher rencontré = " + rok.getname());
+                    return rok;
+                }else{
+                    System.out.println("Le rocher a déja été miner");
+                    return rok;//on retourne ici le rocher mort et on gère le cas au dessus
+                }
+            }
+        }
+        bio.affichegeologie();
+        System.out.println("aucun rocher trouvé");
+        return null;
+    }
+
+//----------------------------------------------------------------------------------------------------------------
+    //fonction d'action
+
+    /**
+     * 
+     * @param rock
+     * @param map
+     * @param pos
+     */
+    public void miner(Rocher rock, Case[][] map, Position pos){
+        if(this.hasTool(Tools.HACHE.getNom())){
+            System.out.println("vous utilisez une pioche pour miner");
+            this.getInvent().ajouterCailloux(rock.getNbcailloux());
+            map[pos.getX()][pos.getY()].setisrocher(false);
+            System.out.println(rock.getNbcailloux() + " cailloux on été ajouté a l'inventaire");
+        }else{
+            System.out.println("Vous minez a la main");
+            this.levellife -= 5;
+            this.getInvent().ajouterCailloux(rock.getNbcailloux());
+            System.out.println(rock.getNbcailloux() + " cailloux on été ajouté a l'inventaire");
+            map[pos.getX()][pos.getY()].setisrocher(false);
+            System.out.println("votre niveau de vie actuel : " + this.getlevellife());
+        }
+    }
+
+    /**
+     * 
+     * @param arbre
+     * @param map
+     * @param pos
+     */
+    public void couperBois(Vegetal arbre, Case[][] map, Position pos){
+        if(this.hasTool(Tools.HACHE.getNom())){
+            System.out.println("vous utilisez une Hache pour couper du bois");
+            this.getInvent().ajouterBois(arbre.getnbbois());
+            map[pos.getX()][pos.getY()].setisvegetal(false);
+            System.out.println(arbre.getnbbois() + " morceau de bois on été ajouté a l'inventaire");
+        }else{
+            System.out.println("Vous coupez l'abre a la main");
+            this.levellife -= 3;
+            this.getInvent().ajouterBois(arbre.getnbbois());
+            System.out.println(arbre.getnbbois() + " morceau de bois on été ajouté a l'inventaire");
+            map[pos.getX()][pos.getY()].setisvegetal(false);
+            System.out.println("votre niveau de vie actuel : " + this.getlevellife());
+        }
+    }
+
+    /**
+     * 
+     * @param vegfind
+     * @param wrlmap
+     * @param arrivedpos
+     */
+    public void recoltefruit(Vegetal vegfind, Case[][] wrlmap, Position arrivedpos){
+        System.out.println("vous avez ramassé : " + ((Arbrefruit) vegfind).getnbfruit() + " fruits");
+        this.getInvent().ajouterFruit(((Arbrefruit) vegfind).getnbfruit());
+        wrlmap[arrivedpos.getX()][arrivedpos.getY()].setisvegetal(false); 
+    }
+
+//------------------------------------------------------------------------------------------------------------
+    //fonction qui gère les rencontres
+
+    /**
+     * 
+     * @param map
+     * @param pos
+     * @return
+     */
+    public Position hommeMeetVegetal(Case[][] map, Position pos){
+        Vegetal findveg;
+        System.out.println("il y a un vegetal sur la case");
+        findveg = findVegetal(pos, map, this.getbiome());
+        if(findveg instanceof Arbrefruit){
+            if(demandeUtilisateur("voulez vous ramassez des fruits")){
+                recoltefruit(findveg, map, pos);
+                System.out.println("*******************");
+                System.out.println("position changé");
+                System.out.println("*******************");
+                map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                this.setposition(pos);
+                map[pos.getX()][pos.getY()].setisanimal(true);
+                return this.getposition();
+            }else{
+                System.out.println("*******************");
+                System.out.println("position changé");
+                System.out.println("*******************");
+                map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                this.setposition(pos);
+                map[pos.getX()][pos.getY()].setisanimal(true);
+                return this.getposition();
+            }
+        }else if(findveg instanceof Arbre){
+            if(demandeUtilisateur("voulez vous coupez du bois")){
+                couperBois(findveg, map, pos);
+                System.out.println("*******************");
+                System.out.println("position changé");
+                System.out.println("*******************");
+                map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                this.setposition(pos);
+                map[pos.getX()][pos.getY()].setisanimal(true);
+                return this.getposition();
+            }else{
+                System.out.println("*******************");
+                System.out.println("position changé");
+                System.out.println("*******************");
+                map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                this.setposition(pos);
+                map[pos.getX()][pos.getY()].setisanimal(true);
+                return this.getposition();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param map
+     * @param pos
+     * @return
+     */
+    public Position hommeMeetRocher(Case[][] map, Position pos){
+        Rocher findrock;
+        System.out.println("il y a un rocher sur la case");
+        if(demandeUtilisateur("Voulez vous le minez ?")){
+            findrock = findRock(pos, map, this.getbiome());
+            miner(findrock, map, pos);
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(pos);
+            map[pos.getX()][pos.getY()].setisanimal(true);
             return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(cartCase);
-        } 
+        }else{
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            map[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(pos);
+            map[pos.getX()][pos.getY()].setisanimal(true);
+            return this.getposition();
+        }
+    }
 
+
+//-----------------------------------------------------------------------------------------------
+    //Mouvement haut bas droite gauche
+    public Position haut (Case[][] cartCase, Biome pla, Biome fore){
+        Position moveto = new Position(0,0);
+        boolean goodHPosition = false;
+        boolean result;
+        System.out.println("x = " + this.getposition().getX() + " y = " + this.getposition().getY());
+        goodHPosition = moveto.setPosition(this.getposition().getX(), this.getposition().getY() - 1);
+        System.out.println("posH : x = " + moveto.getX() + " y = " + moveto.getY());
+        result = testPosition(moveto, cartCase);
+        if(result){
+            if(goodHPosition){
+                if(cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    if (cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    System.out.println("rencontre un animal");
+                    }else{
+                        System.out.println("*******************");
+                        System.out.println("position changé");
+                        System.out.println("*******************");
+                        cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                        this.setposition(moveto);
+                        cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+                        return moveto;
+                    }
+                }
+            }else{
+                System.out.println("la position n'est pas correcte, veullez en saisir une nouvelle");
+                //appel procedure deplacement
+            }
+        }else{
+            GoodBiomehuman(moveto, pla, fore);
+            if(cartCase[moveto.getX()][moveto.getY()].getisvegetal()){
+                return hommeMeetVegetal(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisrocher()){
+                System.out.println("il y a un rocher sur la case");
+                return hommeMeetRocher(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
+                System.out.println("il y a un animal sur la case");
+                //on apelle la fonction human meet animal 
+            }
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(moveto);
+            cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+        }
+        return null;
     }
          
-    public Position bas (Case[][] cartCase){
+    public Position bas (Case[][] cartCase, Biome pla, Biome fore){
         Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setY(moveto.getY()+1, wposition);
-        if(this.getposition().isEmpty(moveto , cartCase)){
-            System.out.println("La position a été changé");
-            //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(cartCase);
-        } 
-
-} 
-
-public Position droite (Case[][] cartCase  ){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX()+1, wposition);
-        if(this.getposition().isEmpty(moveto , cartCase)){
-            System.out.println("La position a été changé");
-            //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(cartCase);
-        } 
-}
-
-     public Position gauche (Case[][] cartCase  ){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX()- 1, wposition);
-        if(this.getposition().isEmpty(moveto , cartCase)){
-            System.out.println("La position a été changé");
-            //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(cartCase);
-        } 
-    }
-
-     public Position diagonalehautgauche(Case [][] caseCart){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX()- 1, wposition);
-        moveto.setY(moveto.getY() - 1, wposition);
-        if(this.getposition().isEmpty(moveto , caseCart)){
-            System.out.println("La position a été changé");
-            //caseCart[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(caseCart);
-        } 
-    } 
-    public Position diagonalehautdroit(Case [][] caseCart){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX() + 1, wposition);
-        moveto.setY(moveto.getY() - 1, wposition);
-        if(this.getposition().isEmpty(moveto , caseCart)){
-            System.out.println("La position a été changé");
-            //caseCart[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(caseCart);
-        } 
-    } 
-    public Position diagonalebasgauche(Case [][] caseCart){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX()- 1, wposition);
-        moveto.setY(moveto.getY() + 1, wposition);
-        if(this.getposition().isEmpty(moveto , caseCart)){
-            System.out.println("La position a été changé");
-            //caseCart[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(caseCart);
-        } 
-    } 
-    public Position diagonalbasdroit(Case [][] caseCart){
-        Position moveto = new Position(0,0);
-        boolean wposition = false ;
-        moveto.setPosition(this.getposition().getX(), this.getposition().getY(), wposition); 
-        moveto.setX(moveto.getX()+ 1, wposition);
-        moveto.setY(moveto.getY() + 1, wposition);
-        if(this.getposition().isEmpty(moveto , caseCart)){
-            System.out.println("La position a été changé");
-            //caseCart[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( moveto);
-            //cartCase[moveto.getX()][moveto.getY()].sethomme(true);    
-            return this.getposition();
-        } else{
-            System.out.println("ouuups! la case est déjà occupée");
-            System.out.println("case d'arrivée : x " + moveto.getX() +"y" + moveto.getY() );
-            return this.correctMove(caseCart);
-        } 
-    }
-
-    public String toString() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Quel outil souhaites-tu utiliser Francis?:");
-        System.out.println("1. Hache");
-        System.out.println("2. Lance");
-        System.out.println("3. Pioche");
-
-        int choix = scanner.nextInt();
-        String nomOutil = "";
-
-        switch (choix) {
-            case 1:
-                nomOutil = "Hache";
-                break;
-            case 2:
-                nomOutil = "Lance";
-                break;
-            case 3:
-                nomOutil = "Pioche";
-                break;
-            default:
-                System.out.println("aieeee, ton choix n'est pas valide");
-        }
-
-        return "Francis a choisi la " + nomOutil ;
-    }
-
-
-public void couperBois(Arbre arbre, Inventaire inventaire){
-    int quantity =0;
-    int minStrength= 10;
-    String nomOutil ="Axe";
-    //vérifier si il a l'axe dans son inventaire
-    if(this.hasTool(nomOutil)){
-        Tool aTool = inventaire.getTool(nomOutil);
-        System.out.println("l'homme utilise l'outil");
-        aTool.useoutil();
-        // si chene quantity =5
-        // donc quantity +=5
-        inventaire.ajouterBois(quantity);
-    } else{
-        if(this.getstrength() >= minStrength ){
-            System.out.println("L'homme coupe l'abre à la main");
-            // si chene quantity = 10 Arbres.CHENE.getnom
-            inventaire.ajouterBois(quantity);
-        } else{
-            System.out.println("L'homme n'a pas assez de force");
-        } 
-    } 
-    //  Carte.supprimer(arbre);
-} 
-public void demanderCouperBois(Arbre arbre){
-
-     boolean veutcouper = demandeUtilisateur("souhaites tu couper du bois?");
-        if(veutcouper){
-             couperBois(arbre,this.getInvent());
-        } else{
-                System.out.println("Francis ne veut pas couper du bois");
-             } 
-}  
-
-public void contactCarnivore(Animal animal, Case[][]  cart){
-    if(animal instanceof Carnivore && animal.getposition()==(this.getposition())){
-            System.out.println("l'homme vient de rentrer en contact avec un carnivore");
-     }
-    
-    boolean veutfuir = demandeUtilisateur("veux-tu fuir?");
-    if(veutfuir){
-        this.correctMove(cart);
-        System.out.println("l'homme a changé de position");
-    } else{
-        if(this.getstrength() <= animal.getstrength()) {
-            this.isDead();
-        } else {
-            this.levellife -= 5;
-            this.correctMove(cart);
-        }
-    }
-
-}  
-// faire un to string qui demande l'outl à utiliser
-public void chasser(Animal animal , Inventaire invent, Case [] [] carte){
-    int qtyviande = 0;
-    int qtyDommageOutil= 2*this.getstrength();
-    int qtyDommage = 0;
-    String nomOutil = "lance";
-    if(animal instanceof Herbivore){
-        if(this.hasTool(nomOutil)){
-            Tool aTool = invent.getTool(nomOutil);
-            System.out.println("L'homme utilise un outil");
-            aTool.useoutil();
-            animal.looselevellife(qtyDommageOutil);
-            if(animal.isDeadAnimal(animal)){
-                System.out.println("l'animal est mort");
-                qtyviande = 5;
-                invent.ajouterViande(qtyviande);
-                //animal.supprimeranimal()
+        boolean goodHPosition = false;
+        boolean result;
+        System.out.println("x = " + this.getposition().getX() + " y = " + this.getposition().getY());
+        goodHPosition = moveto.setPosition(this.getposition().getX(), this.getposition().getY() + 1);
+        System.out.println("posH : x = " + moveto.getX() + " y = " + moveto.getY());
+        result = testPosition(moveto, cartCase);
+        if(result){
+            if(goodHPosition){
+                if(cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    if (cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    System.out.println("rencontre un animal");
+                    }else{
+                        System.out.println("*******************");
+                        System.out.println("position changé");
+                        System.out.println("*******************");
+                        cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                        this.setposition(moveto);
+                        cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+                        return moveto;
+                    }
+                }
             }else{
-                System.out.println("l'animal n'est pas mort");
+                System.out.println("la position n'est pas correcte, veullez en saisir une nouvelle");
+                //appel procedure deplacement
             }
-            
-        }else {
-            animal.looselevellife(qtyDommage);
-            if(animal.isDeadAnimal(animal)){
-                System.out.println("L'animal est mort");
-                qtyviande = 5;
-                invent.ajouterViande(qtyviande);
+        }else{
+            GoodBiomehuman(moveto, pla, fore);
+            if(cartCase[moveto.getX()][moveto.getY()].getisvegetal()){
+                return hommeMeetVegetal(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisrocher()){
+                System.out.println("il y a un rocher sur la case");
+                return hommeMeetRocher(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
+                System.out.println("il y a un animal sur la case");
+                //on apelle la fonction human meet animal 
+            }
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(moveto);
+            cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+        }
+        return null;
+    }
+
+    public Position droite (Case[][] cartCase, Biome pla, Biome fore){
+       Position moveto = new Position(0,0);
+        boolean goodHPosition = false;
+        boolean result;
+        System.out.println("x = " + this.getposition().getX() + " y = " + this.getposition().getY());
+        goodHPosition = moveto.setPosition(this.getposition().getX() + 1, this.getposition().getY());
+        System.out.println("posH : x = " + moveto.getX() + " y = " + moveto.getY());
+        result = testPosition(moveto, cartCase);
+        if(result){
+            if(goodHPosition){
+                if(cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    if (cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    System.out.println("rencontre un animal");
+                    }else{
+                        System.out.println("*******************");
+                        System.out.println("position changé");
+                        System.out.println("*******************");
+                        cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                        this.setposition(moveto);
+                        cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+                        return moveto;
+                    }
+                }
+            }else{
+                System.out.println("la position n'est pas correcte, veullez en saisir une nouvelle");
+                //appel procedure deplacement
+            }
+        }else{
+            GoodBiomehuman(moveto, pla, fore);
+            if(cartCase[moveto.getX()][moveto.getY()].getisvegetal()){
+                return hommeMeetVegetal(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisrocher()){
+                System.out.println("il y a un rocher sur la case");
+                return hommeMeetRocher(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
+                System.out.println("il y a un animal sur la case");
+                //on apelle la fonction human meet animal 
+            }
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(moveto);
+            cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+        }
+        return null;
+    }
+
+     public Position gauche (Case[][] cartCase, Biome pla, Biome fore){
+        Position moveto = new Position(0,0);
+        boolean goodHPosition = false;
+        boolean result;
+        System.out.println("x = " + this.getposition().getX() + " y = " + this.getposition().getY());
+        goodHPosition = moveto.setPosition(this.getposition().getX() - 1, this.getposition().getY());
+        System.out.println("posH : x = " + moveto.getX() + " y = " + moveto.getY());
+        result = testPosition(moveto, cartCase);
+        if(result){
+            if(goodHPosition){
+                if(cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    if (cartCase[moveto.getX()][moveto.getY()].getisanimal() == true){
+                    System.out.println("rencontre un animal");
+                    }else{
+                        System.out.println("*******************");
+                        System.out.println("position changé");
+                        System.out.println("*******************");
+                        cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+                        this.setposition(moveto);
+                        cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+                        return moveto;
+                    }
+                }
+            }else{
+                System.out.println("la position n'est pas correcte, veullez en saisir une nouvelle");
+                //appel procedure deplacement
+            }
+        }else{
+            GoodBiomehuman(moveto, pla, fore);
+            if(cartCase[moveto.getX()][moveto.getY()].getisvegetal()){
+                return hommeMeetVegetal(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisrocher()){
+                System.out.println("il y a un rocher sur la case");
+                return hommeMeetRocher(cartCase, moveto);
+            }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
+                System.out.println("il y a un animal sur la case");
+                //on apelle la fonction human meet animal 
+            }
+            System.out.println("*******************");
+            System.out.println("position changé");
+            System.out.println("*******************");
+            cartCase[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
+            this.setposition(moveto);
+            cartCase[moveto.getX()][moveto.getY()].setisanimal(true);
+        }
+        return null;
+    }
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+    
+        public void afficherInventaire() {
+
+            System.out.println("Voici ce qu'il y a dans l'inventaire ");
+            System.out.println("Quantité de viande : " + this.invent.getQtebois());
+            System.out.println("Quantité de fruit : " + this.invent.getQtecailloux());
+            System.out.println("Quantité de bois : " + this.invent.getQtefruit());
+            System.out.println("Quantité de cailloux : " + this.invent.getQteviande());
+
+            System.out.println("Voici les outils que tu as dans ton inventaire");
+
+            for(Tool outil : this.invent.getArsenal()){
+                System.out.println(outil.getName());
+
+            } 
+        }
+    
+    
+        public void actionHomme() {
+            Scanner scanner = new Scanner(System.in);
+    
+            System.out.println("Que veux -tu faire ");
+            System.out.println("1. Afficher l'inventaire");
+            System.out.println("2. Me déplacer");
+            System.out.println("3. Manger");
+            System.out.println("4. Fabriquer un outil");
+            System.out.println("5. Quitter la simulation")
+    
+            int choice = scanner.nextInt();
+    
+            switch (choice) {
+                case 1:
+                    afficherInventaire();
+                    
+                case 2:
+                    //Deplacer(); à faire
+                
+                case 3:
+                    manger();
+                    
+                case 4:
+                    fabriquerOutil();
+
+                case 5:
+                    System.exit(0);
+                    
+                default:
+                    System.out.println("Choix invalide.");
+            }
+        }
+    
+    public void mangerFruit() {
+            if (this.invent.getQtefruit() > 0) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Combien de fruits voulez-vous manger ?");
+                int quantite = scanner.nextInt();
+
+                if (quantite > 0 && quantite <= this.invent.getQtefruit()) {
+                    System.out.println("Vous mangez " + quantite + " fruits.");
+                    this.invent.setQtefruit(this.invent.getQtefruit()-quantite);; // Retirer la quantité de fruits de l'inventaire
+                    this.levellife += quantite * 2; // Ajuster les points de vie en fonction de la quantité de fruits
+                } else {
+                    System.out.println("Quantité invalide ou insuffisante.");
+                }
             } else {
-                System.out.println("Dommageee! Tu n'as pas pu tuer l'animal");
+                System.out.println("Vous n'avez pas de fruits dans votre inventaire.");
             }
         }
-    } else{
-        if(animal instanceof Carnivore){
-            contactCarnivore(animal, carte);
-        }
-    }
 
-} // revoir le if( animal instanceof carnivore)
+    public void mangerViande() {
+        if (this.invent.getQteviande() > 0) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Combien de viande veux-tu manger ?");
+            int quantite = scanner.nextInt();
 
-public void demanderChasser(Animal animal, Case [] [] carte){
-    boolean veutchasser = demandeUtilisateur("Souhaites tu chasser l'animal?");
-    if(veutchasser){
-        chasser(animal, this.getInvent(), carte);
-    } else{
-        System.out.println("L'homme ne veut pas chasser l'animal");
-    } 
-} 
-
-public void recolterfruit(Arbrefruit arbre, Inventaire iventaire){
-    int qtyfruit = 0;
-    int newqtyfruit = 0;
-    if(arbre instanceof Arbrefruit){
-        qtyfruit += arbre.getnbfruit() ;
-        arbre.setnbfruit(newqtyfruit);
-        iventaire.ajouterFruit(qtyfruit);
-        System.out.println("Génial! On a recolté des fruits");
-    } else{
-        System.out.println("cette arbre n'a pas de fruits");
-    }
-
-}
-
-public void demanderecolterFruit(Arbrefruit arbref){
-    boolean recolterf = demandeUtilisateur("souhaites turecolter des fruits?");
-    if(recolterf){
-        recolterfruit(arbref, invent); 
-    } else{
-        System.out.println("l'homme ne souhaite pas recolter de fruits");
-    } 
-}
-       
-    //demander au prof comment faire un for avec une interface 
-    public boolean hasTool(String toolName){
-        for(Tool atool: invent.getArsenal()){
-            if(atool.getName()== toolName){
-                return true;
+            if (quantite > 0 && quantite <= this.invent.getQteviande()) {
+                System.out.println("Vous mangez " + quantite + " morceaux de viande.");
+                this.invent.setQteviande(this.invent.getQteviande()-quantite); // Retirer la quantité  de viande de l'inventaire
+                this.levellife += quantite * 2; // Ajuster les points de vie en fonction de la quantité de viande
+            } else {
+                System.out.println("Quantité invalide ou insuffisante.");
             }
+        } else {
+            System.out.println("Vous n'avez pas de viande dans votre inventaire.");
         }
-        return false;
     }
 
-    public void fabriquerAxe(Inventaire invent){
-        if(invent.getQtecailloux()>=3 && invent.getQtebois()>=2){
-            invent.setQtebois(invent.getQtebois()-2);
-            invent.setQtecailloux(invent.getQtecailloux()-3);
-
-            invent.ajouterOutil(new Axe("axe"));
-
-            System.out.println("bravo! tu viens de fabriquer une hache!");
+    public void manger (){
+        boolean veutmangerViande = demandeUtilisateur("Veux-tu manger de la viande?");
+        boolean veutmangerFruit = demandeUtilisateur("Veux-tu manger des fruits?");
+        if(veutmangerViande){
+            this.mangerViande();
+            System.out.println("Francis mange de la viande");
         } else{
-            System.out.println("Dommage, nous n'avons pas assez de ressources pour fabriquer une hache :(");
+            if(veutmangerFruit){
+                this.mangerFruit();
+                System.out.println("Francis mange des fruits");
+            } 
         } 
-
     } 
 
-    public void fabriquerspear(Inventaire invent){
-        if(invent.getQtecailloux() >=1 && invent.getQtebois()>=2){
-            invent.setQtecailloux(invent.getQtecailloux()-1);
-            invent.setQtebois(invent.getQtebois()-2);
+    public void fabriquerspear(){
+        if(this.invent.getQtecailloux() >=1 && this.invent.getQtebois()>=2){
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-1);
+            this.invent.setQtebois(this.invent.getQtebois()-2);
 
             invent.ajouterOutil(new Spear("lance"));
 
@@ -503,72 +689,56 @@ public void demanderecolterFruit(Arbrefruit arbref){
 
     } 
 
-    public void fabriquerPickaxe(Inventaire invent){
-        if(invent.getQtecailloux() >=3 && invent.getQtebois()>=2){
-            invent.setQtecailloux(invent.getQtecailloux()-3);
-            invent.setQtebois(invent.getQtebois()-2);
+    public void fabriquerAxe(){
+        if(this.invent.getQtecailloux()>=3 && this.invent.getQtebois()>=2){
+            this.invent.setQtebois(this.invent.getQtebois()-2);
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
 
-            invent.ajouterOutil(new Pickaxe("Pioche"));
+            this.invent.ajouterOutil(new Axe("axe"));
+
+            System.out.println("bravo! tu viens de fabriquer une hache!");
+        } else{
+            System.out.println("Dommage, nous n'avons pas assez de ressources pour fabriquer une hache :(");
+        } 
+    } 
+    public void fabriquerPickaxe(){
+        if(this.invent.getQtecailloux() >=3 && this.invent.getQtebois()>=2){
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
+            this.invent.setQtebois(this.invent.getQtebois()-2);
+
+            this.invent.ajouterOutil(new Pickaxe("Pioche"));
 
             System.out.println("Bravo Francis! tu as fabriqué une Pioche");
         } else{
             System.out.println("Aie, va falloir recolter plus de bois et caillous Francis!");
         } 
     } 
+    public void fabriquerOutil(){
 
-   @Override 
-// problème car l'homme ne mange pas direct un animal mais il se sert dans l'inventaire
-   public void eatMeat(Animal prey){
-    if(isTired()){
-        this.levellife += 3;
-        System.out.println("Miam! Elle est bonne la nourriture");
-        this.invent.setQteviande(invent.getQteviande()-5);
-    } else{
-        System.out.println("on dirait Francis il veut pas manger");
-    } 
-} 
+        boolean creePioche = demandeUtilisateur("veuw-tu fabriquer une pioche?");
+        boolean creeAxe = demandeUtilisateur("Veux-tu fabriquer une hache?");
+        boolean creeLance = demandeUtilisateur("veux tu fabriquer une lance ?");
 
-@Override
+        if(creePioche){
+            System.out.println("Francis veut fabriquer une pioche");
+            this.fabriquerPickaxe();
+        }
+        if (creeAxe){
+                System.out.println("Francis souhaite fabriquer une hache");
+                this.fabriquerAxe();
+        } 
+        if (creeLance){
+            System.out.println("Francis souhaite fabriquer une lance");
+            this.fabriquerspear();
+        } 
+    }
+}
 
-public void eatPlant(Vegetal plant){
-    if(isTired()){
-        this.levellife =3;
-        System.out.println("Francic il se régale");
-        this.invent.setQtefruit(invent.getQtefruit()-5);
-    } else{
-        System.out.println("oooow , Franis n'a pas faim");
-    } 
-} 
-
-
-
-
-
+public void deplacer (){
 
 
     
-    //public void 
-/*recolterbois(outil,vegetal)?? si pas encore d'outil utilise sa force 
-pareil pour recolter Fruit
-    public void recolterBois(int quantity){
-        invent.ajouterBois(quantity);
-        System.out.println(this.getname() + "a recolté" + quantity + "de bois"  );
-    } 
+} 
 
-    public void recolterFruit(int quantity){
-        invent.ajouterFruit(quantity);
-        System.out.println(this.getname() + "a recolté" + quantity + "de fruits");
-    } 
 
-    public void chasse(Animal prey){     
-    }  
-    //commet faire pour ajouter un outil créer dans l'inventaire 
-    //comment questioner l'inventaire
-}
-*/}
-
-/* 
- * 
-*/
-
- 
+       
