@@ -1,8 +1,8 @@
 package Test;
 import class_Animal.Animal;
-import class_Animal.Carnivore;
-import class_Animal.Herbivore;
-import class_Animal.Omnivore;
+import class_Animal.Animaux_carnivore;
+import class_Animal.Animaux_herbivore;
+import class_Animal.Animaux_omnivore;
 import class_Biome.Biome;
 import class_Biome.Foret;
 import class_Biome.Mer;
@@ -42,7 +42,7 @@ public class testBiomes {
         Position position_fraisier = new Position(30, 60);
 
         // Création d'animaux et de plantes pour les tests
-        Animal mouton = new Herbivore("Mouton", 20, 10, position_Mouton, biome);
+        Animal mouton = new Animaux_herbivore("Mouton", 20, 10, position_Mouton, biome);
         Animal loup = new Carnivore("Loup", 50, 45, position_Loup, biome );
         Vegetal arbre = new Vegetal("arbre", biome, position_arbre);
         Vegetal fraisier = new Vegetal("Fraisier", biome, position_fraisier);

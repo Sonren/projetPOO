@@ -1,7 +1,7 @@
-package fr.lynchmaniac.class_Carte;
+package class_Carte;
 
 
-import fr.lynchmaniac.class_Biome.Biome;
+import class_Biome.Biome;
 
 public class Case {
 

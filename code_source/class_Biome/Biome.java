@@ -1,9 +1,9 @@
-package fr.lynchmaniac.class_Biome;
+package class_Biome;
 
 import java.util.ArrayList;
-import fr.lynchmaniac.class_Animal.Animal;
-import fr.lynchmaniac.class_Vegetal.Rocher;
-import fr.lynchmaniac.class_Vegetal.Vegetal;
+import class_Animal.Animal;
+import class_Vegetal.Rocher;
+import class_Vegetal.Vegetal;
 
 public class Biome {
 	private String nom;
