@@ -7,14 +7,14 @@ public class Vegetal {
     private String name;
     private Biome biome;
     private Position position;
-    private int levellife;
+    private boolean isDeadveg = false;
+    private int nbbois = 2;
 
     //constructeur
     public  Vegetal (String n, Biome b, Position p){
             this.name = n;
             this.biome = b;
             this.position = p;
-            this.levellife = 30;
     }
 
     //les getter
@@ -30,8 +30,12 @@ public class Vegetal {
         return this.position;
     }
 
-    public int getlife(){
-        return this.levellife;
+    public boolean isDeadveg(){
+        return this.isDeadveg;
+    }
+
+    public int getnbbois(){
+        return this.nbbois;
     }
 
     // les setters
@@ -47,17 +51,14 @@ public class Vegetal {
         this.position = emplacement;
     }
 
-    public void setlife (int vie){
-        this.levellife = vie;
+    public void setisDeadveg(boolean deadv){
+        this.isDeadveg = deadv;
     }
 
-
-    //fonction de la classe animal 
-    public boolean isDeadveg (){
-        return (this.levellife == 0);
+    public void setnbbois(int nb){
+        this.nbbois = nb;
     }
 
 
 }
-
 

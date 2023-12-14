@@ -9,6 +9,7 @@ public class Rocher {
     private Biome bio;
     private int nbcailloux;
     private String nom;
+    private boolean isDeadroc = false;
     
     
     public Rocher(Position pos, Biome bio, int r, String nom) {
@@ -18,11 +19,11 @@ public class Rocher {
         this.nom = nom;
     }
 
-    public Position getPos() {
+    public Position getposition() {
         return this.pos;
     }
 
-    public void setPos(Position pos) {
+    public void setposition(Position pos) {
         this.pos = pos;
     }
 
@@ -34,6 +35,14 @@ public class Rocher {
         this.bio = bio;
     }
 
+    public void setisDeadroc(boolean rok){
+        this.isDeadroc = rok;
+    }
+
+    public boolean isDeadroc(){
+        return this.isDeadroc;
+    }
+
     public int getNbcailloux() {
         return this.nbcailloux;
     }
@@ -42,7 +51,7 @@ public class Rocher {
         this.nbcailloux = nbcailloux;
     }
 
-    public String getNom() {
+    public String getname() {
         return this.nom;
     }
 

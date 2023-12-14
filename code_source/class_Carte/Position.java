@@ -1,9 +1,9 @@
-package fr.lynchmaniac.class_Carte;
+package class_Carte;
 
 import java.util.Random;
 
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Biome.Biomes;
+import class_Biome.Biome;
+import class_Biome.Biomes;
 
 public class Position {
     protected int x;
