@@ -1,4 +1,4 @@
-package class_Animal.Homme;
+package fr.lynchmaniac.class_Animal.Homme;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class Inventaire {
     private int qtefruit;
     private int qteviande;
     private int qtecailloux;
-    private ArrayList<Tool> arsenal = new ArrayList<>();
+    private ArrayList<Tool> arsenal = new ArrayList<Tool>();
 
     public Inventaire(int qtebois, int qtefruit, int qteviande, int qtecailloux, ArrayList<Tool> arsenal) {
         this.qtebois = qtebois;
