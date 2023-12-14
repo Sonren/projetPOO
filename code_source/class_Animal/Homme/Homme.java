@@ -685,5 +685,11 @@ public class Homme extends Animal {
     }
 }
 
+public void deplacer (){
+
+
+    
+} 
+
 
        
