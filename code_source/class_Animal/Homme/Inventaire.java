@@ -1,4 +1,4 @@
-package class_Animal.Homme;
+package fr.lynchmaniac.class_Animal.Homme;
 
 import java.util.ArrayList;
 

@@ -15,6 +15,7 @@ public class Homme extends Animal {
     private boolean isDead;
 
     public Homme(String n, int l, int s,Position p, Biome b) {
+    public Homme(String n, int l, int s,Position p, Biome b) {
         super(n,l,s,p,b);
         this.isDead = false;
     }
@@ -41,8 +42,11 @@ public class Homme extends Animal {
         return value >= 0 && value <=9 ;
     } 
 
-    public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
+        public Position correctMove(Case[][] cartCase )throws IllegalArgumentException{
         Scanner scanner = new Scanner(System.in);
+        boolean hasNothing = true;
+        while(hasNothing){
+            System.out.println("Entrez ls nouvelle coordonnée de x entre 0 et 9");
         boolean hasNothing = true;
         while(hasNothing){
             System.out.println("Entrez ls nouvelle coordonnée de x entre 0 et 9");
@@ -539,109 +543,156 @@ public class Homme extends Animal {
             System.out.println("Quantité de cailloux : " + this.invent.getQteviande());
 
             System.out.println("Voici les outils que tu as dans ton inventaire");
-            
+
             for(Tool outil : this.invent.getArsenal()){
                 System.out.println(outil.getName());
 
             } 
         }
     
-    }
     
+        public void actionHomme() {
+            Scanner scanner = new Scanner(System.in);
+    
+            System.out.println("Que veux -tu faire ");
+            System.out.println("1. Afficher l'inventaire");
+            System.out.println("2. Me déplacer");
+            System.out.println("3. Manger");
+            System.out.println("4. Fabriquer un outil");
+    
+            int choice = scanner.nextInt();
+    
+            switch (choice) {
+                case 1:
+                    afficherInventaire();
+                    
+                case 2:
+                    //Deplacer(); à faire
+                
+                case 3:
+                    manger();
+                    
+                case 4:
+                    fabriquerOutil();
+                    
+                default:
+                    System.out.println("Choix invalide.");
+            }
+        }
+    
+    public void mangerFruit() {
+            if (this.invent.getQtefruit() > 0) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Combien de fruits voulez-vous manger ?");
+                int quantite = scanner.nextInt();
 
+                if (quantite > 0 && quantite <= this.invent.getQtefruit()) {
+                    System.out.println("Vous mangez " + quantite + " fruits.");
+                    this.invent.setQtefruit(this.invent.getQtefruit()-quantite);; // Retirer la quantité de fruits de l'inventaire
+                    this.levellife += quantite * 2; // Ajuster les points de vie en fonction de la quantité de fruits
+                } else {
+                    System.out.println("Quantité invalide ou insuffisante.");
+                }
+            } else {
+                System.out.println("Vous n'avez pas de fruits dans votre inventaire.");
+            }
+        }
 
+    public void mangerViande() {
+        if (this.invent.getQteviande() > 0) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Combien de viande veux-tu manger ?");
+            int quantite = scanner.nextInt();
 
-        /*String nomOutil ="Axe";
-        //vérifier si il a l'axe dans son inventaire
-        if(this.hasTool(nomOutil)){
-            Tool aTool = inventaire.getTool(nomOutil);
-            System.out.println("l'homme utilise l'outil");
-            aTool.useoutil();
-            // si chene quantity =5
-            // donc quantity +=5
-            inventaire.ajouterBois(quantity);
+            if (quantite > 0 && quantite <= this.invent.getQteviande()) {
+                System.out.println("Vous mangez " + quantite + " morceaux de viande.");
+                this.invent.setQteviande(this.invent.getQteviande()-quantite); // Retirer la quantité  de viande de l'inventaire
+                this.levellife += quantite * 2; // Ajuster les points de vie en fonction de la quantité de viande
+            } else {
+                System.out.println("Quantité invalide ou insuffisante.");
+            }
+        } else {
+            System.out.println("Vous n'avez pas de viande dans votre inventaire.");
+        }
+    }
+
+    public void manger (){
+        boolean veutmangerViande = demandeUtilisateur("Veux-tu manger de la viande?");
+        boolean veutmangerFruit = demandeUtilisateur("Veux-tu manger des fruits?");
+        if(veutmangerViande){
+            this.mangerViande();
+            System.out.println("Francis mange de la viande");
         } else{
-            if(this.getstrength() >= minStrength ){
-                System.out.println("L'homme coupe l'abre à la main");
-                // si chene quantity = 10 Arbres.CHENE.getnom
-                inventaire.ajouterBois(quantity);
-            } else{
-                System.out.println("L'homme n'a pas assez de force");
+            if(veutmangerFruit){
+                this.mangerFruit();
+                System.out.println("Francis mange des fruits");
             } 
-        } 
-        //  Carte.supprimer(arbre);*/
-    
-
-    /*public void demanderCouperBois(Arbre arbre){
-
-        boolean veutcouper = demandeUtilisateur("souhaites tu couper du bois?");
-            if(veutcouper){
-                couperBois(arbre,invent);
-            } else{
-                    System.out.println("Francis ne veut pas couper du bois");
-                } 
-    }  
-
-    public void chasser(Animal animal , Inventaire invent){
-
-        //TODO
-    }
-
-    /*public void demanderChasserherbivore(Homme homme, Herbivore herbivore){
-        boolean veutchasser = demandeUtilisateur("Souhaites tu chasser l'animal?");
-        if(veutchasser){
-            //TODO chasser(homme,outil,herbivore); // à implémenter
-        } else{
-            System.out.println("L'homme ne veut pas chasser l'animal");
         } 
     } 
 
-    public void demanderecolterFruit(Homme homme, Arbrefruit arbref){
-        boolean recolterf = demandeUtilisateur("souhaites turecolter des fruits?");
-        if(recolterf){
-            //TODO recolterfruit(homme, arbref); // a impléménter
+    public void fabriquerspear(){
+        if(this.invent.getQtecailloux() >=1 && this.invent.getQtebois()>=2){
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-1);
+            this.invent.setQtebois(this.invent.getQtebois()-2);
+
+            invent.ajouterOutil(new Spear("lance"));
+
+            System.out.println("Bravo Francis! tu as fabriqué une lance");
         } else{
-            System.out.println("l'homme ne souhaite pas recolter de fruits");
+            System.out.println("oh oooh ... t'as pas assez de ressources");
         } 
-    }
 
-    public void contactCarnivore(Homme homme){
-        TODO for(Animal animal : desAnimaux){
-            if(animal instanceof Carnivore && animal.getposition().equals(homme.getposition())){
-                System.out.println("l'homme vient de rentrer en contact avec un carnivore");
-            }
+    } 
+
+    public void fabriquerAxe(){
+        if(this.invent.getQtecailloux()>=3 && this.invent.getQtebois()>=2){
+            this.invent.setQtebois(this.invent.getQtebois()-2);
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
+
+            this.invent.ajouterOutil(new Axe("axe"));
+
+            System.out.println("bravo! tu viens de fabriquer une hache!");
+        } else{
+            System.out.println("Dommage, nous n'avons pas assez de ressources pour fabriquer une hache :(");
         } 
-        boolean veutfuir = demandeUtilisateur("veux-tu fuir?");
-        // implémenter la logique derrière
-    }  
-        
-    //demander au prof comment faire un for avec une interface 
-    public boolean hasTool(String toolName){
-        for(Tool atool: invent.getArsenal()){
-            if(atool.getName().equals(toolName)){
-                return true;
-            }
+
+    } 
+
+
+    public void fabriquerPickaxe(){
+        if(this.invent.getQtecailloux() >=3 && this.invent.getQtebois()>=2){
+            this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
+            this.invent.setQtebois(this.invent.getQtebois()-2);
+
+            this.invent.ajouterOutil(new Pickaxe("Pioche"));
+
+            System.out.println("Bravo Francis! tu as fabriqué une Pioche");
+        } else{
+            System.out.println("Aie, va falloir recolter plus de bois et caillous Francis!");
+        } 
+    } 
+
+
+    public void fabriquerOutil(){
+
+        boolean creePioche = demandeUtilisateur("veuw-tu fabriquer une pioche?");
+        boolean creeAxe = demandeUtilisateur("Veux-tu fabriquer une hache?");
+        boolean creeLance = demandeUtilisateur("veux tu fabriquer une lance ?");
+
+        if(creePioche){
+            System.out.println("Francis veut fabriquer une pioche");
+            this.fabriquerPickaxe();
         }
-        return false;
-    }
-        //public void 
-        recolterbois(outil,vegetal)?? si pas encore d'outil utilise sa force 
-        pareil pour recolter Fruit
-        public void recolterBois(int quantity){
-            invent.ajouterBois(quantity);
-            System.out.println(this.getname() + "a recolté" + quantity + "de bois"  );
+        if (creeAxe){
+                System.out.println("Francis souhaite fabriquer une hache");
+                this.fabriquerAxe();
         } 
-
-        public void recolterFruit(int quantity){
-            invent.ajouterFruit(quantity);
-            System.out.println(this.getname() + "a recolté" + quantity + "de fruits");
+        if (creeLance){
+            System.out.println("Francis souhaite fabriquer une lance");
+            this.fabriquerspear();
         } 
+    } 
 
-        public void chasse(Animal prey){     
-        }  
-        //commet faire pour ajouter un outil créer dans l'inventaire 
-        //comment questioner l'inventaire
-    }*/
 }
 
        
