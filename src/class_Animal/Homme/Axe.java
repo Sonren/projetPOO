@@ -44,9 +44,9 @@ public class Axe implements Tool{
     public void useoutil(){
 
         if(this.durability>0){
-        this.durability = this.durability-0.4;
+            this.durability = this.durability-0.4;
         } else{
-        System.out.println("l'outil"+ this.getName()+ "a expiré");
+            System.out.println("l'outil"+ this.getName()+ "a expiré");
         }  
     }
     

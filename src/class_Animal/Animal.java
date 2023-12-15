@@ -118,7 +118,6 @@ public class  Animal {
      * @param deadAnimal c'est l'animal qu'on souhaite faire mourir
      */
     public void  killedAnimal(Animal deadAnimal){
-        System.out.println("coucou");
         deadAnimal.setisDead(true);
     }
     
@@ -192,34 +191,20 @@ public class  Animal {
         boolean result;
         Random random = new Random();
         int rand = random.nextInt(4) +1;
-        System.out.println("rand = " + rand);
 
         goodHPosition = tempHPosition.setPosition(this.getposition().getX(), this.getposition().getY() - 1);
-        System.out.println("posH : x = " + tempHPosition.getX() + " y = " + tempHPosition.getY());
-
         goodBPosition = tempBPosition.setPosition(this.getposition().getX(), this.getposition().getY() + 1);
-        System.out.println(" posB : x = " + tempBPosition.getX() + " y = " + tempBPosition.getY());
-
         goodGPosition = tempGPosition.setPosition(this.getposition().getX() - 1, this.getposition().getY());
-        System.out.println(" posG : x = " + tempGPosition.getX() + " y = " + tempGPosition.getY());
-
         goodDPosition = tempDPosition.setPosition(this.getposition().getX() + 1, this.getposition().getY());
-        System.out.println(" posD : x = " + tempDPosition.getX() + " y = " + tempDPosition.getY());
-
         switch (rand){
             case 1:
-                System.out.println("posH : x = " + tempHPosition.getX() + " y = " + tempHPosition.getY());
                 result = testPosition(tempHPosition, cart);
                 if (result) {
                     if(goodHPosition){
                         if (cart[tempHPosition.getX()][tempHPosition.getY()].getisanimal() == true){
-                        System.out.println("rencontre un animal");
                         this.AnimalmeetAnimal(cart, tempHPosition);
                         return this.getposition();
                         }else{
-                            System.out.println("*******************");
-                            System.out.println("position changé");
-                            System.out.println("*******************");
                             cart[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
                             this.setposition(tempHPosition);
                             cart[tempHPosition.getX()][tempHPosition.getY()].setisanimal(true);
@@ -230,17 +215,12 @@ public class  Animal {
                     }
                 }
             case 2:
-                System.out.println(" posB : x = " + tempBPosition.getX() + " y = " + tempBPosition.getY());
                 result = testPosition(tempBPosition, cart);
                 if (result) {
                     if(goodBPosition){
                         if (cart[tempBPosition.getX()][tempBPosition.getY()].getisanimal() == true){
-                            System.out.println("rencontre un animal");
                             this.AnimalmeetAnimal(cart, tempBPosition);
                         }
-                        System.out.println("*******************");
-                        System.out.println("position changé");
-                        System.out.println("*******************");
                         cart[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
                         this.setposition(tempBPosition);
                         cart[tempBPosition.getX()][tempBPosition.getY()].setisanimal(true);
@@ -250,17 +230,12 @@ public class  Animal {
                     }
                 }
             case 3:
-                System.out.println(" posG : x = " + tempGPosition.getX() + " y = " + tempGPosition.getY());
                 result = testPosition(tempGPosition, cart);
                 if (result) {
                     if(goodGPosition){
                         if (cart[tempGPosition.getX()][tempGPosition.getY()].getisanimal() == true){
-                            System.out.println("rencontre un animal");
                             this.AnimalmeetAnimal(cart, tempGPosition);
                         }
-                        System.out.println("*******************");
-                        System.out.println("position changé");
-                        System.out.println("*******************");
                         cart[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
                         this.setposition(tempGPosition);
                         cart[tempGPosition.getX()][tempGPosition.getY()].setisanimal(true);
@@ -270,17 +245,12 @@ public class  Animal {
                     }
                 }
             case 4:
-                System.out.println(" posD : x = " + tempDPosition.getX() + " y = " + tempDPosition.getY());
                 result = testPosition(tempDPosition, cart);
                 if (result) {
                     if(goodDPosition){
                         if (cart[tempDPosition.getX()][tempDPosition.getY()].getisanimal() == true){
-                            System.out.println("rencontre un animal");
                             this.AnimalmeetAnimal(cart, tempDPosition);
                         }
-                        System.out.println("*******************");
-                        System.out.println("position changé");
-                        System.out.println("*******************");
                         cart[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
                         this.setposition(tempDPosition);
                         cart[tempDPosition.getX()][tempDPosition.getY()].setisanimal(true);
@@ -290,7 +260,6 @@ public class  Animal {
                     }
                 }
             default:
-                System.out.println("la position est null");
                 return null;
         }
     }
@@ -304,19 +273,15 @@ public class  Animal {
      */
     public Animal findpet(Position temppos, Case[][] gamemap, Biome bio) {
         for (Animal ani : bio.getfaune()){
-            
             if(ani.getposition().getX() == temppos.getX() && ani.getposition().getY() == temppos.getY()){
                 if (ani.isDead == false){
-                    System.out.println("animal rencontré = " + ani.getname());
                     return ani;
                 }else{
-                    System.out.println("l'animal est mort");
                     return ani; //on retourne ici l'animal mort et on gère le cas dans animalmeetanimal
                 }
             }
         }
         bio.afficheFaune();
-        System.out.println("Aucun animal trouvé");
         return null;
     }
 
@@ -347,7 +312,6 @@ public class  Animal {
                 return tpmpos;
             }
         } 
-        System.out.println("petmet est null");
         return null;
     }
 
@@ -415,19 +379,10 @@ public class  Animal {
      */
     public boolean testPosition(Position position, Case[][] map) {
         boolean isGoodPosition = false;
-        System.out.println("///////////////////////////////");
-        System.out.println("isGoodBiome = " + isGoodBiome(position) + " isEmptyVegetal = " + position.isEmptyVegetal(map));
-        System.out.println("///////////////////////////////");
         if (isGoodBiome(position) && position.isEmptyVegetal(map)){
             isGoodPosition = true;
-            System.out.println("----------------------");
-            System.out.println("la position est bonne");
-            System.out.println("----------------------");
             return isGoodPosition;
         }else{
-            System.out.println("----------------------");
-            System.out.println("la position est mauvaise");
-            System.out.println("----------------------");
             return isGoodPosition;
         }
     }
@@ -454,7 +409,6 @@ public class  Animal {
                         return goodbiome;
                     }
         }else{ 
-            System.out.println("animal dans la mer");
             goodbiome = false;
             return goodbiome; //aucun animal ne peut aller dans la mer 
         }

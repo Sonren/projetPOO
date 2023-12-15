@@ -1,33 +1,16 @@
 package class_Vegetal;
 
 /**
- * L'énumération Arbres représente différents types d'arbres.
+ * L'énumération Arbres représente différents types d'arbres (chene, cerisier, bananier, bouleau)
  */
 public enum Abres {
 
-  /**
-   * Le chêne.
-   */
+
   CHENE("chêne"),
-
-  /**
-   * Le cerisier.
-   */
   CERISIER("cerisier"),
-
-   /**
-   * Le bananier.
-   */
   BANANIER("bananier"),
-
-  /**
-   * Le bouleau.
-   */
   BOULEAU("bouleau");
 
-  /**
-   * Le nom de l'arbre.
-   */
   private final String nom;
 
   /**

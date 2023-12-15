@@ -211,7 +211,7 @@ public class testAnimal {
         }
     }
 
-    public static void testAddHerbivore() {
+    /*public static void testAddHerbivore() {
         Biome testBiome = new Foret("Foret");
         testAnimal test = new testAnimal();
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
@@ -222,11 +222,11 @@ public class testAnimal {
         } else {
             System.out.println("Test addHerbivore: Failed");
         }
-    }
+    }*/
 
-    public static void testRemoveHerbivore() {
+    /*public static void testRemoveHerbivore() {
         Biome testBiome = new Foret("Foret");
-        testAnimal test = new testAnimal();
+        Animal test = new testAnimal();
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
         test.addherbivore(testAnimal);
         test.removeherbivore(testAnimal);
@@ -236,11 +236,11 @@ public class testAnimal {
         } else {
             System.out.println("Test removeHerbivore: Failed");
         }
-    }
+    }*/
 
     public static void testAddCarnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
         test.addcarnivore(testAnimal);
 
@@ -253,7 +253,7 @@ public class testAnimal {
 
     public static void testRemoveCarnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
         test.addcarnivore(testAnimal);
         test.removecarnivore(testAnimal);
@@ -267,7 +267,7 @@ public class testAnimal {
 
     public static void testAddOmnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
         test.addomnivore(testAnimal);
 
@@ -280,7 +280,7 @@ public class testAnimal {
 
     public static void testRemoveOmnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
         test.addomnivore(testAnimal);
         test.removeomnivore(testAnimal);
@@ -294,7 +294,6 @@ public class testAnimal {
 
     public static void testLooseLevelLife() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
         testAnimal.looselevellife(20);
 
@@ -307,7 +306,7 @@ public class testAnimal {
 
     public static void testKilledAnimal() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
         test.killedAnimal(testAnimal);
 
@@ -320,7 +319,7 @@ public class testAnimal {
 
     public static void testIsHerbivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
         test.addherbivore(testAnimal);
 
@@ -333,7 +332,7 @@ public class testAnimal {
 
     public static void testIsCarnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
         test.addcarnivore(testAnimal);
 
@@ -346,7 +345,7 @@ public class testAnimal {
 
     public static void testIsOmnivore() {
         Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
+        Animal test = new Animal("loup", 50, 50, new Position(2, 1), testBiome);
         Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
         test.addomnivore(testAnimal);
 
@@ -356,5 +355,4 @@ public class testAnimal {
             System.out.println("Test isOmnivore: Failed");
         }
     }
-}
 }

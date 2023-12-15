@@ -1,5 +1,6 @@
 package class_Animal.Homme;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import class_Animal.Animal;
@@ -13,7 +14,8 @@ import class_Vegetal.Arbrefruit;
 import class_Vegetal.Rocher;
 
 public class Homme extends Animal {
-    public Inventaire invent = new Inventaire(0, 0, 0, 0, null);
+    ArrayList<Tool> ars = new ArrayList<Tool>();
+    public Inventaire invent = new Inventaire(0, 0, 0, 0, ars);
 
     public Homme(String n, int l, int s,Position p, Biome b) {
         super(n,l,s,p,b);
@@ -42,11 +44,21 @@ public class Homme extends Animal {
         answer = scanner.nextLine();
         return answer;
     }
+
+    public int demandeUtilisateurint(String message, Scanner scanner){
+        int answer;
+        System.out.println(message); 
+        answer = scanner.nextInt();
+        return answer;
+    }
     
     public boolean isValidCoordinate(int value){
         return value >= 0 && value <=9 ;
     } 
 
+    public void endgame(){
+        System.exit(0);
+    }
    
 
 //--------------------------------------------------------------------------------------------------
@@ -185,7 +197,7 @@ public class Homme extends Animal {
                     return veg;
                 }else{
                     System.out.println("l'abre a déja été coupé");
-                    return veg;//on retourne ici l'arbre mort et on gère le cas au dessus
+                    return veg;//on retourne ici l'animal mort et on gère le cas au dessus
                 }
             }
         }
@@ -227,7 +239,6 @@ public class Homme extends Animal {
      */
     public Animal findAnimal(Position moveto, Case[][] map, Biome bio) {
         for (Animal animal: bio.getfaune()){
-            
             if(animal.getposition().getX() == moveto.getX() && animal.getposition().getY() == moveto.getY()){
                 if (animal.isDead() == false){
                     System.out.println("y'a un " + animal.getname());
@@ -253,7 +264,7 @@ public class Homme extends Animal {
      * @param pos
      */
     public void miner(Rocher rock, Case[][] map, Position pos){
-        if(this.hasTool(Tools.HACHE.getNom())){
+        if(this.hasTool(Tools.PIOCHE.getNom())){
             System.out.println("vous utilisez une pioche pour miner");
             this.getInvent().ajouterCailloux(rock.getNbcailloux());
             map[pos.getX()][pos.getY()].setisrocher(false);
@@ -363,7 +374,7 @@ public class Homme extends Animal {
      * @param pos
      * @return
      */
-    public Position HommeMeetCarnivore(Case[][] cart, Position pos, Scanner scanne){
+    public Position HommeMeetCarnivore(Case[][] cart, Position pos, Scanner scanne, Biome plaine, Biome foret){
         boolean veutfuir = demandeUtilisateur("francis souhaites tu fuir?", scanne);
         Animal findanimal = findAnimal(pos, cart, this.getbiome());
         if (findanimal.isDead() == true){
@@ -376,11 +387,13 @@ public class Homme extends Animal {
         if (findanimal!= null){
             if (findanimal.isCarnivore() || findanimal.isOmnivore()){
                 if(veutfuir){
-                    this.correctMove(cart, scanne);
+                    this.correctMove(cart, scanne, plaine, foret);
                     return this.getposition();
                 }else{
                     if(this.getstrength()<= findanimal.getstrength()){
                         this.isDead = true;
+                        System.out.println("Vous etes mort");
+                        this.endgame();
                     } 
                 }
             } 
@@ -395,7 +408,7 @@ public class Homme extends Animal {
      * @param map
      * @param pos
      */
-    public Position chasser(Case[][] map, Position pos, Scanner scan){
+    public Position chasser(Case[][] map, Position pos, Scanner scan, Biome pla, Biome fo){
         Animal findanimal;
         findanimal = this.findAnimal(pos, map, this.getbiome());
         int qtyViandeH = 3 ;
@@ -431,8 +444,8 @@ public class Homme extends Animal {
                 return this.getposition();
             }
         } else{
-            if(findanimal.isCarnivore() || findanimal.isOmnivore() == true){
-                return this.HommeMeetCarnivore(map, pos, scan);
+            if(findanimal.isCarnivore() == true|| findanimal.isOmnivore() == true){
+                return this.HommeMeetCarnivore(map, pos, scan, pla, fo);
             } 
         } 
         System.out.println("Cet animal n'est pas un herbivore! et on na chasse que les herbivore");
@@ -508,7 +521,7 @@ public class Homme extends Animal {
                 return hommeMeetRocher(cartCase, moveto, scanner);
             }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
                 System.out.println("il y a un animal sur la case");
-                return chasser(cartCase, moveto, scanner);
+                return chasser(cartCase, moveto, scanner, pla, fore);
             }
             System.out.println("*******************");
             System.out.println("position changé");
@@ -556,7 +569,7 @@ public class Homme extends Animal {
                 return hommeMeetRocher(cartCase, moveto, scanner);
             }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
                 System.out.println("il y a un animal sur la case");
-                return chasser(cartCase, moveto, scanner); 
+                return chasser(cartCase, moveto, scanner, pla, fore); 
             }
             System.out.println("*******************");
             System.out.println("position changé");
@@ -604,7 +617,7 @@ public class Homme extends Animal {
                 return hommeMeetRocher(cartCase, moveto, scanner);
             }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
                 System.out.println("il y a un animal sur la case");
-                return chasser(cartCase, moveto, scanner);
+                return chasser(cartCase, moveto, scanner, pla, fore);
             }
             System.out.println("*******************");
             System.out.println("position changé");
@@ -652,7 +665,7 @@ public class Homme extends Animal {
                 return hommeMeetRocher(cartCase, moveto, scanner);
             }else if (cartCase[moveto.getX()][moveto.getY()].getisanimal()){
                 System.out.println("il y a un animal sur la case");
-                return chasser(cartCase, moveto, scanner);
+                return chasser(cartCase, moveto, scanner, pla, fore);
             }
             System.out.println("*******************");
             System.out.println("position changé");
@@ -664,44 +677,69 @@ public class Homme extends Animal {
         return null;
     }
 
-     public Position correctMove(Case[][] cartCase, Scanner scanner )throws IllegalArgumentException{
-            System.out.println("Entrez la nouvelle coordonnée de x entre 0 et 9");
-            int newX = scanner.nextInt();
-            System.out.println("Entrez la nouvelle coordonnée de Y entre 0 et 9");
-            int newY = scanner.nextInt();
-            if (!isValidCoordinate(newX)|| !isValidCoordinate(newY) ){
-                throw new IllegalArgumentException(" x et y doivent être compris entre 0 et 9");
-            } 
-            Position nextMove = new Position(newX, newY);
-            
-            if(this.isEmpty(cartCase, nextMove)){
-            //cartCase[this.getposition().getX()][this.getposition().getY()].sethomme(false);// faire le booleen ishomme dans carte
-            this.setposition( nextMove);
-            //cartCase[nextMove.getX()][nexMove.getY()].sethomme(true);  
-            System.out.println("La nouvelle positon a été définie");
-            return this.getposition();
-             } else{
-            System.out.println("ouuups! la case est déjà occupée");
-        }   
+
+
+    public Position askPosition(Scanner sc){
+        System.out.println("Entrez la nouvelle coordonnée de x entre 0 et 9");
+        int newX = sc.nextInt();
+        System.out.println("Entrez la nouvelle coordonnée de Y entre 0 et 9");
+        int newY = sc.nextInt();
+        Position nextMove = new Position(newX, newY);
         return nextMove;
     }
+
+
+    public Position correctMove(Case[][] cartCase, Scanner scanner, Biome pl, Biome f){
+
+        System.out.println("Vers ou voulez vous allez ? ");
+        System.out.println("1. Vers le haut");
+        System.out.println("2. Vers le bas");
+        System.out.println("3. Vers la droite");
+        System.out.println("4. Vers la gauche");
+
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                return haut(cartCase, biome, biome, scanner);
+                
+            case 2:
+                return bas(cartCase, pl, f, scanner);
+            
+            case 3:
+                return droite(cartCase, pl, f, scanner);
+                
+            case 4:
+                return gauche(cartCase, pl, f, scanner);
+                
+            default:
+                return this.getposition();
+        }
+    }
+       
+    
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
     //action que l'utilisateur peut effectuer
 
+    public int askAction (Scanner scan){
+        int answer;
+        answer = demandeUtilisateurint("Que veux tu faire ? " + "\n" + "1. Afficher l'inventaire" + "\n" + "2. Me déplacer" + "\n" + "3. Manger" + "\n" + "4. Fabriquer un outil" + "\n" + "5. Quitter la simulation", scan);
+        return answer;
+    }
     
     
     public boolean actionHomme(Scanner scanner, Case[][] map, Biome pla, Biome fo) {
         boolean gamecontinue = true;
-
-        System.out.println("Que veux -tu faire ");
-        System.out.println("1. Afficher l'inventaire");
-        System.out.println("2. Me déplacer");
-        System.out.println("3. Manger");
-        System.out.println("4. Fabriquer un outil");
-        System.out.println("5. Quitter la simulation");
-
-        int choice = scanner.nextInt();
+        int choice;
+        
+        choice = askAction(scanner);
+        if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5){
+            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5) {
+            System.out.println("Veuillez rentrer un choix valide");
+            askAction(scanner);
+            }
+        }
 
         switch (choice) {
             case 1:
@@ -846,10 +884,10 @@ public class Homme extends Animal {
     public void afficherInventaire() {
         if(this.getInvent() != null){
             System.out.println("Voici ce qu'il y a dans l'inventaire ");
-            System.out.println("Quantité de viande : " + this.invent.getQtebois());
-            System.out.println("Quantité de fruit : " + this.invent.getQtecailloux());
-            System.out.println("Quantité de bois : " + this.invent.getQtefruit());
-            System.out.println("Quantité de cailloux : " + this.invent.getQteviande());
+            System.out.println("Quantité de viande : " + this.invent.getQteviande());
+            System.out.println("Quantité de fruit : " + this.invent.getQtefruit());
+            System.out.println("Quantité de bois : " + this.invent.getQtebois());
+            System.out.println("Quantité de cailloux : " + this.invent.getQtecailloux());
 
             System.out.println("Voici les outils que tu as dans ton inventaire");
             if(this.getInvent().getArsenal() != null){

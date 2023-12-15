@@ -1,19 +1,12 @@
 package class_Vegetal;
 
 /**
- * L'énumération Rochers représente différents types de rochers.
+ * L'énumération Rochers représente différents types de rochers (cailloux et gros cailloux).
  */
 public enum Rochers {
 
   
-  /**
-   * Gros cailloux.
-   */
   GROS_CAILLOUX("gros cailloux"),
-
-  /**
-   * Cailloux.
-   */
   CAILLOUX("cailoux");
 
   /**

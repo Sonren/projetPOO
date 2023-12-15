@@ -21,7 +21,7 @@ public class Vegetal {
     private boolean isDeadveg = false;
 
     /** Le nombre de bois associé au végétal. */
-    private int nbbois = 2;
+    private int nbbois = 3;
 
     /**
      * Constructeur de la classe Vegetal.
