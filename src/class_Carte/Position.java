@@ -23,7 +23,6 @@ public class Position {
 
     public void setX(int xx, boolean isCorrectPosition) {
         if (xx < 0 || xx > 9){
-            System.out.println("position hors le carte");
             isCorrectPosition = true;
         } else {
             this.x = xx;
@@ -36,7 +35,6 @@ public class Position {
 
     public void setY(int yy, boolean isCorrectPosition) {
         if (yy < 0 || yy > 9){
-            System.out.println("position hors le carte");
             isCorrectPosition = true;
         } else {
             this.y = yy;
@@ -47,7 +45,6 @@ public class Position {
     public boolean setPosition (int xx, int yy){
         boolean isCorrectPosition = false;
         if (yy < 0 || yy > 9) {
-          System.out.println("position hors de la carte");
           if (yy > 9){
             this.x = xx;
             this.y = 9;
@@ -56,7 +53,6 @@ public class Position {
           return isCorrectPosition;
         }
         if ( xx < 0 || xx > 9){
-          System.out.println("position hors de la carte");
           if(xx > 9){
             this.y = yy;
             this.x = 9;
@@ -70,7 +66,6 @@ public class Position {
             isCorrectPosition = true;
             return isCorrectPosition;
         }
-        System.out.println("rien ne se passe dans setPosition");
         return isCorrectPosition;
     }
         

@@ -61,18 +61,18 @@ public class Inventaire {
     }
 
     public void ajouterBois(int quantity){
-        this.qtebois = quantity;
+        this.qtebois += quantity;
     } 
 
     public void ajouterViande(int quantityV){
-        this.qteviande = quantityV;
+        this.qteviande += quantityV;
     } 
     
     public void ajouterCailloux(int qtyCailloux){
-        this.qtecailloux = qtyCailloux;
+        this.qtecailloux += qtyCailloux;
     } 
     public void ajouterFruit(int qtyfruit){
-        this.qtefruit = qtyfruit ;
+        this.qtefruit += qtyfruit ;
     }
     public void ajouterOutil(Tool outil){
         arsenal.add(outil);
