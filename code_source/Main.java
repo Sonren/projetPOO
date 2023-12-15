@@ -1,23 +1,21 @@
-package fr.lynchmaniac;
-
-import fr.lynchmaniac.class_Carte.Carte;
-import fr.lynchmaniac.class_Carte.Case;
-import fr.lynchmaniac.class_Carte.Position;
-import fr.lynchmaniac.class_Vegetal.Abres;
-import fr.lynchmaniac.class_Vegetal.Rocher;
-import fr.lynchmaniac.class_Vegetal.Rochers;
-import fr.lynchmaniac.class_Vegetal.Vegetal;
-import fr.lynchmaniac.class_Animal.Animal;
-import fr.lynchmaniac.class_Animal.Animaux_carnivore;
-import fr.lynchmaniac.class_Animal.Animaux_herbivore;
-import fr.lynchmaniac.class_Animal.Animaux_omnivore;
-import fr.lynchmaniac.class_Animal.Diet;
-import fr.lynchmaniac.class_Animal.Homme.Homme;
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Biome.Biomes;
-import fr.lynchmaniac.class_Biome.Foret;
-import fr.lynchmaniac.class_Biome.Mer;
-import fr.lynchmaniac.class_Biome.Plaine;
+import class_Carte.Carte;
+import class_Carte.Case;
+import class_Carte.Position;
+import class_Vegetal.Abres;
+import class_Vegetal.Rocher;
+import class_Vegetal.Rochers;
+import class_Vegetal.Vegetal;
+import class_Animal.Animal;
+import class_Animal.Animaux_carnivore;
+import class_Animal.Animaux_herbivore;
+import class_Animal.Animaux_omnivore;
+import class_Animal.Diet;
+import class_Animal.Homme.Homme;
+import class_Biome.Biome;
+import class_Biome.Biomes;
+import class_Biome.Foret;
+import class_Biome.Mer;
+import class_Biome.Plaine;
 import java.util.Scanner;
 
 public class Main

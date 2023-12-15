@@ -9,6 +9,7 @@ import class_Carte.Position;
 import class_Animal.Animaux_carnivore;
 import class_Animal.Animaux_herbivore;
 import class_Animal.Animaux_omnivore;
+import class_Animal.Diet;
 
 public class testAnimal {
 
@@ -28,12 +29,10 @@ public class testAnimal {
         testSetPosition();
         testSetBiome();
         testSetIsDead();
-        testLooseLevelLife();
-        testKilledAnimal();
-        testIsHerbivore();
-        testIsCarnivore();
-        testIsOmnivore();
-
+        testGetNomCar();
+        testGetNomHerb();
+        testGetNomOmni();
+        testGetNom();
     }
 
      public static void testGetName() {
@@ -210,151 +209,68 @@ public class testAnimal {
             System.out.println("Test setIsDead: Failed");
         }
     }
-
-    public static void testAddHerbivore() {
-        Biome testBiome = new Foret("Foret");
+    
+    public static void testGetNomCar() {
         testAnimal test = new testAnimal();
-        Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
-        test.addherbivore(testAnimal);
-
-        if (test.gethfaune().contains(testAnimal)) {
-            System.out.println("Test addHerbivore: Passed");
+        Animaux_carnivore loup = Animaux_carnivore.LOUP;
+    
+        if (test.getNom(loup).equals("loup")) {
+            System.out.println("Test GetNom: Passed");
         } else {
-            System.out.println("Test addHerbivore: Failed");
+            System.out.println("Test GetNom: Failed");
         }
     }
-
-    public static void testRemoveHerbivore() {
-        Biome testBiome = new Foret("Foret");
+    
+    private String getNom(Animaux_carnivore animal) {
+        return animal.getNom();
+    }
+   
+    public static void testGetNomHerb() {
         testAnimal test = new testAnimal();
-        Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
-        test.addherbivore(testAnimal);
-        test.removeherbivore(testAnimal);
-
-        if (!test.gethfaune().contains(testAnimal)) {
-            System.out.println("Test removeHerbivore: Passed");
+        Animaux_herbivore vache = Animaux_herbivore.VACHE;
+    
+        if (test.getNom(vache).equals("vache")) {
+            System.out.println("Test GetNom: Passed");
         } else {
-            System.out.println("Test removeHerbivore: Failed");
+            System.out.println("Test GetNom: Failed");
+        }
+    }
+    
+    private String getNom(Animaux_herbivore animal) {
+        return animal.getNom();
+    }
+
+    public static void testGetNomOmni() {
+        testAnimal test = new testAnimal();
+        Animaux_omnivore ours = Animaux_omnivore.OURS;
+
+        if (test.getNom(ours).equals("ours")) {
+            System.out.println("Test GetNom: Passed");
+        } else {
+            System.out.println("Test GetNom: Failed");
         }
     }
 
-    public static void testAddCarnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
-        test.addcarnivore(testAnimal);
+    private String getNom(Animaux_omnivore animal) {
+        return animal.getNom();
+    }
 
-        if (test.getcfaune().contains(testAnimal)) {
-            System.out.println("Test addCarnivore: Passed");
+    public static void testGetNom() {
+        testAnimal test = new testAnimal();
+        Diet herbivore = Diet.HERBIVORE;
+        Diet carnivore = Diet.CARNIVORE;
+        Diet omnivore = Diet.OMNIVORE;
+
+        if (test.getNom(herbivore).equals("herbivore") &&
+            test.getNom(carnivore).equals("carnivore") &&
+            test.getNom(omnivore).equals("omnivore")) {
+            System.out.println("Test GetNom: Passed");
         } else {
-            System.out.println("Test addCarnivore: Failed");
+            System.out.println("Test GetNom: Failed");
         }
     }
 
-    public static void testRemoveCarnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
-        test.addcarnivore(testAnimal);
-        test.removecarnivore(testAnimal);
-
-        if (!test.getcfaune().contains(testAnimal)) {
-            System.out.println("Test removeCarnivore: Passed");
-        } else {
-            System.out.println("Test removeCarnivore: Failed");
-        }
+    private String getNom(Diet diet) {
+        return diet.getNom();
     }
-
-    public static void testAddOmnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
-        test.addomnivore(testAnimal);
-
-        if (test.getofaune().contains(testAnimal)) {
-            System.out.println("Test addOmnivore: Passed");
-        } else {
-            System.out.println("Test addOmnivore: Failed");
-        }
-    }
-
-    public static void testRemoveOmnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
-        test.addomnivore(testAnimal);
-        test.removeomnivore(testAnimal);
-
-        if (!test.getofaune().contains(testAnimal)) {
-            System.out.println("Test removeOmnivore: Passed");
-        } else {
-            System.out.println("Test removeOmnivore: Failed");
-        }
-    }
-
-    public static void testLooseLevelLife() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
-        testAnimal.looselevellife(20);
-
-        if (testAnimal.getlevellife() == 30) {
-            System.out.println("Test looseLevelLife: Passed");
-        } else {
-            System.out.println("Test looseLevelLife: Failed");
-        }
-    }
-
-    public static void testKilledAnimal() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
-        test.killedAnimal(testAnimal);
-
-        if (testAnimal.isDead()) {
-            System.out.println("Test killedAnimal: Passed");
-        } else {
-            System.out.println("Test killedAnimal: Failed");
-        }
-    }
-
-    public static void testIsHerbivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
-        test.addherbivore(testAnimal);
-
-        if (testAnimal.isHerbivore()) {
-            System.out.println("Test isHerbivore: Passed");
-        } else {
-            System.out.println("Test isHerbivore: Failed");
-        }
-    }
-
-    public static void testIsCarnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Tigre", 60, 40, new Position(2, 2), testBiome);
-        test.addcarnivore(testAnimal);
-
-        if (testAnimal.isCarnivore()) {
-            System.out.println("Test isCarnivore: Passed");
-        } else {
-            System.out.println("Test isCarnivore: Failed");
-        }
-    }
-
-    public static void testIsOmnivore() {
-        Biome testBiome = new Foret("Foret");
-        AnimalTest test = new AnimalTest();
-        Animal testAnimal = new Animal("Ours", 70, 50, new Position(3, 3), testBiome);
-        test.addomnivore(testAnimal);
-
-        if (testAnimal.isOmnivore()) {
-            System.out.println("Test isOmnivore: Passed");
-        } else {
-            System.out.println("Test isOmnivore: Failed");
-        }
-    }
-}
 }
