@@ -1,5 +1,6 @@
 package class_Animal;
 
+//enumération des animaux herbivore
 public enum Animaux_herbivore {
   VACHE("vache"),
   MOUTON("mouton"),

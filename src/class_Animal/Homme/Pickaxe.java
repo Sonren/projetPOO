@@ -42,6 +42,10 @@ public class Pickaxe implements Tool {
         this.durability = durability;
     }
 
+    /**
+     * Utilise l'outil (la pioche). Réduit la durabilité de 0.5 unité.
+     * Affiche un message si l'outil est expiré.
+     */
     @Override
     public void useoutil(){
         if(this.durability>0){
@@ -50,7 +54,14 @@ public class Pickaxe implements Tool {
             System.out.println("l'outil"+ this.getName()+ "a expiré");
         }  
     }
-    
+
+    /**
+     * Remplace l'outil actuel par un nouvel outil avec les spécifications fournies.
+     *
+     * @param nom     Le nouveau nom de l'outil.
+     * @param force   La nouvelle force de l'outil.
+     * @param durable La nouvelle durabilité de l'outil.
+     */
     @Override
     public void remplaceoutil(String nom, int force, double durable){
             this.name = nom;

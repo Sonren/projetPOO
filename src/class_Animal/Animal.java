@@ -173,10 +173,10 @@ public class  Animal {
     //les mouvement des animaux
     
     /**
-     * 
-     * @param cart
-     * @return
-     * @throws Exception
+     * Déplace l'animal vers une nouvelle position aléatoire parmi les positions disponibles.
+     *
+     * @param cart La grille de cases dans laquelle se déplace l'animal.
+     * @return La nouvelle position de l'animal après le déplacement, ou null si aucune position n'est disponible.
      */
     public Position move(Case[][] cart){
         Position tempHPosition = new Position (0,0);

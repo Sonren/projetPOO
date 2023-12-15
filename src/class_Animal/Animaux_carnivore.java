@@ -1,5 +1,6 @@
 package class_Animal;
 
+//enumeration des animaux carnivore
 public enum Animaux_carnivore {
   LOUP("loup"),
   LION("lion");

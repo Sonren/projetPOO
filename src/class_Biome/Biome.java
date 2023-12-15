@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import class_Animal.Animal;
 import class_Vegetal.Rocher;
 import class_Vegetal.Vegetal;
-
+/**
+* La classe Biome représente un biome avec une faune, une flore et une géologie associées.
+* Elle stocke des listes d'animaux, de végétaux et de rochers présents dans le biome.
+* Elle fournit des méthodes pour afficher les différentes composantes, ajouter et supprimer des éléments.
+*
+*/
 public class Biome {
 	private String nom;
 	protected ArrayList<Animal> faune;
@@ -41,7 +46,9 @@ public class Biome {
 		this.nom = b;
 	}
 
-
+	/**
+     * Affiche la liste d'animaux présents dans le biome.
+     */
 	public void afficheFaune (){
 		System.out.println("Faune dans " + this.nom + ":");
 		for (Animal animal : this.getfaune() ){
@@ -50,6 +57,9 @@ public class Biome {
 		System.out.println("\n");
 	}
 
+	/**
+     * Affiche la liste de végétaux présents dans le biome.
+     */
 	public void afficheFlore (){
 		System.out.println("Flore dans " + this.nom + ":");
 		for (Vegetal vegetal : flore){
@@ -58,6 +68,9 @@ public class Biome {
 		System.out.println("\n");
 	}
 
+	/**
+     * Affiche la liste de rochers présents dans le biome.
+     */
 	public void affichegeologie (){
 		System.out.println("Rocher dans " + this.nom + ":");
 		for (Rocher roc: geologie){
@@ -66,21 +79,41 @@ public class Biome {
 		System.out.println("\n");
 	}
 
+	/**
+     * Ajoute un animal à la liste d'animaux du biome.
+     *
+     * @param animal L'animal à ajouter.
+     */
 	public void addAnimaux (Animal animal){
 		this.faune.add(animal);
 		System.out.println(animal.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
+	/**
+     * Ajoute un végétal à la liste de végétaux du biome.
+     *
+     * @param vegetal Le végétal à ajouter.
+     */
 	public void addPlante (Vegetal vegetal){
 		flore.add(vegetal);
 		System.out.println(vegetal.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
+	/**
+     * Ajoute un rocher à la liste de rochers du biome.
+     *
+     * @param roc Le rocher à ajouter.
+     */
 	public void addRocher (Rocher roc){
 		geologie.add(roc);
 		System.out.println(roc.getname() + " ajouté(e) dans la " + this.nom);
 	}
 
+	/**
+     * Supprime un végétal de la liste de végétaux du biome.
+     *
+     * @param vegetal Le végétal à supprimer.
+     */
 	public void removePlante (Vegetal vegetal){
 		if (flore.remove(vegetal)){
 			System.out.println(vegetal.getname() + "a été extirpé(e) de la flore de la " + nom);
@@ -89,6 +122,11 @@ public class Biome {
 		}
 	}
 
+	/**
+     * Supprime un animal de la liste d'animaux du biome.
+     *
+     * @param animal L'animal à supprimer.
+     */
 	public void removeAnimal (Animal animal){
 		if (faune.remove(animal)){
 			System.out.println(animal.getname() + "a été éléminé(e) de la faune de la " + nom);
@@ -97,6 +135,11 @@ public class Biome {
 		}
 	}
 
+	/**
+     * Supprime un rocher de la liste de rochers du biome.
+     *
+     * @param roc Le rocher à supprimer.
+     */
 	public void removeRocher (Rocher roc){
 		if (geologie.remove(roc)){
 			System.out.println(roc.getname() + "a été éléminé(e) de la faune de la " + nom);

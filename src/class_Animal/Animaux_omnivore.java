@@ -1,5 +1,6 @@
 package class_Animal;
 
+//enumeration des animaux omnivore
 public enum Animaux_omnivore {
   OURS("ours"),
   HUMAIN("humain");

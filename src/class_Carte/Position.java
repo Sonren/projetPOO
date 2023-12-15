@@ -5,6 +5,11 @@ import java.util.Random;
 import class_Biome.Biome;
 import class_Biome.Biomes;
 
+/**
+* La classe Position représente les coordonnées (x, y) d'une position sur la carte.
+* Elle fournit des méthodes pour obtenir et définir les coordonnées, vérifier si la position est vide,
+* et générer une position aléatoire en fonction du biome spécifié.
+*/
 public class Position {
     protected int x;
     protected int y;
@@ -70,6 +75,12 @@ public class Position {
     }
         
 
+    /**
+     * Vérifie si la position est vide dans la carte donnée.
+     *
+     * @param map La carte dans laquelle vérifier la position.
+     * @return    True si la position est vide, sinon False.
+     */
     public boolean isEmpty (Case[][] map){
         boolean empty = false;
         if(map[this.getX()][this.getY()].getisanimal()){
@@ -84,6 +95,12 @@ public class Position {
         }
     }
 
+    /**
+     * Vérifie si la position est vide pour les végétaux dans la carte donnée.
+     *
+     * @param map La carte dans laquelle vérifier la position.
+     * @return    True si la position est vide pour les végétaux, sinon False.
+     */
     public boolean isEmptyVegetal(Case[][] map) {
         boolean isEmptyVeg = false;
         if (map[this.getX()][this.getY()].getisvegetal()){
@@ -96,7 +113,13 @@ public class Position {
         return isEmptyVeg;
     }
     
-
+    /**
+     * Génère une position aléatoire en fonction du biome spécifié.
+     *
+     * @param bio      Le biome spécifié.
+     * @param mapwrld  La carte du monde.
+     * @return         La nouvelle position générée.
+     */
     public Position ramdomPosition(Biome bio, Case[][] mapwrld){
         Random rand = new Random();
         boolean isgoodPosition = false;

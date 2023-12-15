@@ -18,6 +18,12 @@ import class_Vegetal.Rocher;
 import class_Vegetal.Rochers;
 import class_Vegetal.Vegetal;
 
+/**
+* La classe Carte représente la carte du monde du jeu. Elle contient une matrice de cases, le nombre de tours,
+* et des méthodes pour effectuer différentes actions telles que l'ajout d'animaux, de plantes, de rochers,
+* la gestion des tours, etc.
+*
+*/
 public class Carte {
 
     private Case[][] map = new Case[10][10];
@@ -50,19 +56,31 @@ public class Carte {
     public void addtour (){
         this.nbtour += 1;
     }
-   
-    public void preservefaune (){
-        //TODO
-    }
 
+    /**
+     * Obtient la liste des animaux tués.
+     *
+     * @return La liste des animaux tués.
+     */
     public ArrayList<Animal> getKillesAnimal(){
         return this.killedAnimals;
     }
 
+    /**
+     * Ajoute un animal tué à la liste.
+     *
+     * @param animalKilled L'animal tué à ajouter.
+     */
     public void addKilledAnimal(Animal animalKilled){
         this.getKillesAnimal().add(animalKilled);
     }
 
+    /**
+     * Ajoute une case à la carte.
+     *
+     * @param cas La case à ajouter.
+     * @return La carte mise à jour.
+     */
     public Case[][] addcase(Case cas) {
        map[cas.getPosition().getX()][cas.getPosition().getY()] = cas;
        return map;
@@ -146,6 +164,16 @@ public class Carte {
         return pet = null;
     }
 
+    /**
+     * Ajoute un être humain à la carte du monde du jeu. L'être humain est placé aléatoirement
+     * dans le biome spécifié sur la carte.
+     *
+     * @param bio Le biome dans lequel l'être humain sera ajouté.
+     * @param map La carte du monde du jeu représentée par une matrice de cases.
+     * @param nom Le nom du type d'être humain à ajouter (ex. Animaux_omnivore.HUMAIN.getNom()).
+     * @param f La force de l'être humain à ajouter.
+     * @return L'être humain ajouté à la carte.
+     */
     public Homme addHomme(Biome bio, Case[][] map, String nom, int f){
         Homme human;
         Position posi = new Position(0, 0);
@@ -158,11 +186,13 @@ public class Carte {
     }
 
     /**
-     * fonction 
-     * @param bio
-     * @param map
-     * @param name
-     * @return
+     * Ajoute un arbre à la carte en fonction du nom spécifié.
+     * L'arbre est placé aléatoirement dans le biome spécifié sur la carte du monde du jeu.
+     *
+     * @param bio Le biome dans lequel l'arbre sera ajouté.
+     * @param map La carte du monde du jeu représentée par une matrice de cases.
+     * @param name Le nom du type d'arbre à ajouter (ex. Abres.CHENE.getNom()).
+     * @return L'arbre ajouté à la carte.
      */
     public Vegetal addarbre(Biome bio, Case[][] map, String name){
         Vegetal veg;
@@ -195,6 +225,15 @@ public class Carte {
         return veg = null;
     }
 
+    /**
+     * Ajoute un rocher à la carte en fonction du nom spécifié.
+     * Le rocher est placé aléatoirement dans le biome spécifié sur la carte du monde du jeu.
+     *
+     * @param bio Le biome dans lequel le rocher sera ajouté.
+     * @param world La carte du monde du jeu représentée par une matrice de cases.
+     * @param nom Le nom du type de rocher à ajouter (ex. Rochers.CAILLOUX.getNom()).
+     * @return Le rocher ajouté à la carte.
+     */
     public Rocher addrocher(Biome bio, Case[][] world, String nom){
         Rocher rock;
         Position posi = new Position(0, 0);
@@ -216,6 +255,12 @@ public class Carte {
         return rock = null;
     }
 
+    /**
+     * fonction qui effectue les mouvements aléatoires de tous les animaux dans les biomes spécifiés.
+     *
+     * @param bio1 Le premier biome.
+     * @param bio2 Le deuxième biome.
+     */
     public void randommvtAllAnimaux (Biome bio1, Biome bio2){
         for (Animal ani : bio1.getfaune()){ 
             if(!(ani instanceof Homme)){

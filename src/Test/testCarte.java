@@ -284,8 +284,6 @@ public class testCarte {
         testBiome.addAnimaux(testAnimal);
         testMap[1][1].setisanimal(true);
 
-        // Appeler la méthode et vérifier si la faune est préservée
-        testCarte.preservefaune();
 
         if (testBiome.getfaune().size() == 1 && testMap[1][1].getisanimal()) {
             System.out.println("Test preserveFaune: Passed");

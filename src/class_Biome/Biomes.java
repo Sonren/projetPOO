@@ -5,20 +5,9 @@ package class_Biome;
  */
 public enum Biomes {
 
-  /**
-   * Le biome de la forêt.
-   */
+ 
   FORET("fôret"),
-
-  
-    /**
-     * Le biome de la plaine.
-     */
   PLAINE("plaine"),
-
-  /**
-   * Le biome de la mer.
-   */
   MER("mer");
 
   /**
