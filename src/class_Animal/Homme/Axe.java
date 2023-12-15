@@ -7,7 +7,7 @@ public class Axe implements Tool{
     
 
 
-  
+    //constructeur de Axe
     public Axe(String name) {
         this.name = name;
         this.strength = 5;
@@ -39,6 +39,7 @@ public class Axe implements Tool{
     public void setDurability(double durability) {
         this.durability = durability;
     }
+
 
     @Override
     public void useoutil(){

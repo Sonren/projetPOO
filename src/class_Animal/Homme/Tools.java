@@ -1,5 +1,6 @@
     package class_Animal.Homme;
 
+    //enumeration de tous les outils
     public enum Tools {
     HACHE("hache"),
     LANCE("lance"),

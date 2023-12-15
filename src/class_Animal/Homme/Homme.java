@@ -258,10 +258,10 @@ public class Homme extends Animal {
     //fonction d'action
 
     /**
-     * 
-     * @param rock
-     * @param map
-     * @param pos
+     * procédure qui permet a l'Homme de miner des rochers et donc de récupérer une quantité de cailloux dans son inventaire
+     * @param rock le rocher qui se situe a la position ou l'homme veut aller
+     * @param map plateau de jeu ou sont contenu les objet et l'Homme
+     * @param pos Position d'arrivé de l'Homme 
      */
     public void miner(Rocher rock, Case[][] map, Position pos){
         if(this.hasTool(Tools.PIOCHE.getNom())){
@@ -280,10 +280,10 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param arbre
-     * @param map
-     * @param pos
+     * procédure qui permet de couper du bois et qui rajoute du bois a l'inventaire
+     * @param arbre l'arbre qui se situe a la position ou l'homme veut aller
+     * @param map plateau de jeu ou sont contenu les objet et l'Homme
+     * @param pos Position d'arrivé de l'Homme
      */
     public void couperBois(Vegetal arbre, Case[][] map, Position pos){
         if(this.hasTool(Tools.HACHE.getNom())){
@@ -302,10 +302,10 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param vegfind
-     * @param wrlmap
-     * @param arrivedpos
+     * procédure qui permet a l'Homme de récupérer des fruits sur l'arbre sur laquelle il tombe
+     * @param vegfind arbre sur lequel l'Homme doit se trouver
+     * @param wrlmaple plateau de jeu ou sont contenu les objet et l'Homme
+     * @param arrivedpos Position d'arrivé de l'Homme
      */
     public void recoltefruit(Vegetal vegfind, Case[][] wrlmap, Position arrivedpos){
         System.out.println("vous avez ramassé : " + ((Arbrefruit) vegfind).getnbfruit() + " fruits");
@@ -317,10 +317,11 @@ public class Homme extends Animal {
     //fonction qui gère les rencontres
 
     /**
-     * 
-     * @param map
-     * @param pos
-     * @return
+     * Interagit avec un élément végétal sur une case spécifique.
+     * @param map     La carte contenant les cases et les éléments.
+     * @param pos     Position sur laquelle l'Homme doit arriver.
+     * @param sca     Scanner pour la saisie utilisateur.
+     * @return        La nouvelle position de l'Homme après l'interaction.
      */
     public Position hommeMeetVegetal(Case[][] map, Position pos, Scanner sca){
         Vegetal findveg;
@@ -369,10 +370,13 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param cart
-     * @param pos
-     * @return
+     * Interagit avec un animal carnivore sur une case spécifique.
+     * @param cart     La carte contenant les cases et les éléments.
+     * @param pos      Position sur laquelle l'Homme doit arriver.
+     * @param scanne   Scanner pour la saisie utilisateur.
+     * @param plaine   le Biome plaine qui est utilisé dans correctMove
+     * @param foret    le Biome foret qui est utilisé dans correctMove
+     * @return         La nouvelle position de l'Homme après l'interaction.
      */
     public Position HommeMeetCarnivore(Case[][] cart, Position pos, Scanner scanne, Biome plaine, Biome foret){
         boolean veutfuir = demandeUtilisateur("francis souhaites tu fuir?", scanne);
@@ -403,10 +407,13 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param animal
-     * @param map
-     * @param pos
+     * Interagit avec un animal herbivore sur une case spécifique.
+     * @param map      La carte contenant les cases et les éléments.
+     * @param pos      Position sur laquelle l'Homme doit arriver.
+     * @param scan     Scanner pour la saisie utilisateur.
+     * @param pla      le Biome plaine qui est utilisé dans correctMove
+     * @param fo       le Biome foret qui est utilisé dans correctMove
+     * @return         La nouvelle position de l'Homme après l'interaction.
      */
     public Position chasser(Case[][] map, Position pos, Scanner scan, Biome pla, Biome fo){
         Animal findanimal;
@@ -453,10 +460,11 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param map
-     * @param pos
-     * @return
+     * Interagit avec un rocher sur une case spécifique.
+     * @param map      La carte contenant les cases et les éléments.
+     * @param pos      Position sur laquelle l'Homme doit arriver.
+     * @param scan     Scanner pour la saisie utilisateur.
+     * @return         La nouvelle position de l'Homme après l'interaction.
      */
     public Position hommeMeetRocher(Case[][] map, Position pos, Scanner scan){
         Rocher findrock;
@@ -485,6 +493,16 @@ public class Homme extends Animal {
 
 //-----------------------------------------------------------------------------------------------
     //Mouvement haut bas droite gauche
+
+    /**
+     * Déplace l'Homme vers le haut sur la carte, en vérifiant si la position d'arrivé ne comporte aucun conflit et ci-orrige le conflit si jamais il y en a.
+     *
+     * @param cartCase   La carte contenant les cases et les éléments.
+     * @param pla        Le biome plaine.
+     * @param fore       Le biome forêt.
+     * @param scanner    Scanner pour la saisie utilisateur.
+     * @return           La nouvelle position de l'Homme après le déplacement.
+     */
     public Position haut (Case[][] cartCase, Biome pla, Biome fore, Scanner scanner){
         Position moveto = new Position(0,0);
         boolean goodHPosition = false;
@@ -533,6 +551,15 @@ public class Homme extends Animal {
         return null;
     }
          
+    /**
+     * Déplace l'Homme vers le bas sur la carte, en vérifiant si la position d'arrivé ne comporte aucun conflit et ci-orrige le conflit si jamais il y en a.
+     *
+     * @param cartCase   La carte contenant les cases et les éléments.
+     * @param pla        Le biome plaine.
+     * @param fore       Le biome forêt.
+     * @param scanner    Scanner pour la saisie utilisateur.
+     * @return           La nouvelle position de l'Homme après le déplacement.
+     */
     public Position bas (Case[][] cartCase, Biome pla, Biome fore, Scanner scanner){
         Position moveto = new Position(0,0);
         boolean goodHPosition = false;
@@ -581,6 +608,15 @@ public class Homme extends Animal {
         return null;
     }
 
+    /**
+     * Déplace l'Homme vers le droite sur la carte, en vérifiant si la position d'arrivé ne comporte aucun conflit et ci-orrige le conflit si jamais il y en a.
+     *
+     * @param cartCase   La carte contenant les cases et les éléments.
+     * @param pla        Le biome plaine.
+     * @param fore       Le biome forêt.
+     * @param scanner    Scanner pour la saisie utilisateur.
+     * @return           La nouvelle position de l'Homme après le déplacement.
+     */
     public Position droite (Case[][] cartCase, Biome pla, Biome fore, Scanner scanner){
        Position moveto = new Position(0,0);
         boolean goodHPosition = false;
@@ -629,7 +665,16 @@ public class Homme extends Animal {
         return null;
     }
 
-     public Position gauche (Case[][] cartCase, Biome pla, Biome fore, Scanner scanner){
+    /**
+     * Déplace l'Homme vers la gauche sur la carte, en vérifiant si la position d'arrivé ne comporte aucun conflit et ci-orrige le conflit si jamais il y en a.
+     *
+     * @param cartCase   La carte contenant les cases et les éléments.
+     * @param pla        Le biome plaine.
+     * @param fore       Le biome forêt.
+     * @param scanner    Scanner pour la saisie utilisateur.
+     * @return           La nouvelle position de l'Homme après le déplacement.
+     */
+    public Position gauche (Case[][] cartCase, Biome pla, Biome fore, Scanner scanner){
         Position moveto = new Position(0,0);
         boolean goodHPosition = false;
         boolean result;
@@ -678,7 +723,12 @@ public class Homme extends Animal {
     }
 
 
-
+    /**
+     * Demande à l'utilisateur de saisir de nouvelles coordonnées (x, y) et crée une nouvelle position.
+     *
+     * @param sc Le scanner pour la saisie utilisateur.
+     * @return La nouvelle position créée à partir des coordonnées saisies.
+     */
     public Position askPosition(Scanner sc){
         System.out.println("Entrez la nouvelle coordonnée de x entre 0 et 9");
         int newX = sc.nextInt();
@@ -688,7 +738,15 @@ public class Homme extends Animal {
         return nextMove;
     }
 
-
+    /**
+     * Demande à l'utilisateur de choisir une direction de déplacement et effectue le déplacement en conséquence.
+     *
+     * @param cartCase La carte contenant les cases et les éléments.
+     * @param scanner  Le scanner pour la saisie utilisateur.
+     * @param pl       Le biome plaine.
+     * @param f        Le biome forêt.
+     * @return         La nouvelle position après le déplacement, ou la position actuelle si le choix est invalide.
+     */
     public Position correctMove(Case[][] cartCase, Scanner scanner, Biome pl, Biome f){
 
         System.out.println("Vers ou voulez vous allez ? ");
@@ -722,13 +780,27 @@ public class Homme extends Animal {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
     //action que l'utilisateur peut effectuer
 
+    /**
+     * Demande à l'utilisateur de choisir une action parmi plusieurs options.
+     *
+     * @param scan Le scanner pour la saisie utilisateur.
+     * @return Le choix de l'utilisateur.
+     */
     public int askAction (Scanner scan){
         int answer;
         answer = demandeUtilisateurint("Que veux tu faire ? " + "\n" + "\n" + "1. Afficher l'inventaire" + "\n" + "2. Me déplacer" + "\n" + "3. Manger" + "\n" + "4. Fabriquer un outil" + "\n" + "5. Afficher le contenu de la plaine" + "\n" + "6. Afficher le contenue de la forêt" + "\n" + "7. Afficher sa position" + "\n" + "8. Quitter la simulation" + "\n", scan);
         return answer;
     }
     
-    
+    /**
+     * Exécute une action spécifique en fonction du choix de l'utilisateur.
+     *
+     * @param scanner Le scanner pour la saisie utilisateur.
+     * @param map     La carte contenant les cases et les éléments.
+     * @param pla     Le biome plaine.
+     * @param fo      Le biome forêt.
+     * @return        Un indicateur indiquant si le jeu doit continuer après l'action.
+     */
     public boolean actionHomme(Scanner scanner, Case[][] map, Biome pla, Biome fo) {
         boolean gamecontinue = true;
         int choice;
@@ -784,6 +856,11 @@ public class Homme extends Animal {
         }
     }
 
+    /**
+     * Demande à l'utilisateur de choisir un type de nourriture (viande ou fruit) et effectue l'action de manger.
+     *
+     * @param scan Le scanner pour la saisie utilisateur.
+     */
     public void askmanger (Scanner scan){
         String reponse;
         reponse = demandeUtilisateurstr("\n" + "Que voulez vous manger ? (viande, fruit)", scan);
@@ -791,6 +868,12 @@ public class Homme extends Animal {
          
     }
 
+    /**
+     * Demande à l'utilisateur de choisir un type de nourriture (viande ou fruit) et effectue l'action de manger, il recommence jusqu'a ce que la saisie soit bonne.
+     *
+     * @param sc     Le scanner pour la saisie utilisateur.
+     * @param answer Le type de nourriture choisi par l'utilisateur.
+     */
     public void manger (Scanner sc, String answer){
         if(answer.equals("viande")){
             this.mangerViande(sc);
@@ -805,6 +888,11 @@ public class Homme extends Animal {
     }
 
 
+    /**
+     * Permet à l'animal de manger des fruits en demandant à l'utilisateur la quantité à consommer.
+     *
+     * @param scanner Le scanner pour la saisie utilisateur.
+     */
     public void mangerFruit(Scanner scanner) {
         if (this.invent.getQtefruit() > 0) {
             System.out.println("Combien de fruits voulez-vous manger ?");
@@ -822,7 +910,12 @@ public class Homme extends Animal {
     }
 
 
-    
+        
+    /**
+     * Permet à l'animal de manger de la viande en demandant à l'utilisateur la quantité à consommer.
+     *
+     * @param scanner Le scanner pour la saisie utilisateur.
+     */
     public void mangerViande(Scanner scanner) {
         if (this.invent.getQteviande() > 0) {
             System.out.println("Combien de viande veux-tu manger ?");
@@ -839,6 +932,11 @@ public class Homme extends Animal {
         }
     }
 
+    /**
+     * Demande à l'utilisateur de choisir un outil à fabriquer et appelle la méthode correspondante pour la fabrication.
+     *
+     * @param scan Le scanner pour la saisie utilisateur.
+     */
     public void askfabriquerOutil(Scanner scan){ 
         String answer;
 
@@ -846,6 +944,12 @@ public class Homme extends Animal {
         fabriquerOutil(scan, answer);
     }
 
+    /**
+     * Fabrique un outil en fonction du type spécifié par l'utilisateur.
+     *
+     * @param sc  Le scanner pour la saisie utilisateur.
+     * @param ans Le type d'outil à fabriquer (pioche, hache, lance).
+     */
     public void fabriquerOutil (Scanner sc, String ans){
         if(ans.equals("pioche")){
             System.out.println("Francis veut fabriquer une pioche");
@@ -862,6 +966,10 @@ public class Homme extends Animal {
         }
     }
 
+    /**
+     * Fabrique une lance à condition d'avoir les ressources nécessaires.
+     * La fabrication nécessite 1 caillou et 2 morceaux de bois.
+     */
     public void fabriquerspear(){
         if(this.invent.getQtecailloux() >=1 && this.invent.getQtebois()>=2){
             this.invent.setQtecailloux(this.invent.getQtecailloux()-1);
@@ -871,9 +979,12 @@ public class Homme extends Animal {
         } else{
             System.out.println("oh oooh ... t'as pas assez de ressources");
         } 
-
     } 
 
+    /**
+     * Fabrique une hache à condition d'avoir les ressources nécessaires.
+     * La fabrication nécessite 2 morceaux de bois et 3 cailloux.
+     */
     public void fabriquerAxe(){
         if(this.invent.getQtecailloux()>=3 && this.invent.getQtebois()>=2){
             this.invent.setQtebois(this.invent.getQtebois()-2);
@@ -885,6 +996,10 @@ public class Homme extends Animal {
         } 
     }
 
+    /**
+     * Fabrique une pioche à condition d'avoir les ressources nécessaires.
+     * La fabrication nécessite 3 cailloux et 2 morceaux de bois.
+     */
     public void fabriquerPickaxe(){
         if(this.invent.getQtecailloux() >=3 && this.invent.getQtebois()>=2){
             this.invent.setQtecailloux(this.invent.getQtecailloux()-3);
@@ -896,6 +1011,9 @@ public class Homme extends Animal {
         } 
     } 
 
+    /**
+     * Affiche le contenu de l'inventaire, y compris la quantité de ressources et la liste des outils.
+     */
     public void afficherInventaire() {
         if(this.getInvent() != null){
             System.out.println("\n" + "Voici ce qu'il y a dans l'inventaire ");
@@ -919,20 +1037,29 @@ public class Homme extends Animal {
     }
 
     /**
-     * 
-     * @param mapcart
-     * @param plaine
-     * @param flo
+     * Demande à l'utilisateur la direction dans laquelle il souhaite se déplacer et appelle la méthode correspondante.
+     *
+     * @param mapcart La carte contenant les cases et les éléments.
+     * @param plaine  Le biome de la plaine.
+     * @param flo     Le biome de la forêt.
+     * @param scann   Le scanner pour la saisie utilisateur.
      */
     public void askdeplacer (Case [][] mapcart , Biome plaine, Biome flo, Scanner scann){
         String answer; 
 
         answer = demandeUtilisateurstr("dans quel direction voulez-vous allez (haut, bas, droite, gauche)", scann);
         this.deplacer(mapcart, plaine, flo, scann, answer);
-        
-        
     }
 
+    /**
+     * Déplace l'animal dans la direction spécifiée par l'utilisateur.
+     *
+     * @param mapcart La carte contenant les cases et les éléments.
+     * @param plaine  Le biome de la plaine.
+     * @param flo     Le biome de la forêt.
+     * @param scann   Le scanner pour la saisie utilisateur.
+     * @param reponse La direction dans laquelle l'animal souhaite se déplacer (haut, bas, droite, gauche).
+     */
     public void deplacer (Case [][] mapcart , Biome plaine, Biome flo, Scanner scann, String reponse){
         if(reponse.equals("haut")){
             System.out.println("Francis  souhaite aller en haut");

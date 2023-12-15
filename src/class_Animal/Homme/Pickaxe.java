@@ -1,5 +1,8 @@
 package class_Animal.Homme;
 
+/**
+ * La classe Pickaxe représente une pioche dans le jeu, implémentant l'interface Tool.
+ */
 public class Pickaxe implements Tool {
 
     public String name;
