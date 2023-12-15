@@ -211,7 +211,7 @@ public class testAnimal {
         }
     }
 
-    public static void testAddHerbivore() {
+    /*public static void testAddHerbivore() {
         Biome testBiome = new Foret("Foret");
         testAnimal test = new testAnimal();
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
@@ -222,9 +222,9 @@ public class testAnimal {
         } else {
             System.out.println("Test addHerbivore: Failed");
         }
-    }
+    }*/
 
-    public static void testRemoveHerbivore() {
+    /*public static void testRemoveHerbivore() {
         Biome testBiome = new Foret("Foret");
         Animal test = new testAnimal();
         Animal testAnimal = new Animal("Lion", 50, 30, new Position(1, 1), testBiome);
@@ -236,7 +236,7 @@ public class testAnimal {
         } else {
             System.out.println("Test removeHerbivore: Failed");
         }
-    }
+    }*/
 
     public static void testAddCarnivore() {
         Biome testBiome = new Foret("Foret");

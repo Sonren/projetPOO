@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: src.Main
-Version: 1.0
+Created-By: 21.0.1 (Oracle Corporation)
+

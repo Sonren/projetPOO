@@ -1,6 +1,6 @@
 #!/bin/bash
 
-javac -cp ./src/  -d ./target/ ./dech/*.java  ./src/fr/dech/Animal/*.java ./src/fr/dech/Biome/*.java ./src/fr/dech/Carte/*.java ./src/fr/dech/Vegetal/*.java ./src/fr/dech/Animal/Homme/*.java
+javac -cp ./src/  -d ./target/ *.java  ./class_Animal/*.java ./class_Biome/*.java ./class_Carte/*.java ./class_Vegetal/*.java ./class_Animal/Homme/*.java
 cd target
-jar cvfm Main.jar ../manifest.txt ./fr/dech/*.class ./fr/dech/Animal/*.class ./fr/dech/Biome/*.class ./fr/dech/Carte/*.class ./fr/dech/Vegetal/*.class ./fr/dech/Animal/Homme/*.class
+jar cvfm Main.jar ../manifest.txt *.class ./class_Animal/*.class ./class_Biome/*.class ./class_Carte/*.class ./class_Vegetal/*.class ./class_Animal/Homme/*.class
 cd ..
