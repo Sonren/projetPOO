@@ -61,7 +61,6 @@ public class Carte {
 
     public void addKilledAnimal(Animal animalKilled){
         this.getKillesAnimal().add(animalKilled);
-		System.out.println(animalKilled.getname() + " ajouté(e) dans la liste des animaux tué");
     }
 
     public Case[][] addcase(Case cas) {
@@ -218,11 +217,7 @@ public class Carte {
     }
 
     public void randommvtAllAnimaux (Biome bio1, Biome bio2){
-        bio1.afficheFaune();
-        bio2.afficheFaune();
-        int i = 0;
         for (Animal ani : bio1.getfaune()){ 
-            i = i + 1;
             if(!(ani instanceof Homme)){
                 if (!ani.isDead()) {
                     ani.move(this.map);
@@ -239,11 +234,9 @@ public class Carte {
             }
         }
         for (Animal killedAnimal : this.getKillesAnimal()) {
-            System.out.println(killedAnimal.getname());
             bio1.getfaune().remove(killedAnimal);
         }
         for (Animal ani : bio2.getfaune()){ 
-            i = i + 1;
             if(!(ani instanceof Homme)){
                 if (!ani.isDead()) {
                     ani.move(this.map);
@@ -260,7 +253,6 @@ public class Carte {
             }
         }
         for (Animal killedAnimal : this.getKillesAnimal()) {
-            System.out.println(killedAnimal.getname());
             bio2.getfaune().remove(killedAnimal);
         }
     }

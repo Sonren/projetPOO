@@ -71,10 +71,6 @@ public class Main{
     public static boolean tour (Biome plain, Biome forest, Carte map, Homme michel, Scanner scan, Case[][] tabCase){
       boolean iscontinue = true;
       System.out.println("\n");
-      plain.afficheFaune();
-      forest.afficheFaune();
-      plain.afficheFlore();
-      forest.afficheFlore();
       iscontinue = michel.actionHomme(scan, tabCase, plain, forest);
       map.randommvtAllAnimaux(plain, forest);
       return iscontinue;

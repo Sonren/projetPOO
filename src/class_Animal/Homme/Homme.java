@@ -724,7 +724,7 @@ public class Homme extends Animal {
 
     public int askAction (Scanner scan){
         int answer;
-        answer = demandeUtilisateurint("Que veux tu faire ? " + "\n" + "1. Afficher l'inventaire" + "\n" + "2. Me déplacer" + "\n" + "3. Manger" + "\n" + "4. Fabriquer un outil" + "\n" + "5. Quitter la simulation", scan);
+        answer = demandeUtilisateurint("Que veux tu faire ? " + "\n" + "\n" + "1. Afficher l'inventaire" + "\n" + "2. Me déplacer" + "\n" + "3. Manger" + "\n" + "4. Fabriquer un outil" + "\n" + "5. Afficher le contenu de la plaine" + "\n" + "6. Afficher le contenue de la forêt" + "\n" + "7. Afficher sa position" + "\n" + "8. Quitter la simulation" + "\n", scan);
         return answer;
     }
     
@@ -734,8 +734,8 @@ public class Homme extends Animal {
         int choice;
         
         choice = askAction(scanner);
-        if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5){
-            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5) {
+        if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7 && choice != 8){
+            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7 && choice != 8) {
             System.out.println("Veuillez rentrer un choix valide");
             askAction(scanner);
             }
@@ -759,10 +759,25 @@ public class Homme extends Animal {
                 return gamecontinue;
 
             case 5:
+                pla.afficheFaune();
+                pla.afficheFlore();
+                return gamecontinue;
+
+            case 6:
+                fo.afficheFaune();
+                fo.afficheFlore();
+                fo.affichegeologie();
+                return gamecontinue;
+            
+            case 7:
+                System.out.println("\n" + "Vous êtes dans la " + this.getbiome().getName() + " a la position : x = " + this.getposition().getX() + " y = " + this.getposition().getY() + "\n");
+                return gamecontinue;
+
+            case 8:
                 System.exit(0);
                 gamecontinue = false;
                 return gamecontinue;
-                
+
             default:
                 System.out.println("Choix invalide.");
                 return gamecontinue;
@@ -771,7 +786,7 @@ public class Homme extends Animal {
 
     public void askmanger (Scanner scan){
         String reponse;
-        reponse = demandeUtilisateurstr("Que voulez vous manger ? (viande, fruit)", scan);
+        reponse = demandeUtilisateurstr("\n" + "Que voulez vous manger ? (viande, fruit)", scan);
         manger(scan, reponse);
          
     }
@@ -827,7 +842,7 @@ public class Homme extends Animal {
     public void askfabriquerOutil(Scanner scan){ 
         String answer;
 
-        answer =demandeUtilisateurstr("Quel outil voulez-vous fabriquer ? (hache, pioche, lance)", scan);
+        answer =demandeUtilisateurstr("\n" + "Quel outil voulez-vous fabriquer ? (hache, pioche, lance)", scan);
         fabriquerOutil(scan, answer);
     }
 
@@ -883,7 +898,7 @@ public class Homme extends Animal {
 
     public void afficherInventaire() {
         if(this.getInvent() != null){
-            System.out.println("Voici ce qu'il y a dans l'inventaire ");
+            System.out.println("\n" + "Voici ce qu'il y a dans l'inventaire ");
             System.out.println("Quantité de viande : " + this.invent.getQteviande());
             System.out.println("Quantité de fruit : " + this.invent.getQtefruit());
             System.out.println("Quantité de bois : " + this.invent.getQtebois());

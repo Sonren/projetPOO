@@ -21,7 +21,7 @@ public class Arbrefruit extends Arbre {
      */
     public Arbrefruit (String n,Biome b, Position p){
         super (n,b,p);
-        this.nbfruit = 10;
+        this.nbfruit = 5;
     }
 
     /**

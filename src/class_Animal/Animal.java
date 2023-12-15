@@ -108,7 +108,6 @@ public class  Animal {
         levellife -= quantite;
         if(levellife <0){
             levellife = 0;
-            System.out.println("l'animal est mort");
             killedAnimal(this);
         }
     }
@@ -294,7 +293,6 @@ public class  Animal {
         //On doit chercher l'animal rencontré
         Animal petmeet = findpet(tpmpos, mapmonde, this.getbiome());
         if (petmeet.isDead() == true){
-            System.out.println("animal mort");
             mapmonde[this.getposition().getX()][this.getposition().getY()].setisanimal(false);
             this.setposition(tpmpos);
             mapmonde[tpmpos.getX()][tpmpos.getY()].setisanimal(true);
