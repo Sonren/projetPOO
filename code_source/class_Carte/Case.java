@@ -1,6 +1,5 @@
 package class_Carte;
 
-
 import class_Biome.Biome;
 
 public class Case {
@@ -72,8 +71,4 @@ public class Case {
     public void setisHomme(boolean ho){
         this.isHomme = ho;
     }
-
-    
-
-    
 }
