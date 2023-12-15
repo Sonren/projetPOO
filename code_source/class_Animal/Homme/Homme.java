@@ -1,16 +1,16 @@
-package fr.lynchmaniac.class_Animal.Homme;
+package class_Animal.Homme;
 
 import java.util.Scanner;
 
-import fr.lynchmaniac.class_Animal.Animal;
-import fr.lynchmaniac.class_Biome.Biome;
-import fr.lynchmaniac.class_Biome.Biomes;
-import fr.lynchmaniac.class_Carte.Position;
-import fr.lynchmaniac.class_Vegetal.Vegetal;
-import fr.lynchmaniac.class_Carte.Case;
-import fr.lynchmaniac.class_Vegetal.Arbre;
-import fr.lynchmaniac.class_Vegetal.Arbrefruit;
-import fr.lynchmaniac.class_Vegetal.Rocher;
+import class_Animal.Animal;
+import class_Biome.Biome;
+import class_Biome.Biomes;
+import class_Carte.Position;
+import class_Vegetal.Vegetal;
+import class_Carte.Case;
+import class_Vegetal.Arbre;
+import class_Vegetal.Arbrefruit;
+import class_Vegetal.Rocher;
 
 public class Homme extends Animal {
     public Inventaire invent = new Inventaire(0, 0, 0, 0, null);
